@@ -173,7 +173,7 @@ function createAuctionPresentation(colors, formatPrice, actions) {
         node("arena-tables").replaceChildren(...Object.entries(teams).map(([code, name]) => {
           const button = document.createElement("button");
           button.type = "button";
-          button.textContent = code;
+          button.append(actions.badge(code), document.createTextNode(code));
           button.dataset.team = code;
           button.style.setProperty("--team-light", tones[code]);
           button.setAttribute("aria-label", `Inspect ${name}${code === state.user ? ", your team" : ""}`);

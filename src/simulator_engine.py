@@ -29,9 +29,9 @@ TEAMS = {
 DATA = ROOT / "data/raw/ipl_auctions"
 PURSE = 12000
 OPENING_PAUSE = 2.4
-CALL_PAUSE = 2.6
+CALL_PAUSE = 4.0
 ACCELERATED_OPENING_PAUSE = 1.35
-ACCELERATED_CALL_PAUSE = 1.25
+ACCELERATED_CALL_PAUSE = 2.35
 NOMINATION_LIMIT = 10
 RTM_SECONDS = 30
 SQUAD_LIMIT = 25
@@ -396,7 +396,7 @@ class Auction:
     def bid(self, code, price):
         self.leader, self.price = code, price
         self.cue = "open"
-        delay = self.rng.uniform(.75, 1.20) if self.recall_round else self.rng.uniform(1.45, 2.25)
+        delay = self.rng.uniform(1.30, 1.75) if self.recall_round else self.rng.uniform(2.10, 2.90)
         self.deadline = monotonic() + delay
         self.log("Raised a paddle", code, price, kind="bid")
 

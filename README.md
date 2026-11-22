@@ -43,7 +43,7 @@ Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. 
 
 The catalog count describes registrations. The live counter shows the current lot, the number queued so far, and the position within the set. Nomination rounds add lots to the queue, and a recalled player can appear twice. The nomination cap and exact bidding intervals are simulator settings. [Revised IPL auction list](https://documents.iplt20.com/bcci/documents/1732248356511_TATA%20IPL%202025-%20Auction%20List%20with%20RTM%20-19.11.24.pdf) · [BCCI accelerated procedure as reported by Cricbuzz](https://www.cricbuzz.com/cricket-news/132439/auction-register-churned-as-accelerated-process-to-begin-from-player-no117-cricbuzzcom)
 
-In both accelerated rounds, the opening window drops from **2.4 s to 1.35 s**, the wait after a bid drops from **1.45–2.25 s to 0.75–1.20 s**, and the wait after each closing call drops from **2.6 s to 1.25 s**. After the result, the next lot still waits for your confirmation.
+In both accelerated rounds, the opening window drops from **2.4 s to 1.35 s**, the wait after a bid drops from **2.10–2.90 s to 1.30–1.75 s**, and the wait after each closing call drops from **4 s to 2.35 s**. You can bid during the auctioneer’s calls, including “Going once” and “Going twice.” After the result, the next lot still waits for your confirmation.
 
 ### Build your Playing XI
 

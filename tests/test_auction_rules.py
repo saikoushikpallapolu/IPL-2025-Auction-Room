@@ -30,6 +30,21 @@ class AuctionRulesTests(TestCase):
         known = dict(CSK=5500, DC=7300, GT=6900, KKR=5100, LSG=6900, MI=4500, PBKS=11050, RR=4100, RCB=8300, SRH=4500)
         self.assertEqual(Auction(self.catalog, None, []).purses, known)
 
+    def test_user_can_bid_during_opening_and_both_closing_calls(self):
+        for call_count, cue in enumerate(("open", "once", "twice")):
+            with self.subTest(cue=cue):
+                auction = self.make_auction([player("bid-window")])
+                auction.ceilings.clear()
+                auction.bid("MI", 50)
+                for _ in range(call_count):
+                    auction.deadline = 0
+                    auction.tick()
+                before = auction.snapshot()
+                self.assertEqual(before["cue"], cue)
+                self.assertTrue(before["can_bid"])
+                auction.act("bid")
+                self.assertEqual((auction.leader, auction.price, auction.cue), ("DC", before["next_price"], "open"))
+
     def test_leading_team_can_raise_before_user_confirms_rtm(self):
         auction = self.make_auction([player("a", "DC")])
         auction.ceilings["MI"] = 120

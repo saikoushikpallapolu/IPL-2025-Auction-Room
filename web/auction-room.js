@@ -86,6 +86,7 @@ function prepareMaterials() {
 }
 
 function panelTexture(initials, color) {
+  const badge = new Image();
   const sign = canvasTexture(256, 128, (ctx, w, h) => {
     ctx.fillStyle = "#141b29";
     ctx.fillRect(0, 0, w, h);
@@ -95,8 +96,15 @@ function panelTexture(initials, color) {
     ctx.textAlign = "center";
     ctx.fillStyle = "#f6e9d0";
     ctx.font = "bold 51px Georgia";
-    ctx.fillText(initials, w / 2, 81);
+    if (badge.naturalWidth) {
+      ctx.drawImage(badge, 23, 13, 102, 102);
+      ctx.fillText(initials, 177, 81, 110);
+    } else {
+      ctx.fillText(initials, w / 2, 81);
+    }
   });
+  badge.onload = () => sign.draw();
+  badge.src = `/assets/team-badges/${initials.toLowerCase()}.webp`;
   sign.draw();
   return new T.MeshBasicMaterial({ map: sign.texture });
 }
@@ -219,9 +227,9 @@ function makeTable(scene, code, color, x, z, angle, index, isUser) {
   box(table, paper, 0, .985, 0, 2.85, .10, 1.10).receiveShadow = true;
   box(table, edge, 0, .88, .509, 2.72, .02, .016);
   box(table, accent, 0, .39, .513, 2.69, .57, .025);
-  // Table identification and a reserved logo plaque face the center aisle.
-  box(table, panelTexture(code, color), 0, .57, .542, .66, .28, .015);
-  const seatSign = box(table, panelTexture(code, color), .85, 1.10, -.02, .4, .20, .03);
+  const sign = panelTexture(code, color);
+  box(table, sign, 0, .57, .542, .66, .28, .015);
+  const seatSign = box(table, sign, .85, 1.10, -.02, .4, .20, .03);
   seatSign.rotation.y = Math.PI;
   const lamp = box(table, new T.MeshBasicMaterial({ color, transparent: true, opacity: 0 }), 0, 1.04, .42, 2.43, .017, .03);
   for (const col of [-1, 0, 1]) {
@@ -234,7 +242,7 @@ function makeTable(scene, code, color, x, z, angle, index, isUser) {
   }
   const people = [-.76, 0, .76].map((offset, seat) =>
     makeDelegate(table, offset, 0, -.77, index * 3 + seat, color, false, seat === 1));
-  const rowSign = box(table, panelTexture(code, color), 0, .73, -1.58, .83, .25, .02);
+  const rowSign = box(table, sign, 0, .73, -1.58, .83, .25, .02);
   rowSign.rotation.y = Math.PI;
   const bidder = people[1];
   if (isUser) {
@@ -406,6 +414,7 @@ export function createRoom(host, labels, handlers) {
   const spotlightBeam = new T.Mesh(
     new T.CylinderGeometry(.10, 1.95, 8, 40, 1, true),
     new T.ShaderMaterial({
+      uniforms: { beamColor: { value: new T.Color(0xffffff) } },
       transparent: true,
       depthWrite: false,
       blending: T.AdditiveBlending,
@@ -422,13 +431,14 @@ export function createRoom(host, labels, handlers) {
         }
       `,
       fragmentShader: `
+        uniform vec3 beamColor;
         varying vec3 beamNormal;
         varying vec3 viewDirection;
         varying float beamHeight;
         void main() {
           float body = max(0.0, dot(normalize(beamNormal), normalize(viewDirection)));
           float edgeFade = smoothstep(0.0, 0.13, beamHeight);
-          gl_FragColor = vec4(1.0, 0.83, 0.55, pow(body, 1.35) * edgeFade * 0.32);
+          gl_FragColor = vec4(beamColor, pow(body, 1.35) * edgeFade * 0.42);
         }
       `,
     }),
@@ -492,7 +502,7 @@ export function createRoom(host, labels, handlers) {
       label.textContent = names[team];
       label.style.setProperty("--table-color", colors[team]);
       labels.append(label);
-      floorTables.set(team, { ...desk, label });
+      floorTables.set(team, { ...desk, label, color: colors[team] });
     });
     cameraReady = false;
   }
@@ -604,6 +614,9 @@ export function createRoom(host, labels, handlers) {
       spotlightBeam.visible = Boolean(desk);
       if (!desk) return;
       desk.label.classList.add("is-leading");
+      spotlight.color.set(desk.color);
+      spotlightBeam.material.uniforms.beamColor.value.set(desk.color);
+      spotlightRing.material.color.set(desk.color);
       spotlight.target.position.copy(desk.table.position);
       spotlight.position.copy(desk.table.position);
       spotlight.position.y = 8;

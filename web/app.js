@@ -27,6 +27,10 @@ function element(tag, text, className) {
 
 function badge(code) {
   const node = element("span", code, "team-badge");
+  const logo = element("img", null, "team-logo");
+  logo.alt = "";
+  logo.addEventListener("load", () => node.replaceChildren(logo), { once: true });
+  logo.src = `/assets/team-badges/${code.toLowerCase()}.webp`;
   node.style.setProperty("--team-bg", colors[code][0]);
   node.style.setProperty("--team-fg", colors[code][1]);
   return node;
@@ -141,11 +145,6 @@ function renderStandings() {
 }
 
 function updateClock() {
-  if (state?.phase === "bidding") {
-    const speaking = presentation.speaking();
-    $("bid").disabled = !state.can_bid || speaking;
-    $("bid").title = speaking ? "Wait for the auctioneer to finish the call." : "";
-  }
   if (state?.phase !== "rtm") return;
   const seconds = Math.max(0, Math.ceil((countdownEnd - performance.now()) / 1000));
   $("phase").textContent = `Match window · ${seconds}s`;
@@ -398,9 +397,7 @@ function render(nextState) {
       complete ? "Start a new auction to try another franchise." : "Ready to continue? Bidding stays paused until you choose.";
   $("bid").textContent = matching ? (finalBid ? "Raise final bid" : state.rtm_stage === "offer" ? "Request RTM" : `Match ${money(price)}`) : leader === user ? "You lead" : `Bid ${money(state.next_price)}`;
   $("bid").hidden = !(bidding || matching);
-  $("bid").disabled = bidding && (!state.can_bid || presentation.speaking());
-  if (bidding && presentation.speaking()) $("bid").title = "Wait for the auctioneer to finish the call.";
-  if (!bidding) $("bid").removeAttribute("title");
+  $("bid").disabled = bidding && !state.can_bid;
   $("pass").hidden = !matching;
   $("pass").textContent = finalBid ? "Keep current bid" : "Decline RTM";
   $("final-raise").hidden = !finalBid;
@@ -445,7 +442,12 @@ async function move(action, options = {}) {
   busy = true;
   showError();
   try {
-    render(await api("action", { action, version: state.version, lot: state.lot, price: state.next_price, ...options }));
+    const { version, lot, next_price: price } = state;
+    const updated = await api("action", { action, version, lot, price, ...options });
+    render(updated);
+    if (action === "bid" && (updated.leader !== updated.user || updated.price !== price)) {
+      showError(updated.phase === "bidding" ? "The asking price changed. Bid again at the new price." : "The lot closed before your bid arrived.");
+    }
   } catch (error) {
     showError(error.message);
   } finally {
@@ -454,7 +456,6 @@ async function move(action, options = {}) {
 }
 
 $("bid").addEventListener("click", () => {
-  if (state.phase === "bidding" && presentation.speaking()) return;
   if (state.rtm_stage === "final") {
     const price = $("final-amount");
     if (price.reportValidity() && Number.isFinite(price.valueAsNumber)) {
@@ -533,6 +534,7 @@ async function initialize() {
 const presentation = createAuctionPresentation(colors, money, {
   inspect: code => showStats("teams", code),
   playerRole: player => xiRoles[player.skill] || roles[player.role],
+  badge,
 });
 const lineupMaker = createLineupMaker(async lineup => render(await api("lineup", lineup)));
 
