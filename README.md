@@ -37,11 +37,21 @@ Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. 
 ### How the auction moves
 
 1. **Opening sets.** Players are offered in shuffled order within each set. Teams can pass even when they have room and money.
-2. **Accelerated round.** Franchises nominate from later sets that have yet to be called. The merged shortlist goes under the hammer at a faster pace.
-3. **Final recall.** Franchises submit another sheet from players who went unsold or were never called. Eligible nominations are merged and offered in the final accelerated round.
-4. **Playing XI.** Review the results and select a lineup from your finished squad.
+2. **First accelerated round.** After opening sets 1–17, submit a sheet of up to ten uncalled players from the later sets. Search by name or filter by role and check each player's reserve price before submitting. The AI franchises build their own sheets using affordability, overseas slots, and squad needs. The engine merges all submitted names and offers each nominated player once.
+3. **Final recall.** Submit a fresh sheet with players who went unsold in either stage or were never called. The sheet marks previously unsold players so you can distinguish them from first-time lots. AI franchises nominate again using their updated squads and purses. Players already sold are excluded.
+4. **Playing XI.** Review the final squads and build your match lineup from the players you signed.
 
 The catalog count describes registrations. The live counter shows the current lot, the number queued so far, and the position within the set. Nomination rounds add lots to the queue, and a recalled player can appear twice. The nomination cap and exact bidding intervals are simulator settings. [Revised IPL auction list](https://documents.iplt20.com/bcci/documents/1732248356511_TATA%20IPL%202025-%20Auction%20List%20with%20RTM%20-19.11.24.pdf) · [BCCI accelerated procedure as reported by Cricbuzz](https://www.cricbuzz.com/cricket-news/132439/auction-register-churned-as-accelerated-process-to-begin-from-player-no117-cricbuzzcom)
+
+In both accelerated rounds, the opening window drops from **2.4 s to 1.35 s**, the wait after a bid drops from **1.45–2.25 s to 0.75–1.20 s**, and the wait after each closing call drops from **2.6 s to 1.25 s**. After the result, the next lot still waits for your confirmation.
+
+### Build your Playing XI
+
+Start with the suggested XI, swap players in from the available squad, set the batting order, and select a wicketkeeper. The editor shows the overseas count and the number of batting and bowling options. A saved lineup must have eleven distinct players, a wicketkeeper, and at most four overseas players.
+
+![Playing XI maker showing the batting order, available squad, selected wicketkeeper, overseas count, and save button](docs/screenshots/playing-xi.jpg)
+
+*Playing XI editor after a sample Chennai Super Kings auction.*
 
 ## Quick start
 
