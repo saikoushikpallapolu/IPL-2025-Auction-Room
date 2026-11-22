@@ -356,3 +356,11 @@ input[type="checkbox"] { width: 1.05rem; height: 1.05rem; accent-color: var(--ac
 @media (prefers-reduced-motion: reduce) {
   .floor-table, .bidder, .team-option { animation: none; transition: none; }
 }
+
+#nominations { margin-top: 1rem; }
+#nominations p, #nomination-search { margin: .6rem 0; }
+#nomination-search, #final-amount { font: inherit; padding: .35rem; border-radius: .35rem; border: 1px solid #b1a0c5; }
+#nomination-list { max-height: 42vh; overflow: auto; }
+#nomination-list .retention { min-height: 1.8rem; }
+#final-raise { align-self: center; color: white; font-size: .84rem; }
+#final-amount { max-width: 6.4rem; }

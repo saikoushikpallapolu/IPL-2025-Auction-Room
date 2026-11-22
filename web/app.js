@@ -1,6 +1,7 @@
 const $ = id => document.getElementById(id);
 const money = value => value == null ? "—" : `₹${(value / 100).toFixed(2).replace(/\.?0+$/, "")} Cr`;
 const roles = { BAT: "Batter", BOWL: "Bowler", AR: "All-rounder", WK: "Wicketkeeper" };
+const xiRoles = { keeper: "Wicketkeeper", top_order: "Top-order batter", finisher: "Finisher", pace: "Pace bowler", spin: "Spinner", death: "Death bowler" };
 const colors = {
   CSK: ["#fff3ba", "#705000"], DC: ["#dcecff", "#174b8d"], GT: ["#dde4ef", "#233c5b"],
   KKR: ["#eee2ff", "#572695"], LSG: ["#d9f1ff", "#125477"], MI: ["#dce6ff", "#20489c"],
@@ -53,11 +54,13 @@ async function api(path, body) {
 }
 
 function updatePurse() {
-  let purse = 12000;
-  for (const box of $("retentions").querySelectorAll("input:checked")) {
-    purse -= Number(box.dataset.price);
-  }
-  $("starting-purse").textContent = money(purse);
+  const keep = new Set([...$("retentions").querySelectorAll("input:checked")].map(box => box.value));
+  const players = config.retained[selection].filter(player => keep.has(player.name));
+  const capped = players.filter(player => !player.uncapped);
+  const slab = config.retention_slabs.slice(0, capped.length).reduce((sum, price) => sum + price, 0);
+  const cappedCost = Math.max(slab, capped.reduce((sum, player) => sum + player.price, 0));
+  const uncappedCost = players.filter(player => player.uncapped).reduce((sum, player) => sum + Math.max(400, player.price), 0);
+  $("starting-purse").textContent = money(12000 - cappedCost - uncappedCost);
 }
 
 function choose(team) {
@@ -124,7 +127,14 @@ function renderStandings() {
       roster.append(element("li", `${player.name} · ${money(player.price)}${player.retained ? " · Retained" : ""}`));
     }
     if (!team.roster.length) roster.append(element("li", "No players yet"));
-    details.append(summary, roster);
+    const xi = element("p", `Projected XI · ${team.playing_xi.players.length}/11 roles filled`, "muted");
+    const vacancies = Object.entries(team.playing_xi.vacancies).map(([skill, count]) => `${xiRoles[skill]} ×${count}`);
+    const needs = element("p", vacancies.length ? vacancies.join(" · ") : "All specialist roles covered", "muted");
+    const lineup = element("ul", null, "roster");
+    for (const player of team.playing_xi.players) {
+      lineup.append(element("li", `${player.name} · ${xiRoles[player.skill]}${player.overseas ? " · Overseas" : ""}`));
+    }
+    details.append(summary, xi, needs, lineup, element("p", "Full squad", "muted"), roster);
     return details;
   }));
 }
@@ -234,6 +244,21 @@ function renderPerformance(stats) {
   }));
 }
 
+function renderNominations(players) {
+  $("nomination-search").value = "";
+  $("nomination-list").replaceChildren(...players.map(player => {
+    const label = element("label", null, "retention");
+    const box = element("input");
+    box.type = "checkbox";
+    box.value = player.id;
+    box.addEventListener("change", () => {
+      if ($("nomination-list").querySelectorAll("input:checked").length > 10) box.checked = false;
+    });
+    label.append(box, element("span", player.name), element("span", roles[player.role], "muted"));
+    return label;
+  }));
+}
+
 function renderFloor(call) {
   $("floor-call").textContent = call;
   for (const table of $("floor-tables").children) {
@@ -264,14 +289,23 @@ function render(nextState) {
   const { player, phase, user, leader, price, results } = state;
   const bidding = phase === "bidding";
   const matching = phase === "rtm";
+  const finalBid = matching && state.rtm_stage === "final";
   const complete = phase === "complete";
   const reveal = phase === "reveal";
+  const nominate = phase === "nomination";
   $("setup").hidden = true;
   $("room").hidden = false;
   $("restart").hidden = false;
   $("your-team").replaceChildren(badge(user), element("span", config.teams[user]));
   $("set-reveal").hidden = !reveal;
-  $("room-grid").hidden = reveal;
+  $("room-grid").hidden = reveal || nominate;
+  $("nominations").hidden = !nominate;
+  if (nominate) {
+    if ($("stats-dialog").open) $("stats-dialog").close();
+    renderNominations(state.nominees);
+    window.scrollTo(0, 0);
+    return;
+  }
   if (state.set && (!previous || previous.set?.code !== state.set.code)) renderSet(state.set);
   if (reveal) {
     if ($("stats-dialog").open) $("stats-dialog").close();
@@ -291,7 +325,7 @@ function render(nextState) {
     leader ? `${leader} bid ${money(price)}` : "Taking opening bids";
   $("phase").textContent = complete ? "Complete" : bidding ? "Live bidding" : leader ? "Sold" : "Unsold";
   if (!complete) {
-    renderFloor(bidding ? call : matching ? "Right to match offered" : leader ? `Sold to ${leader} · ${money(price)}` : "Unsold · no bids");
+    renderFloor(bidding ? call : matching ? (finalBid ? "Make your final offer" : `Right to Match · ${state.rtm_team}`) : leader ? `Sold to ${leader} · ${money(price)}` : "Unsold · no bids");
   } else {
     renderFloor("Final standings are available below");
   }
@@ -307,23 +341,39 @@ function render(nextState) {
   $("stage-price").textContent = complete ? "" : money(price ?? player.reserve);
   $("current-label").textContent = phase === "result" && leader ? "Winning bid" : "Current bid";
   $("previous-franchise").textContent = config.teams[player?.previous] || "—";
+  $("sale-probability").textContent = player?.sale_probability == null ? "—" : `${Math.round(player.sale_probability * 100)}%`;
+  $("median-price").textContent = money(player?.price_range?.[1]);
+  $("price-range").textContent = player?.price_range ? `${money(player.price_range[0])} – ${money(player.price_range[2])}` : "—";
+  $("prior-sale").textContent = money(player?.prior_sale);
+  $("xi-role").textContent = xiRoles[player?.skill] || "—";
+  $("phase-stats").textContent = player?.form && Object.keys(player.form).length ?
+    `Pre-auction T20 form · ${player.form.recent_runs} runs · ${player.form.recent_wickets} wickets · ${player.form.death_bowl_balls} death-over balls bowled` : "";
   if (previous?.lot !== state.lot || previous?.phase === "reveal" || !previous) {
     renderPerformance(player?.stats);
     if ($("stats-dialog").open && !$("stats-player").hidden) {
       $("stats-title").textContent = player?.name || statTitles.player;
     }
   }
-  $("action-note").textContent = matching ? "Use one card to sign the player at the winning bid." :
+  $("action-note").textContent = matching ? (finalBid ? "Raise your winning bid once, or stand on the current price." :
+    state.rtm_stage === "offer" ? "Request Right to Match. The current leader can raise once before you decide." : "Match the final price to sign the player and use a card.") :
     bidding ? (leader === user ? "Your paddle has the high bid." : state.can_bid ?
       "Raise your paddle from your table any time before the hammer." : "Your purse or squad limits prevent another bid.") :
       complete ? "Start a new auction to try another franchise." : "Continue to the next player when ready.";
-  $("bid").textContent = matching ? `Match ${money(price)}` : leader === user ? "You lead" : `Bid ${money(state.next_price)}`;
+  $("bid").textContent = matching ? (finalBid ? "Raise final bid" : state.rtm_stage === "offer" ? "Request RTM" : `Match ${money(price)}`) : leader === user ? "You lead" : `Bid ${money(state.next_price)}`;
   $("bid").hidden = !(bidding || matching);
   $("bid").disabled = bidding && !state.can_bid;
   $("pass").hidden = !matching;
+  $("pass").textContent = finalBid ? "Keep current bid" : "Decline RTM";
+  $("final-raise").hidden = !finalBid;
+  if (finalBid && previous?.rtm_stage !== "final") {
+    $("final-amount").min = state.final_bid_min / 100;
+    $("final-amount").max = state.final_bid_max / 100;
+    $("final-amount").value = state.final_bid_min / 100;
+  }
+  if (finalBid) $("bid").disabled = state.final_bid_min > state.final_bid_max;
   $("skip").hidden = !bidding;
   $("next").hidden = phase !== "result";
-  $("next").textContent = state.lot === state.total ? "Finish auction" : "Next player";
+  $("next").textContent = state.lot === state.total ? "Continue" : "Next player";
   $("rtm-count").textContent = `${state.rtm} RTM left`;
   $("current-set").hidden = complete;
   $("player-stats-button").hidden = complete;
@@ -349,12 +399,12 @@ function render(nextState) {
   }));
 }
 
-async function move(action) {
+async function move(action, options = {}) {
   if (busy || !state) return;
   busy = true;
   showError();
   try {
-    render(await api("action", { action, version: state.version, lot: state.lot, price: state.next_price }));
+    render(await api("action", { action, version: state.version, lot: state.lot, price: state.next_price, ...options }));
   } catch (error) {
     showError(error.message);
   } finally {
@@ -362,7 +412,24 @@ async function move(action) {
   }
 }
 
-$("bid").addEventListener("click", () => move(state.phase === "rtm" ? "match" : "bid"));
+$("bid").addEventListener("click", () => {
+  if (state.rtm_stage === "final") {
+    const price = $("final-amount");
+    if (price.reportValidity() && Number.isFinite(price.valueAsNumber)) {
+      move("raise", { amount: Math.round(price.valueAsNumber * 100) });
+    }
+  } else {
+    move(state.phase === "rtm" ? "match" : "bid");
+  }
+});
+$("nomination-search").addEventListener("input", event => {
+  const query = event.target.value.trim().toLowerCase();
+  for (const row of $("nomination-list").children) row.hidden = !row.textContent.toLowerCase().includes(query);
+});
+$("submit-nominations").addEventListener("click", () => {
+  const nominations = [...$("nomination-list").querySelectorAll("input:checked")].map(box => box.value);
+  move("nominate", { nominations });
+});
 for (const button of document.querySelectorAll("[data-stats]")) {
   button.addEventListener("click", () => showStats(button.dataset.stats));
 }

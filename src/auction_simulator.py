@@ -78,6 +78,15 @@ def main():
     last_call = None
     while (state := auction.snapshot())["phase"] != "complete":
         player = state["player"]
+        if state["phase"] == "nomination":
+            print("\nNominate players for the accelerated round:")
+            for nominee in state["nominees"]:
+                print(f"  {nominee['id']}: {nominee['name']}")
+            try:
+                auction.act("nominate", nominations=input("Enter up to 10 IDs separated by spaces: ").split())
+            except ValueError as error:
+                print(error)
+            continue
         if state["phase"] == "reveal":
             group = state["set"]
             print(f"\n{group['code']} · {group['category']} ({len(group['players'])} players)")
@@ -118,7 +127,14 @@ def main():
             for code, franchise in state["teams"].items():
                 print(f"  {code}: {franchise['purse'] / 100:g} Cr, {len(franchise['roster'])}/25 players")
         elif key == "b" and can_bid:
-            auction.act("match" if matching else "bid")
+            if state["rtm_stage"] == "final":
+                try:
+                    amount = input("Final bid in crore, or Enter to keep the current bid: ").strip()
+                    auction.act("raise", amount=round(float(amount) * 100)) if amount else auction.act("pass")
+                except (ValueError, OverflowError) as error:
+                    print(error)
+            else:
+                auction.act("match" if matching else "bid")
         elif key == "k":
             auction.act("skip")
         elif not sys.stdin.isatty():

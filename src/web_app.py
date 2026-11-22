@@ -5,9 +5,9 @@ from uuid import uuid4
 
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-from .simulator_engine import Auction, Catalog, TEAMS
+from .simulator_engine import Auction, Catalog, RETENTION_SLABS, TEAMS
 from .train_predictor import ROOT
 
 
@@ -21,6 +21,8 @@ class Move(BaseModel):
     version: int
     lot: int | None = None
     price: int | None = None
+    amount: int | None = None
+    nominations: list[str] = Field(default_factory=list, max_length=10)
 
 
 @asynccontextmanager
@@ -55,6 +57,8 @@ def config(request: Request):
             "retained": catalog.retained,
             "players": len(catalog.players),
             "modeled": sum(p["valuation"] is not None for p in catalog.players),
+            "estimated": sum(p["sale_probability"] is not None for p in catalog.players),
+            "retention_slabs": RETENTION_SLABS,
         }
 
 
@@ -99,7 +103,7 @@ def action(move: Move, request: Request):
         if move.version != auction.version and not (current_offer or move.action == "skip" and same_lot):
             return auction.snapshot()
         try:
-            auction.act(move.action)
+            auction.act(move.action, amount=move.amount, nominations=move.nominations)
         except ValueError as error:
             raise HTTPException(400, str(error)) from error
         return auction.snapshot()

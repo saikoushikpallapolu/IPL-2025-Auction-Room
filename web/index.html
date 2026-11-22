@@ -68,6 +68,14 @@
           <button id="open-set" class="primary">Open bidding</button>
         </div>
       </section>
+      <section id="nominations" class="panel" aria-labelledby="nomination-title" hidden>
+        <h2 id="nomination-title">Accelerated round nominations</h2>
+        <p class="muted">Nominate up to 10 players from the available pool. AI teams submit their own choices.</p>
+        <label for="nomination-search">Find an available player</label>
+        <input id="nomination-search" type="search">
+        <div id="nomination-list" class="retentions"></div>
+        <button id="submit-nominations" class="primary" type="button">Continue to accelerated round</button>
+      </section>
       <div id="room-grid" hidden>
         <section id="auction-floor" class="auction-floor" aria-labelledby="player-name">
           <header class="stage-scoreboard">
@@ -86,6 +94,7 @@
           <footer class="stage-controls">
             <p id="action-note"></p>
             <div class="buttons">
+              <label id="final-raise" hidden>Final bid (₹ Cr) <input id="final-amount" type="number" step="0.01"></label>
               <button id="pass" class="secondary" hidden>Decline RTM</button>
               <button id="skip" class="secondary" hidden>Skip player</button>
               <button id="next" class="primary" hidden>Next player</button>
@@ -112,10 +121,16 @@
             <p class="muted" id="price-source"></p>
             <dl class="detail-stats">
               <div><dt>Reserve price</dt><dd id="reserve"></dd></div>
-              <div><dt>Model valuation</dt><dd id="valuation"></dd></div>
+              <div><dt>Historical model estimate</dt><dd id="valuation"></dd></div>
               <div><dt id="current-label">Current bid</dt><dd id="current-price"></dd></div>
               <div><dt>Previous franchise</dt><dd id="previous-franchise"></dd></div>
+              <div><dt>Replay sale probability</dt><dd id="sale-probability"></dd></div>
+              <div><dt>Median price if sold</dt><dd id="median-price"></dd></div>
+              <div><dt>Price range if sold</dt><dd id="price-range"></dd></div>
+              <div><dt>Prior recorded sale</dt><dd id="prior-sale"></dd></div>
+              <div><dt>Playing XI role</dt><dd id="xi-role"></dd></div>
             </dl>
+            <p class="muted" id="phase-stats"></p>
             <div id="performance-stats"></div>
           </section>
           <section id="stats-teams" hidden>

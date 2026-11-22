@@ -1,575 +1,578 @@
-player_name,reserve_price,set_name,role,country,previous_team,set_code
-Jos Buttler,2,1,WK,England,RR,M1
-Shreyas Iyer,2,1,BAT,India,KKR,M1
-Rishabh Pant,2,1,BAT,India,DC,M1
-Kagiso Rabada,2,1,BOWL,South Africa,PBKS,M1
-Arshdeep Singh,2,1,BOWL,India,PBKS,M1
-Mitchell Starc,2,1,BOWL,Australia,KKR,M1
-Yuzvendra Chahal,2,2,BOWL,India,RR,M2
-Liam Livingstone,2,2,AR,England,PBKS,M2
-David Miller,1.5,2,BAT,South Africa,GT,M2
-KL Rahul,2,2,WK,India,LSG,M2
-Mohammad Shami,2,2,BOWL,India,GT,M2
-Mohammad Siraj,2,2,BOWL,India,RCB,M2
-Harry Brook,2,3,BAT,England,DC,BA1
-Devon Conway,2,3,BAT,New Zealand,CSK,BA1
-Jake Fraser-Mcgurk,2,3,BAT,Australia,DC,BA1
-Aiden Markram,2,3,BAT,South Africa,SRH,BA1
-Devdutt Padikkal,2,3,BAT,India,LSG,BA1
-Rahul Tripathi,0.75,3,BAT,India,SRH,BA1
-David Warner,2,3,BAT,Australia,DC,BA1
-Ravichandaran Ashwin,2,4,AR,India,RR,AL1
-Venkatesh Iyer,2,4,AR,India,KKR,AL1
-Mitchell Marsh,2,4,AR,Australia,DC,AL1
-Glenn Maxwell,2,4,AR,Australia,RCB,AL1
-Harshal Patel,2,4,AR,India,PBKS,AL1
-Rachin Ravindra,1.5,4,AR,New Zealand,CSK,AL1
-Marcus Stoinis,2,4,AR,Australia,LSG,AL1
-Jonny Bairstow,2,5,WK,England,PBKS,WK1
-Quinton De Kock,2,5,WK,South Africa,LSG,WK1
-Rahmanullah Gurbaz,2,5,WK,Afghanistan,KKR,WK1
-Ishan Kishan,2,5,WK,India,MI,WK1
-Phil Salt,2,5,WK,England,KKR,WK1
-Jitesh Sharma,1,5,WK,India,PBKS,WK1
-Syed Khaleel Ahmed,2,6,BOWL,India,DC,FA1
-Trent Boult,2,6,BOWL,New Zealand,RR,FA1
-Josh Hazlewood,2,6,BOWL,Australia,,FA1
-Avesh Khan,2,6,BOWL,India,RR,FA1
-Prasidh Krishna,2,6,BOWL,India,RR,FA1
-T. Natarajan,2,6,BOWL,India,SRH,FA1
-Anrich Nortje,2,6,BOWL,South Africa,DC,FA1
-Noor Ahmad,2,7,BOWL,Afghanistan,GT,SP1
-Rahul Chahar,1,7,BOWL,India,PBKS,SP1
-Wanindu Hasaranga,2,7,BOWL,Sri Lanka,SRH,SP1
-Waqar Salamkheil,0.75,7,BOWL,Afghanistan,,SP1
-Maheesh Theekshana,2,7,BOWL,Sri Lanka,CSK,SP1
-Adam Zampa,2,7,BOWL,Australia,RR,SP1
-Yash Dhull,0.3,8,BAT,India,DC,UBA1
-Abhinav Manohar,0.3,8,BAT,India,GT,UBA1
-Karun Nair,0.3,8,BAT,India,,UBA1
-Angkrish Raghuvanshi,0.3,8,BAT,India,KKR,UBA1
-Anmolpreet Singh,0.3,8,BAT,India,SRH,UBA1
-Atharva Taide,0.3,8,BAT,India,PBKS,UBA1
-Nehal Wadhera,0.3,8,BAT,India,MI,UBA1
-Harpreet Brar,0.3,9,AR,India,PBKS,UAL1
-Naman Dhir,0.3,9,AR,India,MI,UAL1
-Mahipal Lomror,0.5,9,AR,India,RCB,UAL1
-Sameer Rizvi,0.3,9,AR,India,CSK,UAL1
-Abdul Samad,0.3,9,AR,India,SRH,UAL1
-Vijay Shankar,0.3,9,AR,India,GT,UAL1
-Ashutosh Sharma,0.3,9,AR,India,PBKS,UAL1
-Nishant Sindhu,0.3,9,AR,India,CSK,UAL1
-Utkarsh Singh,0.3,9,AR,India,,UAL1
-Aryan Juyal,0.3,10,WK,India,,UWK1
-Kumar Kushagra,0.3,10,WK,India,GT,UWK1
-Robin Minz,0.3,10,WK,India,GT,UWK1
-Anuj Rawat,0.3,10,WK,India,RCB,UWK1
-Luvnith Sisodia,0.3,10,WK,India,,UWK1
-Vishnu Vinod,0.3,10,WK,India,MI,UWK1
-Upendra Singh Yadav,0.3,10,WK,India,SRH,UWK1
-Vaibhav Arora,0.3,11,BOWL,India,KKR,UFA1
-Rasikh Dar,0.3,11,BOWL,India,DC,UFA1
-Akash Madhwal,0.3,11,BOWL,India,MI,UFA1
-Mohit Sharma,0.5,11,BOWL,India,GT,UFA1
-Simarjeet Singh,0.3,11,BOWL,India,CSK,UFA1
-Yash Thakur,0.3,11,BOWL,India,LSG,UFA1
-Kartik Tyagi,0.4,11,BOWL,India,GT,UFA1
-Vyshak Vijaykumar,0.3,11,BOWL,India,RCB,UFA1
-Piyush Chawla,0.5,12,BOWL,India,MI,USP1
-Shreyas Gopal,0.3,12,BOWL,India,MI,USP1
-Mayank Markande,0.3,12,BOWL,India,SRH,USP1
-Suyash Sharma,0.3,12,BOWL,India,KKR,USP1
-Karn Sharma,0.5,12,BOWL,India,RCB,USP1
-Kumar Kartikeya Singh,0.3,12,BOWL,India,MI,USP1
-Manav Suthar,0.3,12,BOWL,India,GT,USP1
-Mayank Agarawal,1,13,BAT,India,SRH,BA2
-Faf Du Plessis,2,13,BAT,South Africa,RCB,BA2
-Glenn Phillips,2,13,BAT,New Zealand,SRH,BA2
-Rovman Powell,1.5,13,BAT,West Indies,RR,BA2
-Ajinkya Rahane,1.5,13,BAT,India,CSK,BA2
-Prithvi Shaw,0.75,13,BAT,India,DC,BA2
-Kane Williamson,2,13,BAT,New Zealand,GT,BA2
-Sam Curran,2,14,AR,England,PBKS,AL2
-Marco Jansen,1.25,14,AR,South Africa,SRH,AL2
-Daryl Mitchell,2,14,AR,New Zealand,CSK,AL2
-Krunal Pandya,2,14,AR,India,LSG,AL2
-Nitish Rana,1.5,14,AR,India,KKR,AL2
-Washington Sundar,2,14,AR,India,SRH,AL2
-Shardul Thakur,2,14,AR,India,CSK,AL2
-K.S Bharat,0.75,15,WK,India,KKR,WK2
-Alex Carey,1,15,WK,Australia,,WK2
-Donovan Ferreira,0.75,15,WK,South Africa,RR,WK2
-Shai Hope,1.25,15,WK,West Indies,DC,WK2
-Josh Inglis,2,15,WK,Australia,,WK2
-Ryan Rickelton,1,15,WK,South Africa,,WK2
-Deepak Chahar,2,16,BOWL,India,CSK,FA2
-Gerald Coetzee,1.25,16,BOWL,South Africa,MI,FA2
-Akash Deep,1,16,BOWL,India,RCB,FA2
-Tushar Deshpande,1,16,BOWL,India,CSK,FA2
-Lockie Ferguson,2,16,BOWL,New Zealand,RCB,FA2
-Bhuvneshwar Kumar,2,16,BOWL,India,SRH,FA2
-Mukesh Kumar,2,16,BOWL,India,DC,FA2
-Allah Ghazanfar,0.75,17,BOWL,Afghanistan,KKR,SP2
-Akeal Hosein,1.5,17,BOWL,West Indies,,SP2
-Keshav Maharaj,0.75,17,BOWL,South Africa,RR,SP2
-Mujeeb Ur Rahman,2,17,BOWL,Afghanistan,,SP2
-Adil Rashid,2,17,BOWL,England,,SP2
-Vijayakanth Viyaskanth,0.75,17,BOWL,Sri Lanka,SRH,SP2
-Ricky Bhui,0.3,18,BAT,India,DC,UBA2
-Swastik Chhikara,0.3,18,BAT,India,DC,UBA2
-Aarya Desai,0.3,18,BAT,India,,UBA2
-Shubham Dubey,0.3,18,BAT,India,RR,UBA2
-Madhav Kaushik,0.3,18,BAT,India,,UBA2
-Pukhraj Mann,0.3,18,BAT,India,,UBA2
-Shaik Rasheed,0.3,18,BAT,India,CSK,UBA2
-Himmat Singh,0.3,18,BAT,India,,UBA2
-Mayank Dagar,0.3,19,AR,India,RCB,UAL2
-Anshul Kamboj,0.3,19,AR,India,MI,UAL2
-Mohd. Arshad Khan,0.3,19,AR,India,LSG,UAL2
-Darshan Nalkande,0.3,19,AR,India,GT,UAL2
-Suyash Prabhudessai,0.3,19,AR,India,RCB,UAL2
-Anukul Roy,0.3,19,AR,India,KKR,UAL2
-Swapnil Singh,0.3,19,AR,India,PBKS,UAL2
-Sanvir Singh,0.3,19,AR,India,SRH,UAL2
-Avanish Aravelly,0.3,20,WK,India,CSK,UWK2
-Vansh Bedi,0.3,20,WK,India,,UWK2
-Saurav Chauhan,0.3,20,WK,India,RCB,UWK2
-Harvik Desai,0.3,20,WK,India,MI,UWK2
-Tom Kohler-Cadmore,0.5,20,WK,England,RR,UWK2
-Kunal Rathore,0.3,20,WK,India,RR,UWK2
-B.R Sharath,0.3,20,WK,India,GT,UWK2
-Gurnoor Singh Brar,0.3,21,BOWL,India,GT,UFA2
-Mukesh Choudhary,0.3,21,BOWL,India,CSK,UFA2
-Sakib Hussain,0.3,21,BOWL,India,KKR,UFA2
-Vidwath Kaverappa,0.3,21,BOWL,India,PBKS,UFA2
-Rajan Kumar,0.3,21,BOWL,India,RCB,UFA2
-Sushant Mishra,0.3,21,BOWL,India,GT,UFA2
-Arjun Tendulkar,0.3,21,BOWL,India,MI,UFA2
-Zeeshan Ansari,0.3,22,BOWL,India,,USP2
-Prince Choudhary,0.3,22,BOWL,India,PBKS,USP2
-Himanshu Sharma,0.3,22,BOWL,India,RCB,USP2
-M. Siddharth,0.3,22,BOWL,India,LSG,USP2
-Digvesh Singh,0.3,22,BOWL,India,,USP2
-Prashant Solanki,0.3,22,BOWL,India,CSK,USP2
-Jhathavedh Subramanyan,0.3,22,BOWL,India,SRH,USP2
-Finn Allen,2,23,BAT,New Zealand,,BA3
-Dewald Brevis,0.75,23,BAT,South Africa,MI,BA3
-Ben Duckett,2,23,BAT,England,,BA3
-Manish Pandey,0.75,23,BAT,India,KKR,BA3
-Rilee Rossouw,2,23,BAT,South Africa,PBKS,BA3
-Sherfane Rutherford,1.5,23,BAT,West Indies,KKR,BA3
-Ashton Turner,1,23,BAT,Australia,LSG,BA3
-James Vince,2,23,BAT,England,,BA3
-Shahbaz Ahamad,1,24,AR,India,SRH,AL3
-Moeen Ali,2,24,AR,England,CSK,AL3
-Tim David,2,24,AR,Australia,MI,AL3
-Deepak Hooda,0.75,24,AR,India,LSG,AL3
-Will Jacks,2,24,AR,England,RCB,AL3
-Azmatullah Omarzai,1.5,24,AR,Afghanistan,GT,AL3
-R. Sai Kishore,0.75,24,AR,India,GT,AL3
-Romario Shepherd,1.5,24,AR,West Indies,MI,AL3
-Tom Banton,2,25,WK,England,,WK3
-Sam Billings,1.5,25,WK,England,,WK3
-Jordan Cox,1.25,25,WK,England,,WK3
-Ben McDermott,0.75,25,WK,Australia,,WK3
-Kusal Mendis,0.75,25,WK,Sri Lanka,,WK3
-Kusal Perera,0.75,25,WK,Sri Lanka,,WK3
-Josh Philippe,0.75,25,WK,Australia,,WK3
-Tim Seifert,1.25,25,WK,New Zealand,,WK3
-Nandre Burger,1.25,26,BOWL,South Africa,RR,FA3
-Spencer Johnson,2,26,BOWL,Australia,GT,FA3
-Umran Malik,0.75,26,BOWL,India,SRH,FA3
-Mustafizur Rahman,2,26,BOWL,Bangladesh,CSK,FA3
-Ishant Sharma,0.75,26,BOWL,India,DC,FA3
-Nuwan Thushara,0.75,26,BOWL,Sri Lanka,MI,FA3
-Naveen Ul Haq,2,26,BOWL,Afghanistan,LSG,FA3
-Jaydev Unadkat,1,26,BOWL,India,SRH,FA3
-Umesh Yadav,2,26,BOWL,India,GT,FA3
-Rishad Hossain,0.75,27,BOWL,Bangladesh,,SP3
-Zahir Khan Pakten,0.75,27,BOWL,Afghanistan,,SP3
-Nqabayomzi Peter,0.75,27,BOWL,South Africa,,SP3
-Tanveer Sangha,0.75,27,BOWL,Australia,,SP3
-Tabraiz Shamsi,2,27,BOWL,South Africa,,SP3
-Jeffery Vandersay,0.75,27,BOWL,Sri Lanka,,SP3
-Sachin Baby,0.3,28,BAT,India,,UBA3
-Priyam Garg,0.3,28,BAT,India,,UBA3
-Harnoor Pannu,0.3,28,BAT,India,,UBA3
-Smaran Ravichandran,0.3,28,BAT,India,,UBA3
-Shashwat Rawat,0.3,28,BAT,India,,UBA3
-Andre Siddarth,0.3,28,BAT,India,,UBA3
-Avneesh Sudha,0.3,28,BAT,India,,UBA3
-Apoorv Wankhade,0.3,28,BAT,India,,UBA3
-Yudhvir Charak,0.3,29,AR,India,LSG,UAL3
-Rishi Dhawan,0.3,29,AR,India,PBKS,UAL3
-Rajvardhan Hangargekar,0.3,29,AR,India,CSK,UAL3
-Tanush Kotian,0.3,29,AR,India,RR,UAL3
-Arshin Kulkarni,0.3,29,AR,India,LSG,UAL3
-Shams Mulani,0.3,29,AR,India,MI,UAL3
-Shivam Singh,0.3,29,AR,India,PBKS,UAL3
-Lalit Yadav,0.3,29,AR,India,DC,UAL3
-Mohammed Azharuddeen,0.3,30,WK,India,,UWK3
-L.R Chethan,0.3,30,WK,India,,UWK3
-Aryaman Singh Dhaliwal,0.3,30,WK,India,,UWK3
-Urvil Patel,0.3,30,WK,India,,UWK3
-Sanskar Rawat,0.3,30,WK,India,,UWK3
-Bipin Saurabh,0.3,30,WK,India,,UWK3
-Tanay Thyagarajann,0.3,30,WK,India,,UWK3
-Money Grewal,0.3,31,BOWL,India,,UFA3
-Ashwani Kumar,0.3,31,BOWL,India,,UFA3
-Ishan Porel,0.3,31,BOWL,India,,UFA3
-Abhilash Shetty,0.3,31,BOWL,India,,UFA3
-Akash Singh,0.3,31,BOWL,India,,UFA3
-Gurjapneet Singh,0.3,31,BOWL,India,,UFA3
-Basil Thampi,0.3,31,BOWL,India,,UFA3
-Murugan Ashwin,0.3,32,BOWL,India,,USP3
-Shreyas Chavan,0.3,32,BOWL,India,,USP3
-Chintal Gandhi,0.3,32,BOWL,India,,USP3
-Raghav Goyal,0.3,32,BOWL,India,,USP3
-Jagadeesha Suchith,0.3,32,BOWL,India,,USP3
-Roshan Waghsare,0.3,32,BOWL,India,,USP3
-Bailapudi Yeswanth,0.3,32,BOWL,India,,USP3
-Sediqullah Atal,0.75,33,BAT,Afghanistan,,BA4
-Matthew Breetzke,0.75,33,BAT,South Africa,,BA4
-Mark Chapman,1.5,33,BAT,New Zealand,,BA4
-Brandon King,0.75,33,BAT,West Indies,,BA4
-Evin Lewis,2,33,BAT,West Indies,,BA4
-Pathum Nissanka,0.75,33,BAT,Sri Lanka,,BA4
-Bhanuka Rajapaksa,0.75,33,BAT,Sri Lanka,,BA4
-Steve Smith,2,33,BAT,Australia,,BA4
-Gus Atkinson,2,34,AR,England,KKR,AL4
-Tom Curran,2,34,AR,England,RCB,AL4
-Krishnappa Gowtham,1,34,AR,India,LSG,AL4
-Mohammad Nabi,1.5,34,AR,Afghanistan,MI,AL4
-Gulbadin Naib,1,34,AR,Afghanistan,DC,AL4
-Sikandar Raza,1.25,34,AR,Zimbabwe,PBKS,AL4
-Mitchell Santner,2,34,AR,New Zealand,CSK,AL4
-Jayant Yadav,0.75,34,AR,India,GT,AL4
-Johnson Charles,0.75,35,WK,West Indies,,WK4
-Litton Das,0.75,35,WK,Bangladesh,,WK4
-Andre Fletcher,0.75,35,WK,West Indies,,WK4
-Tom Latham,1.5,35,WK,New Zealand,,WK4
-Ollie Pope,0.75,35,WK,England,,WK4
-Kyle Verreynne,0.75,35,WK,South Africa,,WK4
-Fazalhaq Farooqi,2,36,BOWL,Afghanistan,SRH,FA4
-Richard Gleeson,0.75,36,BOWL,England,CSK,FA4
-Matt Henry,2,36,BOWL,New Zealand,LSG,FA4
-Alzarri Joseph,2,36,BOWL,West Indies,RCB,FA4
-Kwena Maphaka,0.75,36,BOWL,South Africa,MI,FA4
-Kuldeep Sen,0.75,36,BOWL,India,RR,FA4
-Reece Topley,0.75,36,BOWL,England,RCB,FA4
-Lizaad Williams,0.75,36,BOWL,South Africa,DC,FA4
-Luke Wood,0.75,36,BOWL,England,MI,FA4
-Sachin Dhas,0.3,37,BAT,India,,UBA4
-Leus Du Plooy,0.5,37,BAT,England,,UBA4
-Ashwin Hebbar,0.3,37,BAT,India,,UBA4
-Rohan Kunnummal,0.3,37,BAT,India,,UBA4
-Ayush Pandey,0.3,37,BAT,India,,UBA4
-Akshat Raghuwanshi,0.3,37,BAT,India,,UBA4
-Shoun Roger,0.4,37,BAT,India,,UBA4
-Virat Singh,0.3,37,BAT,India,,UBA4
-Priyansh Arya,0.3,38,AR,India,,UAL4
-Manoj Bhandage,0.3,38,AR,India,RCB,UAL4
-Pravin Dubey,0.3,38,AR,India,DC,UAL4
-Ajay Mandal,0.3,38,AR,India,CSK,UAL4
-Prerak Mankad,0.3,38,AR,India,LSG,UAL4
-Vipraj Nigam,0.3,38,AR,India,,UAL4
-Vicky Ostwal,0.3,38,AR,India,DC,UAL4
-Shivalik Sharma,0.3,38,AR,India,MI,UAL4
-Salil Arora,0.3,39,WK,India,,UWK4
-Dinesh Bana,0.3,39,WK,India,,UWK4
-Ajitesh Guruswamy,0.3,39,WK,India,,UWK4
-Narayan Jagadeesan,0.3,39,WK,India,,UWK4
-Shrijith Krishnan,0.3,39,WK,India,,UWK4
-Michael Pepper,0.5,39,WK,England,,UWK4
-Vishnu Solanki,0.3,39,WK,India,,UWK4
-K.M Asif,0.3,40,BOWL,India,,UFA4
-Akhil Chaudhary,0.3,40,BOWL,India,,UFA4
-Himanshu Chauhan,0.3,40,BOWL,India,,UFA4
-Arpit Guleria,0.3,40,BOWL,India,,UFA4
-Nishanth Saranu,0.3,40,BOWL,India,,UFA4
-Kuldip Yadav,0.3,40,BOWL,India,,UFA4
-Prithviraj Yarra,0.3,40,BOWL,India,,UFA4
-Shubham Agrawal,0.3,41,BOWL,India,,USP4
-Jass Inder Baidwan,0.3,41,BOWL,India,,USP4
-Jasmer Dhankhar,0.3,41,BOWL,India,,USP4
-Pulkit Narang,0.3,41,BOWL,India,,USP4
-Saumy Pandey,0.3,41,BOWL,India,,USP4
-Mohit Rathee,0.3,41,BOWL,India,,USP4
-Himanshu Singh,0.3,41,BOWL,India,,USP4
-Towhid Hridoy,0.75,42,BAT,Bangladesh,,BA5
-Mikyle Louis,0.75,42,BAT,West Indies,,BA5
-Harry Tector,0.75,42,BAT,Ireland,,BA5
-Rassie Van Der Dussen,2,42,BAT,South Africa,,BA5
-Will Young,1.25,42,BAT,New Zealand,,BA5
-Najibullah Zadran,0.75,42,BAT,Afghanistan,,BA5
-Ibrahim Zadran,0.75,42,BAT,Afghanistan,,BA5
-Sean Abbott,2,43,AR,Australia,,AL5
-Jacob Bethell England None,1.25,43,AR,,,AL5
-Brydon Carse,1,43,AR,England,,AL5
-Aaron Hardie,1.25,43,AR,Australia,,AL5
-Sarfaraz Khan,0.75,43,AR,India,,AL5
-Kyle Mayers,1.5,43,AR,West Indies,LSG,AL5
-Kamindu Mendis,0.75,43,AR,Sri Lanka,,AL5
-Matthew Short,0.75,43,AR,Australia,,AL5
-Jason Behrendorff,1.5,44,BOWL,Australia,MI,FA5
-Dushmantha Chameera,0.75,44,BOWL,Sri Lanka,LSG,FA5
-Nathan Ellis,1.25,44,BOWL,Australia,PBKS,FA5
-Shamar Joseph,0.75,44,BOWL,West Indies,LSG,FA5
-Josh Little,0.75,44,BOWL,Ireland,GT,FA5
-Shivam Mavi,0.75,44,BOWL,India,GT,FA5
-Jhye Richardson,1.5,44,BOWL,Australia,DC,FA5
-Navdeep Saini,0.75,44,BOWL,India,RR,FA5
-Tanmay Agarwal,0.3,45,BAT,India,,UBA5
-Amandeep Khare,0.3,45,BAT,India,,UBA5
-Ayush Mhatre,0.3,45,BAT,India,,UBA5
-Salman Nizar,0.3,45,BAT,India,,UBA5
-Aniket Verma,0.3,45,BAT,India,,UBA5
-Sumeet Verma,0.3,45,BAT,India,,UBA5
-Manan Vohra,0.3,45,BAT,India,,UBA5
-Samarth Vyas,0.3,45,BAT,India,,UBA5
-Raj Angad Bawa,0.3,46,AR,India,,UAL5
-Emanjot Chahal,0.3,46,AR,India,,UAL5
-Musheer Khan,0.3,46,AR,India,,UAL5
-Manvanth Kumar L,0.3,46,AR,India,,UAL5
-Mayank Rawat,0.3,46,AR,India,,UAL5
-Suryansh Shedge,0.3,46,AR,India,,UAL5
-Hritik Shokeen,0.3,46,AR,India,,UAL5
-Sonu Yadav,0.3,46,AR,India,,UAL5
-S. Rithik Easwaran,0.3,47,WK,India,,UWK5
-Anmol Malhotra,0.3,47,WK,India,,UWK5
-Pradosh Paul,0.3,47,WK,India,,UWK5
-Karteek Sharma,0.3,47,WK,India,,UWK5
-Akash Singh,0.3,47,WK,India,,UWK5
-Tejasvi Singh,0.3,47,WK,India,,UWK5
-Siddharth Yadav,0.3,47,WK,India,,UWK5
-Saurabh Dubey,0.3,48,BOWL,India,,UFA5
-Aaqib Khan,0.3,48,BOWL,India,,UFA5
-Kulwant Khejroliya,0.3,48,BOWL,India,,UFA5
-Ankit Singh Rajpoot,0.3,48,BOWL,India,,UFA5
-Divesh Sharma,0.3,48,BOWL,India,,UFA5
-Naman Tiwari,0.3,48,BOWL,India,,UFA5
-Prince Yadav,0.3,48,BOWL,India,,UFA5
-Kunal Singh Chibb,0.3,49,BOWL,India,,USP5
-Yuvraj Chudasama,0.3,49,BOWL,India,,USP5
-Deepak Devadiga,0.3,49,BOWL,India,,USP5
-Ramesh Prasad,0.3,49,BOWL,India,,USP5
-Shivam Shukla,0.3,49,BOWL,India,,USP5
-Himanshu Singh,0.3,49,BOWL,India,,USP5
-Tejpreet Singh,0.3,49,BOWL,India,,USP5
-Qais Ahmad,0.75,50,AR,Afghanistan,,AL6
-Charith Asalanka,0.75,50,AR,Sri Lanka,,AL6
-Michael Bracewell,1.5,50,AR,New Zealand,,AL6
-Gudakesh Motie,0.75,50,AR,West Indies,,AL6
-Daniel Mousley,0.75,50,AR,England,,AL6
-Jamie Overton,1.5,50,AR,England,,AL6
-Dunith Wellalage,0.75,50,AR,Sri Lanka,,AL6
-Ottneil Baartman,0.75,51,BOWL,South Africa,,FA6
-Xavier Bartlett,0.75,51,BOWL,Australia,,FA6
-Dilshan Madushanka,0.75,51,BOWL,Sri Lanka,MI,FA6
-Adam Milne,2,51,BOWL,New Zealand,,FA6
-Lungisani Ngidi,1,51,BOWL,South Africa,DC,FA6
-William O'Rourke,1.5,51,BOWL,New Zealand,,FA6
-Chetan Sakariya,0.75,51,BOWL,India,KKR,FA6
-Sandeep Warrier,0.75,51,BOWL,India,,FA6
-Musaif Ajaz,0.3,52,BAT,India,,UBA6
-Agni Chopra,0.3,52,BAT,India,,UBA6
-Abhimanyu Easwaran,0.3,52,BAT,India,,UBA6
-Sudip Gharami,0.3,52,BAT,India,,UBA6
-Shubham Khajuria,0.3,52,BAT,India,,UBA6
-Akhil Rawat,0.3,52,BAT,India,,UBA6
-Prateek Yadav,0.3,52,BAT,India,,UBA6
-Abdul Bazith,0.3,53,AR,India,,UAL6
-K.C Cariappa,0.3,53,AR,India,,UAL6
-Yuvraj Chaudhary,0.3,53,AR,India,,UAL6
-Aman Khan,0.3,53,AR,India,,UAL6
-Sumit Kumar,0.3,53,AR,India,,UAL6
-Kamlesh Nagarkoti,0.3,53,AR,India,,UAL6
-Hardik Raj,0.3,53,AR,India,,UAL6
-Harsh Tyagi,0.3,53,AR,India,,UAL6
-M. Ajnas,0.3,54,WK,India,,UWK6
-Unmukt Chand,0.3,54,WK,USA,,UWK6
-Tejasvi Dahiya,0.3,54,WK,India,,UWK6
-Sumit Ghadigaonkar,0.3,54,WK,India,,UWK6
-Baba Indrajith,0.3,54,WK,India,,UWK6
-Muhammed Khan,0.3,54,WK,India,,UWK6
-Bhagmender Lather,0.3,54,WK,India,,UWK6
-Baltej Dhanda,0.3,55,BOWL,India,,UFA6
-Ali Khan,0.3,55,BOWL,USA,,UFA6
-Ravi Kumar,0.3,55,BOWL,India,,UFA6
-Vineet Panwar,0.3,55,BOWL,India,,UFA6
-Vidyadhar Patil,0.3,55,BOWL,India,,UFA6
-Aradhya Shukla,0.3,55,BOWL,India,,UFA6
-Abhinandan Singh,0.3,55,BOWL,India,,UFA6
-Cooper Connolly,0.75,56,AR,Australia,,AL7
-Dushan Hemantha,0.75,56,AR,Sri Lanka,,AL7
-Jason Holder,2,56,AR,West Indies,,AL7
-Karim Janat,0.75,56,AR,Afghanistan,,AL7
-Jimmy Neesham,1.5,56,AR,New Zealand,,AL7
-Daniel Sams,1.5,56,AR,Australia,,AL7
-William Sutherland,0.75,56,AR,Australia,,AL7
-Taskin Ahmed,1,57,BOWL,Bangladesh,,FA7
-Ben Dwarshuis,0.75,57,BOWL,Australia,,FA7
-Obed McCoy,1.25,57,BOWL,West Indies,,FA7
-Riley Meredith,1.5,57,BOWL,Australia,,FA7
-Lance Morris,1.25,57,BOWL,Australia,,FA7
-Olly Stone,0.75,57,BOWL,England,,FA7
-Daniel Worrall,1.5,57,BOWL,England,,FA7
-Pyla Avinash,0.3,58,BAT,India,,UBA7
-Kiran Chormale,0.3,58,BAT,India,,UBA7
-Ashish Dahariya,0.3,58,BAT,India,,UBA7
-Tushar Raheja,0.3,58,BAT,India,,UBA7
-Sarthak Ranjan,0.3,58,BAT,India,,UBA7
-Abhijeet Tomar,0.3,58,BAT,India,,UBA7
-Krish Bhagat,0.3,59,AR,India,,UAL7
-Sohraab Dhaliwal,0.3,59,AR,India,,UAL7
-Harsh Dubey,0.3,59,AR,India,,UAL7
-Ramakrishna Ghosh,0.3,59,AR,India,,UAL7
-Raj Limbani,0.3,59,AR,India,,UAL7
-Ninad Rathva,0.3,59,AR,India,,UAL7
-Vivrant Sharma,0.3,59,AR,India,,UAL7
-Shiva Singh,0.3,59,AR,India,,UAL7
-Sayed Irfan Aftab,0.3,60,BOWL,India,,UFA7
-Anirudh Chowdhary,0.3,60,BOWL,India,,UFA7
-Anshuman Hooda,0.3,60,BOWL,India,,UFA7
-Siddharth Kaul,0.4,60,BOWL,India,,UFA7
-Prashant Sai Painkra,0.3,60,BOWL,India,,UFA7
-Venkata Satyanarayana Penmetsa,0.3,60,BOWL,India,,UFA7
-Yeddala Reddy,0.3,60,BOWL,India,,UFA7
-Zak Foulkes,0.75,61,AR,New Zealand,,AL8
-Chris Green,1,61,AR,Australia,,AL8
-Shakib Al Hasan,1,61,AR,Bangladesh,,AL8
-Mehidy Hasan Miraz,1,61,AR,Bangladesh,,AL8
-Wiaan Mulder,0.75,61,AR,South Africa,,AL8
-Dwaine Pretorius,0.75,61,AR,South Africa,,AL8
-Dasun Shanaka,0.75,61,AR,Sri Lanka,,AL8
-Shoriful Islam,0.75,62,BOWL,Bangladesh,,FA8
-Blessing Muzarabani,0.75,62,BOWL,Zimbabwe,,FA8
-Matthew Potts,1.5,62,BOWL,England,,FA8
-Tanzim Hasan Sakib,0.75,62,BOWL,Bangladesh,,FA8
-Benjamin Sears,1,62,BOWL,New Zealand,,FA8
-Tim Southee,1.5,62,BOWL,New Zealand,,FA8
-John Turner,1.5,62,BOWL,England,,FA8
-Joshua Brown,0.3,63,BAT,Australia,,UBA8
-Oliver Davies,0.3,63,BAT,Australia,,UBA8
-Bevan John Jacobs,0.3,63,BAT,New Zealand,,UBA8
-Atharva Kale,0.3,63,BAT,India,,UBA8
-Abhishek Nair,0.3,63,BAT,India,,UBA8
-Vishwanath Pratap Singh,0.3,63,BAT,India,,UBA8
-Nasir Lone,0.3,64,AR,India,,UAL8
-Brandon McMullen,0.3,64,AR,Scotland,,UAL8
-S. Midhun,0.3,64,AR,India,,UAL8
-Abid Mushtaq,0.3,64,AR,India,,UAL8
-Mahesh Pithiya,0.3,64,AR,India,,UAL8
-Maramreddy Reddy,0.3,64,AR,India,,UAL8
-Atit Sheth,0.3,64,AR,India,,UAL8
-Jonty Sidhu,0.3,64,AR,India,,UAL8
-Mohit Avasthi,0.3,65,BOWL,India,,UFA8
-Faridoon Dawoodzai,0.3,65,BOWL,Afghanistan,,UFA8
-Praful Hinge,0.3,65,BOWL,India,,UFA8
-Pankaj Jaswal,0.3,65,BOWL,India,,UFA8
-Vijay Kumar,0.3,65,BOWL,India,,UFA8
-Ashok Sharma,0.3,65,BOWL,India,,UFA8
-Mujtaba Yousuf,0.3,65,BOWL,India,,UFA8
-Ashton Agar,1.25,66,AR,Australia,,AL9
-Roston Chase,0.75,66,AR,West Indies,,AL9
-Junior Dala,0.75,66,AR,South Africa,,AL9
-Mahedi Hasan,0.75,66,AR,Bangladesh,,AL9
-Nangeyalia Kharote,0.75,66,AR,Afghanistan,,AL9
-Dan Lawrence,1,66,AR,England,,AL9
-Nathan Smith,1,66,AR,New Zealand,,AL9
-James Anderson,1.25,67,BOWL,England,,FA9
-Kyle Jamieson,1.5,67,BOWL,New Zealand,,FA9
-Chris Jordan,2,67,BOWL,England,,FA9
-Hasan Mahmud,0.75,67,BOWL,Bangladesh,,FA9
-Tymal Mills,2,67,BOWL,England,,FA9
-David Payne,1,67,BOWL,England,,FA9
-Nahid Rana,0.75,67,BOWL,Bangladesh,,FA9
-Prayas Ray Barman,0.3,68,BAT,India,,UBA9
-Jafar Jamal,0.3,68,BAT,India,,UBA9
-Ayaz Khan,0.3,68,BAT,India,,UBA9
-Kaushik Maity,0.3,68,BAT,India,,UBA9
-Rituraj Sharma,0.3,68,BAT,India,,UBA9
-Vaibhav Suryavanshi,0.3,68,BAT,India,,UBA9
-Kartik Chadha,0.3,69,AR,India,,UAL9
-Writtick Chatterjee,0.3,69,AR,India,,UAL9
-Prerit Dutta,0.3,69,AR,India,,UAL9
-Rajneesh Gurbani,0.3,69,AR,India,,UAL9
-Shubhang Hegde,0.3,69,AR,India,,UAL9
-Saransh Jain,0.3,69,AR,India,,UAL9
-Ripal Patel,0.3,69,AR,India,,UAL9
-Akash Vashisht,0.3,69,AR,India,,UAL9
-Anirudh Kanwar,0.3,70,BOWL,India,,UFA9
-Shubham Kapse,0.3,70,BOWL,India,,UFA9
-Atif Mushtaq,0.3,70,BOWL,India,,UFA9
-Dipesh Parwani,0.3,70,BOWL,India,,UFA9
-Manish Reddy,0.3,70,BOWL,India,,UFA9
-Chetan Sharma,0.3,70,BOWL,India,,UFA9
-Avinash Singh,0.3,70,BOWL,India,,UFA9
-Alick Athanaze,0.75,72,AR,West Indies,,AL10
-Hilton Cartwright,0.75,72,AR,Australia,,AL10
-Dominic Drakes,1.25,72,AR,West Indies,,AL10
-Daryn Dupavillon,0.75,72,BOWL,South Africa,,FA10
-Matthew Forde,1.25,72,AR,West Indies,,AL10
-Patrick Kruger,0.75,72,AR,South Africa,,AL10
-Lahiru Kumara,0.75,72,BOWL,Sri Lanka,,FA10
-Michael Neser,0.75,72,AR,Australia,,AL10
-Richard Ngarava,0.75,72,BOWL,Zimbabwe,,FA10
-Wayne Parnell,1,72,BOWL,South Africa,,FA10
-Keemo Paul,1.25,72,AR,West Indies,,AL10
-Odean Smith,0.75,72,AR,West Indies,,AL10
-Andrew Tye,0.75,72,BOWL,Australia,,FA10
-Ajay Ahlawat,0.4,73,AR,India,,UAL10
-Corbin Bosch,0.3,73,AR,South Africa,,UAL10
-Mayank Gusain,0.3,73,AR,India,,UAL10
-Mukhtar Hussain,0.3,73,AR,India,,UAL10
-Girinath Reddy,0.3,73,AR,India,,UAL10
-Jalaj Saxena,0.4,73,AR,India,,UAL10
-Yajas Sharma,0.3,73,AR,India,,UAL10
-Sanjay Yadav,0.3,73,AR,India,,UAL10
-Vishal Godara,0.3,74,BOWL,India,,UFA10
-Eshan Malinga,0.3,74,BOWL,Sri Lanka,,UFA10
-Samarth Nagraj,0.3,74,BOWL,India,,UFA10
-Abhishek Saini,0.3,74,BOWL,India,,UFA10
-Dumindu Sewmina,0.3,74,BOWL,Sri Lanka,,UFA10
-Pradyuman Kumar Singh,0.3,74,BOWL,India,,UFA10
-Vasu Vats,0.3,74,BOWL,India,,UFA10
-Umang Kumar,0.3,75,AR,India,,UAL11
-Mohamed Ali,0.3,75,AR,India,,UAL11
-Atharva Ankolekar,0.3,75,AR,India,,UAL11
-Vaisakh Chandran,0.3,75,AR,India,,UAL11
-Auqib Dar,0.3,75,AR,India,,UAL11
-Rohit Rayudu,0.3,75,AR,India,,UAL11
-Uday Saharan,0.3,75,AR,India,,UAL11
-Ayush Vartak,0.3,75,AR,India,,UAL11
-Baba Aparajith,0.3,76,AR,India,,UAL12
-Sumit Kumar Beniwal,0.3,76,AR,India,,UAL12
-Nishunk Birla,0.3,76,AR,India,,UAL12
-Digvijay Deshmukh,0.3,76,AR,India,,UAL12
-Lakshay Jain,0.3,76,AR,India,,UAL12
-Duan Jansen,0.3,76,AR,South Africa,,UAL12
-Kritagya Singh,0.3,76,AR,India,,UAL12
-P. Vignesh,0.3,76,AR,India,,UAL12
-Sabhay Chadha,0.3,77,AR,India,,UAL13
-Ben Howell,0.5,77,AR,England,,UAL13
-Hemanth Kumar,0.3,77,AR,India,,UAL13
-Rohan Rana,0.3,77,AR,India,,UAL13
-Bharat Sharma,0.3,77,AR,India,,UAL13
-Pratham Singh,0.3,77,AR,India,,UAL13
-Tripurana Vijay,0.3,77,AR,India,,UAL13
-Ravi Yadav,0.3,77,AR,India,,UAL13
-Arjun Azad,0.3,78,AR,India,,UAL14
-Abhay Choudhary,0.3,78,AR,India,,UAL14
-Gaurav Gambhir,0.3,78,AR,India,,UAL14
-Shubham Garhwal,0.3,78,AR,India,,UAL14
-Tejasvi Jaiswal,0.3,78,AR,India,,UAL14
-Sairaj Patil,0.3,78,AR,India,,UAL14
-Madhav Tiwari,0.3,78,AR,India,,UAL14
-Kamal Tripathi,0.3,78,AR,India,,UAL14
-Prashant Chauhan,0.3,79,AR,India,,UAL15
-Yash Dabas,0.3,79,AR,India,,UAL15
-Dhruv Kaushik,0.3,79,AR,India,,UAL15
-Khrievitso Kense,0.3,79,AR,India,,UAL15
-Akash Parkar,0.3,79,AR,India,,UAL15
-Vignesh Puthur,0.3,79,AR,India,,UAL15
-Tripuresh Singh,0.3,79,AR,India,,UAL15
-Vijay Yadav,0.3,79,AR,India,,UAL15
+"player_name","reserve_price","set_name","role","country","previous_team","set_code","registration_id","age","ipl_matches","bowling_style","cap_status","rtm_team"
+"Jos Buttler","2","1","WK","England","RR","M1","1","34","107","RIGHT ARM Off Spin","Capped",""
+"Shreyas Iyer","2","1","BAT","India","KKR","M1","2","30","116","RIGHT ARM Off Spin","Capped",""
+"Rishabh Pant","2","1","BAT","India","DC","M1","3","27","111","RIGHT ARM Off Spin","Capped","DC"
+"Kagiso Rabada","2","1","BOWL","South Africa","PBKS","M1","4","29","80","RIGHT ARM Fast","Capped","PBKS"
+"Arshdeep Singh","2","1","BOWL","India","PBKS","M1","5","26","65","LEFT ARM Fast Medium","Capped","PBKS"
+"Mitchell Starc","2","1","BOWL","Australia","KKR","M1","6","35","41","LEFT ARM Fast","Capped",""
+"Yuzvendra Chahal","2","2","BOWL","India","RR","M2","7","34","160","RIGHT ARM Leg Spin","Capped",""
+"Liam Livingstone","2","2","AR","England","PBKS","M2","8","31","39","RIGHT ARM Leg Spin","Capped","PBKS"
+"David Miller","1.5","2","BAT","South Africa","GT","M2","9","35","130","-","Capped","GT"
+"KL Rahul","2","2","WK","India","LSG","M2","10","32","132","-","Capped","LSG"
+"Mohammad Shami","2","2","BOWL","India","GT","M2","11","34","110","RIGHT ARM Fast","Capped","GT"
+"Mohammad Siraj","2","2","BOWL","India","RCB","M2","12","31","93","RIGHT ARM Fast","Capped","RCB"
+"Harry Brook","2","3","BAT","England","DC","BA1","13","26","11","RIGHT ARM Medium","Capped","DC"
+"Devon Conway","2","3","BAT","New Zealand","CSK","BA1","14","33","23","-","Capped","CSK"
+"Jake Fraser-Mcgurk","2","3","BAT","Australia","DC","BA1","15","22","9","-","Capped","DC"
+"Aiden Markram","2","3","BAT","South Africa","SRH","BA1","16","30","44","RIGHT ARM Off Spin","Capped",""
+"Devdutt Padikkal","2","3","BAT","India","LSG","BA1","17","24","64","-","Capped","LSG"
+"Rahul Tripathi","0.75","3","BAT","India","SRH","BA1","18","34","95","RIGHT ARM Medium","Capped",""
+"David Warner","2","3","BAT","Australia","DC","BA1","19","38","184","-","Capped","DC"
+"Ravichandran Ashwin","2","4","AR","India","RR","AL1","20","38","212","RIGHT ARM Off Spin","Capped",""
+"Venkatesh Iyer","2","4","AR","India","KKR","AL1","21","30","51","RIGHT ARM Medium","Capped",""
+"Mitchell Marsh","2","4","AR","Australia","DC","AL1","22","33","42","RIGHT ARM Fast","Capped","DC"
+"Glenn Maxwell","2","4","AR","Australia","RCB","AL1","23","36","134","RIGHT ARM Off Spin","Capped","RCB"
+"Harshal Patel","2","4","AR","India","PBKS","AL1","24","34","106","RIGHT ARM Fast Medium","Capped","PBKS"
+"Rachin Ravindra","1.5","4","AR","New Zealand","CSK","AL1","25","25","10","LEFT ARM Slow Orthodox","Capped","CSK"
+"Marcus Stoinis","2","4","AR","Australia","LSG","AL1","26","35","96","RIGHT ARM Fast","Capped","LSG"
+"Jonny Bairstow","2","5","WK","England","PBKS","WK1","27","35","50","RIGHT ARM Medium","Capped","PBKS"
+"Quinton De Kock","2","5","WK","South Africa","LSG","WK1","28","32","107","-","Capped","LSG"
+"Rahmanullah Gurbaz","2","5","WK","Afghanistan","KKR","WK1","29","23","14","-","Capped",""
+"Ishan Kishan","2","5","WK","India","MI","WK1","30","26","104","-","Capped",""
+"Phil Salt","2","5","WK","England","KKR","WK1","31","28","21","-","Capped",""
+"Jitesh Sharma","1","5","WK","India","PBKS","WK1","32","31","40","-","Capped","PBKS"
+"Syed Khaleel Ahmed","2","6","BOWL","India","DC","FA1","33","27","57","LEFT ARM Fast Medium","Capped","DC"
+"Trent Boult","2","6","BOWL","New Zealand","RR","FA1","34","35","104","LEFT ARM Fast Medium","Capped",""
+"Josh Hazlewood","2","6","BOWL","Australia","","FA1","35","34","27","RIGHT ARM Fast Medium","Capped",""
+"Avesh Khan","2","6","BOWL","India","RR","FA1","36","28","63","RIGHT ARM Fast","Capped",""
+"Prasidh Krishna","2","6","BOWL","India","RR","FA1","37","29","51","RIGHT ARM Fast","Capped",""
+"T. Natarajan","2","6","BOWL","India","SRH","FA1","38","33","61","LEFT ARM Fast Medium","Capped",""
+"Anrich Nortje","2","6","BOWL","South Africa","DC","FA1","39","31","46","RIGHT ARM Fast","Capped","DC"
+"Noor Ahmad","2","7","BOWL","Afghanistan","GT","SP1","40","20","23","LEFT ARM Slow Unorthodox","Capped","GT"
+"Rahul Chahar","1","7","BOWL","India","PBKS","SP1","41","25","78","RIGHT ARM Leg Spin","Capped","PBKS"
+"Wanindu Hasaranga","2","7","BOWL","Sri Lanka","SRH","SP1","42","27","26","RIGHT ARM Leg Spin","Capped",""
+"Waqar Salamkheil","0.75","7","BOWL","Afghanistan","","SP1","43","23","","LEFT ARM Slow Unorthodox","Capped",""
+"Maheesh Theekshana","2","7","BOWL","Sri Lanka","CSK","SP1","44","24","27","RIGHT ARM Off Spin","Capped","CSK"
+"Adam Zampa","2","7","BOWL","Australia","RR","SP1","45","32","20","RIGHT ARM Leg Spin","Capped",""
+"Yash Dhull","0.3","8","BAT","India","DC","UBA1","46","22","4","-","Uncapped","DC"
+"Abhinav Manohar","0.3","8","BAT","India","GT","UBA1","47","30","18","RIGHT ARM Leg Spin","Uncapped",""
+"Karun Nair","0.3","8","BAT","India","","UBA1","48","33","76","RIGHT ARM Off Spin","Uncapped",""
+"Angkrish Raghuvanshi","0.3","8","BAT","India","KKR","UBA1","49","20","10","RIGHT ARM Off Spin","Uncapped",""
+"Anmolpreet Singh","0.3","8","BAT","India","SRH","UBA1","50","27","9","RIGHT ARM Off Spin","Uncapped","SRH"
+"Atharva Taide","0.3","8","BAT","India","PBKS","UBA1","51","24","9","LEFT ARM Slow Orthodox","Uncapped","PBKS"
+"Nehal Wadhera","0.3","8","BAT","India","MI","UBA1","52","24","20","RIGHT ARM Leg Spin","Uncapped","MI"
+"Harpreet Brar","0.3","9","AR","India","PBKS","UAL1","53","29","41","LEFT ARM Slow Orthodox","Uncapped",""
+"Naman Dhir","0.3","9","AR","India","MI","UAL1","54","25","7","RIGHT ARM Off Spin","Uncapped","MI"
+"Mahipal Lomror","0.3","9","AR","India","RCB","UAL1","55","25","40","LEFT ARM Slow Orthodox","Uncapped","RCB"
+"Sameer Rizvi","0.3","9","AR","India","CSK","UAL1","56","21","9","RIGHT ARM Leg Spin","Uncapped","CSK"
+"Abdul Samad","0.3","9","AR","India","SRH","UAL1","57","23","50","RIGHT ARM Leg Spin","Uncapped","SRH"
+"Vijay Shankar","0.3","9","AR","India","GT","UAL1","58","34","72","RIGHT ARM Medium","Uncapped",""
+"Ashutosh Sharma","0.3","9","AR","India","PBKS","UAL1","59","26","11","RIGHT ARM Medium","Uncapped",""
+"Nishant Sindhu","0.3","9","AR","India","CSK","UAL1","60","20","0","LEFT ARM Slow Orthodox","Uncapped","CSK"
+"Utkarsh Singh","0.3","9","AR","India","","UAL1","61","26","0","RIGHT ARM Off Spin","Uncapped",""
+"Aryan Juyal","0.3","10","WK","India","","UWK1","62","23","0","RIGHT ARM Off Spin","Uncapped",""
+"Kumar Kushagra","0.3","10","WK","India","GT","UWK1","63","20","0","-","Uncapped","DC"
+"Robin Minz","0.3","10","WK","India","GT","UWK1","64","22","0","RIGHT ARM Off Spin","Uncapped",""
+"Anuj Rawat","0.3","10","WK","India","RCB","UWK1","65","25","24","RIGHT ARM Leg Spin","Uncapped","RCB"
+"Luvnith Sisodia","0.3","10","WK","India","","UWK1","66","25","0","-","Uncapped",""
+"Vishnu Vinod","0.3","10","WK","India","MI","UWK1","67","31","6","-","Uncapped","MI"
+"Upendra Singh Yadav","0.3","10","WK","India","SRH","UWK1","68","28","0","-","Uncapped","SRH"
+"Vaibhav Arora","0.3","11","BOWL","India","KKR","UFA1","69","27","20","RIGHT ARM Fast Medium","Uncapped",""
+"Rasikh Dar","0.3","11","BOWL","India","DC","UFA1","70","25","11","RIGHT ARM Medium","Uncapped","DC"
+"Akash Madhwal","0.5","11","BOWL","India","MI","UFA1","71","31","12","RIGHT ARM Fast","Uncapped","MI"
+"Mohit Sharma","0.5","11","BOWL","India","GT","UFA1","72","36","111","RIGHT ARM Fast","Uncapped",""
+"Simarjeet Singh","0.3","11","BOWL","India","CSK","UFA1","73","27","10","RIGHT ARM Fast","Uncapped","CSK"
+"Yash Thakur","0.3","11","BOWL","India","LSG","UFA1","74","26","19","RIGHT ARM Fast Medium","Uncapped",""
+"Kartik Tyagi","0.4","11","BOWL","India","GT","UFA1","75","24","20","RIGHT ARM Fast","Uncapped",""
+"Vyshak Vijaykumar","0.3","11","BOWL","India","RCB","UFA1","76","28","11","RIGHT ARM Fast Medium","Uncapped","RCB"
+"Piyush Chawla","0.5","12","BOWL","India","MI","USP1","77","36","192","RIGHT ARM Leg Spin","Uncapped","MI"
+"Shreyas Gopal","0.3","12","BOWL","India","MI","USP1","78","31","52","RIGHT ARM Leg Spin","Uncapped","MI"
+"Mayank Markande","0.3","12","BOWL","India","SRH","USP1","79","27","37","RIGHT ARM Leg Spin","Uncapped","SRH"
+"Suyash Sharma","0.3","12","BOWL","India","KKR","USP1","80","21","13","RIGHT ARM Leg Spin","Uncapped",""
+"Karn Sharma","0.5","12","BOWL","India","RCB","USP1","81","37","84","RIGHT ARM Leg Spin","Uncapped","RCB"
+"Kumar Kartikeya Singh","0.3","12","BOWL","India","MI","USP1","82","27","12","LEFT ARM Slow Orthodox","Uncapped","MI"
+"Manav Suthar","0.3","12","BOWL","India","GT","USP1","83","22","0","LEFT ARM Slow Orthodox","Uncapped",""
+"Mayank Agarawal","1","13","BAT","India","SRH","BA2","84","34","127","RIGHT ARM Off Spin","Capped",""
+"Faf Du Plessis","2","13","BAT","South Africa","RCB","BA2","85","40","145","-","Capped","RCB"
+"Glenn Phillips","2","13","BAT","New Zealand","SRH","BA2","86","28","8","RIGHT ARM Off Spin","Capped",""
+"Rovman Powell","1.5","13","BAT","West Indies","RR","BA2","87","31","27","RIGHT ARM Fast Medium","Capped",""
+"Ajinkya Rahane","1.5","13","BAT","India","CSK","BA2","88","36","185","-","Capped","CSK"
+"Prithvi Shaw","0.75","13","BAT","India","DC","BA2","89","25","79","-","Capped","DC"
+"Kane Williamson","2","13","BAT","New Zealand","GT","BA2","90","34","79","-","Capped","GT"
+"Sam Curran","2","14","AR","England","PBKS","AL2","91","26","59","LEFT ARM Fast Medium","Capped","PBKS"
+"Marco Jansen","1.25","14","AR","South Africa","SRH","AL2","92","24","21","LEFT ARM Fast","Capped",""
+"Daryl Mitchell","2","14","AR","New Zealand","CSK","AL2","93","33","15","RIGHT ARM Medium","Capped","CSK"
+"Krunal Pandya","2","14","AR","India","LSG","AL2","94","34","127","LEFT ARM Slow Orthodox","Capped","LSG"
+"Nitish Rana","1.5","14","AR","India","KKR","AL2","95","31","107","RIGHT ARM Off Spin","Capped",""
+"Washington Sundar","2","14","AR","India","SRH","AL2","96","25","61","RIGHT ARM Off Spin","Capped",""
+"Shardul Thakur","2","14","AR","India","CSK","AL2","97","33","95","RIGHT ARM Fast Medium","Capped","CSK"
+"K.S Bharat","0.75","15","WK","India","KKR","WK2","98","31","11","-","Capped",""
+"Alex Carey","1","15","WK","Australia","","WK2","99","33","3","-","Capped",""
+"Donovan Ferreira","0.75","15","WK","South Africa","RR","WK2","100","26","2","RIGHT ARM Off Spin","Capped",""
+"Shai Hope","1.25","15","WK","West Indies","DC","WK2","101","31","9","-","Capped","DC"
+"Josh Inglis","2","15","WK","Australia","","WK2","102","30","","-","Capped",""
+"Ryan Rickelton","1","15","WK","South Africa","","WK2","103","28","","-","Capped",""
+"Deepak Chahar","2","16","BOWL","India","CSK","FA2","104","32","81","RIGHT ARM Fast Medium","Capped","CSK"
+"Gerald Coetzee","1.25","16","BOWL","South Africa","MI","FA2","105","24","10","RIGHT ARM Fast","Capped",""
+"Akash Deep","1","16","BOWL","India","RCB","FA2","106","28","8","RIGHT ARM Fast","Capped","RCB"
+"Tushar Deshpande","1","16","BOWL","India","CSK","FA2","107","29","36","RIGHT ARM Fast","Capped","CSK"
+"Lockie Ferguson","2","16","BOWL","New Zealand","RCB","FA2","108","33","45","RIGHT ARM Fast","Capped","RCB"
+"Bhuvneshwar Kumar","2","16","BOWL","India","SRH","FA2","109","35","176","RIGHT ARM Fast Medium","Capped",""
+"Mukesh Kumar","2","16","BOWL","India","DC","FA2","110","31","20","RIGHT ARM Fast Medium","Capped","DC"
+"Allah Ghazanfar","0.75","17","BOWL","Afghanistan","KKR","SP2","111","19","0","RIGHT ARM Off Spin","Capped",""
+"Akeal Hosein","1.5","17","BOWL","West Indies","SRH","SP2","112","31","1","LEFT ARM Slow Orthodox","Capped",""
+"Keshav Maharaj","0.75","17","BOWL","South Africa","RR","SP2","113","35","2","LEFT ARM Slow Orthodox","Capped",""
+"Mujeeb Ur Rahman","2","17","BOWL","Afghanistan","","SP2","114","24","46","RIGHT ARM Off Spin","Capped",""
+"Adil Rashid","2","17","BOWL","England","","SP2","115","37","3","RIGHT ARM Leg Spin","Capped",""
+"Vijayakanth Viyaskanth","0.75","17","BOWL","Sri Lanka","SRH","SP2","116","23","3","RIGHT ARM Leg Spin","Capped",""
+"Ricky Bhui","0.3","18","BAT","India","DC","UBA2","117","28","4","-","Uncapped","DC"
+"Swastik Chhikara","0.3","18","BAT","India","DC","UBA2","118","20","0","RIGHT ARM Off Spin","Uncapped","DC"
+"Aarya Desai","0.3","18","BAT","India","","UBA2","119","22","0","RIGHT ARM Off Spin","Uncapped",""
+"Shubham Dubey","0.3","18","BAT","India","RR","UBA2","120","30","4","RIGHT ARM Off Spin","Uncapped",""
+"Madhav Kaushik","0.3","18","BAT","India","","UBA2","121","27","","RIGHT ARM Off Spin","Uncapped",""
+"Pukhraj Mann","0.3","18","BAT","India","","UBA2","122","23","","RIGHT ARM Off Spin","Uncapped",""
+"Shaik Rasheed","0.3","18","BAT","India","CSK","UBA2","123","20","0","RIGHT ARM Leg Spin","Uncapped","CSK"
+"Himmat Singh","0.3","18","BAT","India","","UBA2","124","28","0","RIGHT ARM Off Spin","Uncapped",""
+"Mayank Dagar","0.3","19","AR","India","RCB","UAL2","125","28","8","LEFT ARM Slow Orthodox","Uncapped","RCB"
+"Anshul Kamboj","0.3","19","AR","India","MI","UAL2","126","24","3","RIGHT ARM Fast Medium","Uncapped","MI"
+"Mohd. Arshad Khan","0.3","19","AR","India","LSG","UAL2","127","27","10","LEFT ARM Fast Medium","Uncapped",""
+"Darshan Nalkande","0.3","19","AR","India","GT","UAL2","128","26","5","RIGHT ARM Fast Medium","Uncapped",""
+"Suyash Prabhudessai","0.3","19","AR","India","RCB","UAL2","129","27","1","RIGHT ARM Fast","Uncapped","RCB"
+"Anukul Roy","0.3","19","AR","India","KKR","UAL2","130","26","11","LEFT ARM Slow Orthodox","Uncapped",""
+"Swapnil Singh","0.3","19","AR","India","PBKS","UAL2","131","34","14","LEFT ARM Slow Orthodox","Uncapped","RCB"
+"Sanvir Singh","0.3","19","AR","India","SRH","UAL2","132","28","6","RIGHT ARM Fast","Uncapped","SRH"
+"Avanish Aravelly","0.3","20","WK","India","CSK","UWK2","133","19","0","RIGHT ARM Off Spin","Uncapped","CSK"
+"Vansh Bedi","0.3","20","WK","India","","UWK2","134","22","","-","Uncapped",""
+"Saurav Chauhan","0.3","20","WK","India","RCB","UWK2","135","24","3","RIGHT ARM Off Spin","Uncapped","RCB"
+"Harvik Desai","0.3","20","WK","India","MI","UWK2","136","25","0","-","Uncapped","MI"
+"Tom Kohler-Cadmore","0.5","20","WK","England","RR","UWK2","137","30","4","-","Uncapped",""
+"Kunal Rathore","0.3","20","WK","India","RR","UWK2","138","22","0","RIGHT ARM Off Spin","Uncapped",""
+"B.R Sharath","0.3","20","WK","India","GT","UWK2","139","28","1","-","Uncapped",""
+"Gurnoor Singh Brar","0.3","21","BOWL","India","GT","UFA2","140","24","1","RIGHT ARM Fast","Uncapped",""
+"Mukesh Choudhary","0.3","21","BOWL","India","CSK","UFA2","141","28","14","LEFT ARM Fast","Uncapped","CSK"
+"Sakib Hussain","0.3","21","BOWL","India","KKR","UFA2","142","20","0","RIGHT ARM Fast Medium","Uncapped",""
+"Vidwath Kaverappa","0.3","21","BOWL","India","PBKS","UFA2","143","26","1","RIGHT ARM Fast Medium","Uncapped",""
+"Rajan Kumar","0.3","21","BOWL","India","RCB","UFA2","144","28","0","LEFT ARM Fast","Uncapped","RCB"
+"Sushant Mishra","0.3","21","BOWL","India","GT","UFA2","145","24","0","LEFT ARM Fast","Uncapped",""
+"Arjun Tendulkar","0.3","21","BOWL","India","MI","UFA2","146","25","5","LEFT ARM Fast Medium","Uncapped","MI"
+"Zeeshan Ansari","0.3","22","BOWL","India","","USP2","147","25","","RIGHT ARM Leg Spin","Uncapped",""
+"Prince Choudhary","0.3","22","BOWL","India","PBKS","USP2","148","25","0","RIGHT ARM Leg Spin","Uncapped",""
+"Himanshu Sharma","0.3","22","BOWL","India","RCB","USP2","149","26","1","RIGHT ARM Leg Spin","Uncapped","RCB"
+"M. Siddharth","0.3","22","BOWL","India","LSG","USP2","150","26","3","LEFT ARM Slow Orthodox","Uncapped",""
+"Digvesh Singh","0.3","22","BOWL","India","","USP2","151","25","","RIGHT ARM Leg Spin","Uncapped",""
+"Prashant Solanki","0.3","22","BOWL","India","CSK","USP2","152","25","2","RIGHT ARM Leg Spin","Uncapped","CSK"
+"Jhatavedh Subramanyan","0.3","22","BOWL","India","SRH","USP2","153","25","0","RIGHT ARM Leg Spin","Uncapped","SRH"
+"Finn Allen","2","23","BAT","New Zealand","","BA3","154","25","0","-","Capped",""
+"Dewald Brevis","0.75","23","BAT","South Africa","MI","BA3","155","21","2","RIGHT ARM Leg Spin","Capped",""
+"Ben Duckett","2","23","BAT","England","","BA3","156","30","","-","Capped",""
+"Manish Pandey","0.75","23","BAT","India","KKR","BA3","157","35","171","-","Capped",""
+"Rilee Rossouw","2","23","BAT","South Africa","PBKS","BA3","158","35","22","-","Capped","PBKS"
+"Sherfane Rutherford","1.5","23","BAT","West Indies","KKR","BA3","159","26","10","RIGHT ARM Fast Medium","Capped",""
+"Ashton Turner","1","23","BAT","Australia","LSG","BA3","160","32","6","RIGHT ARM Off Spin","Capped","LSG"
+"James Vince","2","23","BAT","England","","BA3","161","34","","-","Capped",""
+"Shahbaz Ahmad","1","24","AR","India","SRH","AL3","162","30","55","LEFT ARM Slow Orthodox","Capped",""
+"Moeen Ali","2","24","AR","England","CSK","AL3","163","37","67","RIGHT ARM Off Spin","Capped","CSK"
+"Tim David","2","24","AR","Australia","MI","AL3","164","29","38","RIGHT ARM Off Spin","Capped",""
+"Deepak Hooda","0.75","24","AR","India","LSG","AL3","165","29","118","RIGHT ARM Off Spin","Capped","LSG"
+"Will Jacks","2","24","AR","England","RCB","AL3","166","26","8","RIGHT ARM Off Spin","Capped","RCB"
+"Azmatullah Omarzai","1.5","24","AR","Afghanistan","GT","AL3","167","25","7","RIGHT ARM Fast Medium","Capped","GT"
+"R. Sai Kishore","0.75","24","AR","India","GT","AL3","168","28","10","LEFT ARM Slow Unorthodox","Capped","GT"
+"Romario Shepherd","1.5","24","AR","West Indies","MI","AL3","169","30","10","RIGHT ARM Fast","Capped",""
+"Tom Banton","2","25","WK","England","","WK3","170","26","2","RIGHT ARM Off Spin","Capped",""
+"Sam Billings","1.5","25","WK","England","","WK3","171","33","30","-","Capped",""
+"Jordan Cox","1.25","25","WK","England","","WK3","172","24","","-","Capped",""
+"Ben McDermott","0.75","25","WK","Australia","","WK3","173","30","","RIGHT ARM Off Spin","Capped",""
+"Kusal Mendis","0.75","25","WK","Sri Lanka","","WK3","174","30","","RIGHT ARM Leg Spin","Capped",""
+"Kusal Perera","0.75","25","WK","Sri Lanka","","WK3","175","34","2","-","Capped",""
+"Josh Philippe","0.75","25","WK","Australia","","WK3","176","27","5","-","Capped",""
+"Tim Seifert","1.25","25","WK","New Zealand","","WK3","177","30","3","-","Capped",""
+"Nandre Burger","1.25","26","BOWL","South Africa","RR","FA3","178","29","6","LEFT ARM Fast","Capped",""
+"Spencer Johnson","2","26","BOWL","Australia","GT","FA3","179","29","5","LEFT ARM Fast","Capped","GT"
+"Umran Malik","0.75","26","BOWL","India","SRH","FA3","180","25","26","RIGHT ARM Fast","Capped",""
+"Mustafizur Rahman","2","26","BOWL","Bangladesh","CSK","FA3","181","29","57","LEFT ARM Fast","Capped","CSK"
+"Ishant Sharma","0.75","26","BOWL","India","DC","FA3","182","36","109","RIGHT ARM Fast","Capped","DC"
+"Nuwan Thushara","0.75","26","BOWL","Sri Lanka","MI","FA3","183","30","7","RIGHT ARM Fast","Capped",""
+"Naveen Ul Haq","2","26","BOWL","Afghanistan","LSG","FA3","184","25","18","RIGHT ARM Medium","Capped","LSG"
+"Jaydev Unadkat","1","26","BOWL","India","SRH","FA3","185","33","105","LEFT ARM Fast Medium","Capped",""
+"Umesh Yadav","2","26","BOWL","India","GT","FA3","186","37","148","RIGHT ARM Fast Medium","Capped","GT"
+"Rishad Hossain","0.75","27","BOWL","Bangladesh","","SP3","187","22","","RIGHT ARM Leg Spin","Capped",""
+"Zahir Khan Pakten","0.75","27","BOWL","Afghanistan","","SP3","188","26","0","LEFT ARM Slow Unorthodox","Capped",""
+"Nqabayomzi Peter","0.75","27","BOWL","South Africa","","SP3","189","23","","RIGHT ARM Leg Spin","Capped",""
+"Tanveer Sangha","0.75","27","BOWL","Australia","","SP3","190","23","","RIGHT ARM Leg Spin","Capped",""
+"Tabraiz Shamsi","2","27","BOWL","South Africa","","SP3","191","35","5","LEFT ARM Slow Unorthodox","Capped",""
+"Jeffery Vandersay","0.75","27","BOWL","Sri Lanka","","SP3","192","35","","RIGHT ARM Leg Spin","Capped",""
+"Sachin Baby","0.3","28","BAT","India","","UBA3","193","36","19","RIGHT ARM Off Spin","Uncapped",""
+"Priyam Garg","0.3","28","BAT","India","","UBA3","194","24","23","-","Uncapped",""
+"Harnoor Pannu","0.3","28","BAT","India","","UBA3","195","22","","RIGHT ARM Leg Spin","Uncapped",""
+"Smaran Ravichandran","0.3","28","BAT","India","","UBA3","196","21","","RIGHT ARM Off Spin","Uncapped",""
+"Shashwat Rawat","0.3","28","BAT","India","","UBA3","197","24","","RIGHT ARM Medium","Uncapped",""
+"Andre Siddarth","0.3","28","BAT","India","","UBA3","198","18","","-","Uncapped",""
+"Awneesh Sudha","0.3","28","BAT","India","","UBA3","199","23","","RIGHT ARM Off Spin","Uncapped",""
+"Apoorv Wankhade","0.3","28","BAT","India","","UBA3","200","33","0","-","Uncapped",""
+"Yudhvir Charak","0.3","29","AR","India","LSG","UAL3","201","27","5","RIGHT ARM Fast Medium","Uncapped",""
+"Rishi Dhawan","0.3","29","AR","India","PBKS","UAL3","202","35","39","RIGHT ARM Fast Medium","Uncapped",""
+"Rajvardhan Hangargekar","0.3","29","AR","India","CSK","UAL3","203","22","2","RIGHT ARM Fast Medium","Uncapped","CSK"
+"Tanush Kotian","0.3","29","AR","India","RR","UAL3","204","26","1","RIGHT ARM Off Spin","Uncapped",""
+"Arshin Kulkarni","0.3","29","AR","India","LSG","UAL3","205","20","2","RIGHT ARM Fast Medium","Uncapped",""
+"Shams Mulani","0.3","29","AR","India","MI","UAL3","206","28","2","LEFT ARM Slow Orthodox","Uncapped","MI"
+"Shivam Singh","0.3","29","AR","India","PBKS","UAL3","207","29","1","RIGHT ARM Off Spin","Uncapped",""
+"Lalit Yadav","0.3","29","AR","India","DC","UAL3","208","28","27","RIGHT ARM Off Spin","Uncapped","DC"
+"Mohammed Azharuddeen","0.3","30","WK","India","","UWK3","209","31","0","-","Uncapped",""
+"L.R Chethan","0.3","30","WK","India","","UWK3","210","24","","RIGHT ARM Off Spin","Uncapped",""
+"Aryaman Singh Dhaliwal","0.3","30","WK","India","","UWK3","211","22","","LEFT ARM Slow Orthodox","Uncapped",""
+"Urvil Patel","0.3","30","WK","India","","UWK3","212","26","0","-","Uncapped",""
+"Sanskar Rawat","0.3","30","WK","India","","UWK3","213","29","","-","Uncapped",""
+"Bipin Saurabh","0.3","30","WK","India","","UWK3","214","25","","RIGHT ARM Off Spin","Uncapped",""
+"Tanay Thyagarajan","0.3","30","WK","India","PBKS","UWK3","215","29","0","LEFT ARM Slow Orthodox","Uncapped",""
+"Money Grewal","0.3","31","BOWL","India","","UFA3","216","24","","RIGHT ARM Fast","Uncapped",""
+"Ashwani Kumar","0.3","31","BOWL","India","","UFA3","217","23","","LEFT ARM Fast","Uncapped",""
+"Ishan Porel","0.3","31","BOWL","India","","UFA3","218","26","1","RIGHT ARM Fast Medium","Uncapped",""
+"Abhilash Shetty","0.3","31","BOWL","India","","UFA3","219","26","","LEFT ARM Fast Medium","Uncapped",""
+"Akash Singh","0.3","31","BOWL","India","SRH","UFA3","220","22","7","LEFT ARM Fast","Uncapped","SRH"
+"Gurjapneet Singh","0.3","31","BOWL","India","","UFA3","221","26","","LEFT ARM Fast Medium","Uncapped",""
+"Basil Thampi","0.3","31","BOWL","India","","UFA3","222","31","25","RIGHT ARM Fast","Uncapped",""
+"Murugan Ashwin","0.3","32","BOWL","India","","USP3","223","34","44","RIGHT ARM Leg Spin","Uncapped",""
+"Shreyas Chavan","0.3","32","BOWL","India","","USP3","224","21","","RIGHT ARM Leg Spin","Uncapped",""
+"Chintal Gandhi","0.3","32","BOWL","India","","USP3","225","30","","RIGHT ARM Leg Spin","Uncapped",""
+"Raghav Goyal","0.3","32","BOWL","India","","USP3","226","23","1","LEFT ARM Slow Unorthodox","Uncapped",""
+"Jagadeesha Suchith","0.3","32","BOWL","India","","USP3","227","31","22","LEFT ARM Slow Orthodox","Uncapped",""
+"Roshan Waghsare","0.3","32","BOWL","India","","USP3","228","21","","LEFT ARM Slow Unorthodox","Uncapped",""
+"Bailapudi Yeshwanth","0.3","32","BOWL","India","","USP3","229","20","","RIGHT ARM Leg Spin","Uncapped",""
+"Sediqullah Atal","0.75","33","BAT","Afghanistan","","BA4","230","23","","-","Capped",""
+"Matthew Breetzke","0.75","33","BAT","South Africa","","BA4","231","26","","-","Capped",""
+"Mark Chapman","1.5","33","BAT","New Zealand","","BA4","232","30","76","LEFT ARM Slow Orthodox","Capped",""
+"Brandon King","0.75","33","BAT","West Indies","","BA4","233","30","","RIGHT ARM Off Spin","Capped",""
+"Evin Lewis","2","33","BAT","West Indies","","BA4","234","33","27","-","Capped",""
+"Pathum Nissanka","0.75","33","BAT","Sri Lanka","","BA4","235","26","","RIGHT ARM Off Spin","Capped",""
+"Bhanuka Rajapaksa","0.75","33","BAT","Sri Lanka","","BA4","236","33","13","-","Capped",""
+"Steve Smith","2","33","BAT","Australia","","BA4","237","35","103","-","Capped",""
+"Gus Atkinson","2","34","AR","England","KKR","AL4","238","27","0","RIGHT ARM Fast","Capped",""
+"Tom Curran","2","34","AR","England","RCB","AL4","239","30","13","RIGHT ARM Fast Medium","Capped","RCB"
+"Krishnappa Gowtham","1","34","AR","India","LSG","AL4","240","36","36","RIGHT ARM Off Spin","Capped","LSG"
+"Mohammad Nabi","1.5","34","AR","Afghanistan","MI","AL4","241","40","24","RIGHT ARM Off Spin","Capped",""
+"Gulbadin Naib","1","34","AR","Afghanistan","DC","AL4","242","33","2","RIGHT ARM Fast Medium","Capped","DC"
+"Sikandar Raza","1.25","34","AR","Zimbabwe","PBKS","AL4","243","38","9","RIGHT ARM Off Spin","Capped","PBKS"
+"Mitchell Santner","2","34","AR","New Zealand","CSK","AL4","244","33","18","LEFT ARM Slow Orthodox","Capped","CSK"
+"Jayant Yadav","0.75","34","AR","India","GT","AL4","245","35","20","RIGHT ARM Off Spin","Capped","GT"
+"Johnson Charles","0.75","35","WK","West Indies","","WK4","246","36","0","RIGHT ARM Off Spin","Capped",""
+"Litton Das","0.75","35","WK","Bangladesh","","WK4","247","30","1","RIGHT ARM Off Spin","Capped",""
+"Andre Fletcher","0.75","35","WK","West Indies","","WK4","248","37","","RIGHT ARM Leg Spin","Capped",""
+"Tom Latham","1.5","35","WK","New Zealand","","WK4","249","33","","-","Capped",""
+"Ollie Pope","0.75","35","WK","England","","WK4","250","27","","-","Capped",""
+"Kyle Verryenne","0.75","35","WK","South Africa","","WK4","251","27","","-","Capped",""
+"Fazalhaq Farooqi","2","36","BOWL","Afghanistan","SRH","FA4","252","24","7","LEFT ARM Fast Medium","Capped",""
+"Richard Gleeson","0.75","36","BOWL","England","CSK","FA4","253","37","2","RIGHT ARM Fast","Capped","CSK"
+"Matt Henry","2","36","BOWL","New Zealand","LSG","FA4","254","33","6","RIGHT ARM Fast Medium","Capped","LSG"
+"Alzarri Joseph","2","36","BOWL","West Indies","RCB","FA4","255","28","22","RIGHT ARM Fast","Capped","RCB"
+"Kwena Maphaka","0.75","36","BOWL","South Africa","MI","FA4","256","18","2","LEFT ARM Fast","Capped",""
+"Kuldeep Sen","0.75","36","BOWL","India","","FA4","257","28","12","RIGHT ARM Fast","Capped",""
+"Reece Topley","0.75","36","BOWL","England","RCB","FA4","258","31","5","LEFT ARM Fast","Capped","RCB"
+"Lizaad Williams","0.75","36","BOWL","South Africa","DC","FA4","259","31","2","RIGHT ARM Fast","Capped","DC"
+"Luke Wood","0.75","36","BOWL","England","MI","FA4","260","29","","LEFT ARM Fast","Capped",""
+"Sachin Dhas","0.3","37","BAT","India","","UBA4","261","20","","RIGHT ARM Off Spin","Uncapped",""
+"Leus Du Plooy","0.5","37","BAT","England","","UBA4","262","30","","-","Uncapped",""
+"Ashwin Hebbar","0.3","37","BAT","India","","UBA4","263","29","0","RIGHT ARM Medium","Uncapped",""
+"Rohan Kunnummal","0.3","37","BAT","India","","UBA4","264","26","","RIGHT ARM Off Spin","Uncapped",""
+"Ayush Pandey","0.3","37","BAT","India","","UBA4","265","21","","RIGHT ARM Off Spin","Uncapped",""
+"Akshat Raghuwanshi","0.3","37","BAT","India","","UBA4","266","21","","-","Uncapped",""
+"Shoun Roger","0.4","37","BAT","India","","UBA4","267","22","","RIGHT ARM Off Spin","Uncapped",""
+"Virat Singh","0.3","37","BAT","India","SRH","UBA4","268","27","3","RIGHT ARM Off Spin","Uncapped",""
+"Priyansh Arya","0.3","38","AR","India","","UAL4","269","23","","","Uncapped",""
+"Manoj Bhandage","0.3","38","AR","India","RCB","UAL4","270","26","","RIGHT ARM Fast Medium","Uncapped","RCB"
+"Pravin Dubey","0.3","38","AR","India","DC","UAL4","271","31","","RIGHT ARM Leg Spin","Uncapped","DC"
+"Ajay Mandal","0.3","38","AR","India","CSK","UAL4","272","29","","LEFT ARM Slow Orthodox","Uncapped","CSK"
+"Prerak Mankad","0.3","38","AR","India","","UAL4","273","30","","RIGHT ARM Leg Spin","Uncapped",""
+"Vipraj Nigam","0.3","38","AR","India","","UAL4","274","20","","RIGHT ARM Leg Spin","Uncapped",""
+"Vicky Ostwal","0.3","38","AR","India","DC","UAL4","275","22","","LEFT ARM Slow Orthodox","Uncapped","DC"
+"Shivalik Sharma","0.3","38","AR","India","MI","UAL4","276","26","","RIGHT ARM Leg Spin","Uncapped","MI"
+"Salil Arora","0.3","39","WK","India","","UWK4","277","22","","-","Uncapped",""
+"Dinesh Bana","0.3","39","WK","India","","UWK4","278","20","","-","Uncapped",""
+"Ajitesh Guruswamy","0.3","39","WK","India","","UWK4","279","22","","-","Uncapped",""
+"Narayan Jagadeesan","0.3","39","WK","India","","UWK4","280","29","","-","Uncapped",""
+"Shrijith Krishnan","0.3","39","WK","India","","UWK4","281","28","","-","Uncapped",""
+"Michael Pepper","0.5","39","WK","England","","UWK4","282","26","","-","Uncapped",""
+"Vishnu Solanki","0.3","39","WK","India","","UWK4","283","32","","-","Uncapped",""
+"K.M Asif","0.3","40","BOWL","India","","UFA4","284","31","","RIGHT ARM Fast","Uncapped",""
+"Akhil Chaudhary","0.3","40","BOWL","India","","UFA4","285","22","","RIGHT ARM Fast","Uncapped",""
+"Himanshu Chauhan","0.3","40","BOWL","India","","UFA4","286","22","","RIGHT ARM Fast","Uncapped",""
+"Arpit Guleria","0.3","40","BOWL","India","","UFA4","287","27","","RIGHT ARM Fast","Uncapped",""
+"Nishanth Saranu","0.3","40","BOWL","India","","UFA4","288","20","","RIGHT ARM Fast Medium","Uncapped",""
+"Kuldip Yadav","0.3","40","BOWL","India","","UFA4","289","28","","LEFT ARM Fast","Uncapped",""
+"Prithviraj Yarra","0.3","40","BOWL","India","","UFA4","290","27","","LEFT ARM Fast","Uncapped",""
+"Shubham Agrawal","0.3","41","BOWL","India","","USP4","291","31","","RIGHT ARM Leg Spin","Uncapped",""
+"Jass Inder Baidwan","0.3","41","BOWL","India","","USP4","292","28","","RIGHT ARM Off Spin","Uncapped",""
+"Jasmer Dhankhar","0.3","41","BOWL","India","","USP4","293","26","","RIGHT ARM Leg Spin","Uncapped",""
+"Pulkit Narang","0.3","41","BOWL","India","","USP4","294","30","","RIGHT ARM Off Spin","Uncapped",""
+"Saumy Pandey","0.3","41","BOWL","India","","USP4","295","20","","LEFT ARM Slow Orthodox","Uncapped",""
+"Mohit Rathee","0.3","41","BOWL","India","","USP4","296","26","","RIGHT ARM Leg Spin","Uncapped",""
+"Himanshu Singh","0.3","41","BOWL","India","","USP4","297","21","","RIGHT ARM Off Spin","Uncapped",""
+"Towhid Hridoy","0.75","42","BAT","Bangladesh","","BA5","298","24","","RIGHT ARM Off Spin","Capped",""
+"Mikyle Louis","0.75","42","BAT","West Indies","","BA5","299","24","","- 5","Capped",""
+"Harry Tector","0.75","42","BAT","Ireland","","BA5","300","25","","RIGHT ARM Off Spin 6","Capped",""
+"Rassie Van Der Dussen","2","42","BAT","South Africa","","BA5","301","36","","RIGHT ARM Off Spin 15","Capped",""
+"Will Young","1.25","42","BAT","New Zealand","","BA5","302","32","","- 19","Capped",""
+"Najibullah Zadran","0.75","42","BAT","Afghanistan","","BA5","303","32","","-","Capped",""
+"Ibrahim Zadran","0.75","42","BAT","Afghanistan","","BA5","304","24","","RIGHT ARM Medium 7","Capped",""
+"Sean Abbott","2","43","AR","Australia","","AL5","305","33","","RIGHT ARM Fast Medium","Capped",""
+"Jacob Bethell","1.25","43","AR","England","","AL5","306","21","","LEFT ARM Slow Orthodox","Capped",""
+"Brydon Carse","1","43","AR","England","","AL5","307","29","","RIGHT ARM Fast 2","Capped",""
+"Aaron Hardie","1.25","43","AR","Australia","","AL5","308","26","","RIGHT ARM Medium","Capped",""
+"Sarfaraz Khan","0.75","43","AR","India","","AL5","309","27","","RIGHT ARM Leg Spin 5","Capped",""
+"Kyle Mayers","1.5","43","AR","West Indies","LSG","AL5","310","32","","RIGHT ARM Medium 18","Capped","LSG"
+"Kamindu Mendis","0.75","43","AR","Sri Lanka","","AL5","311","26","","LEFT ARM Slow Orthodox 8","Capped",""
+"Matthew Short","0.75","43","AR","Australia","","AL5","312","29","","RIGHT ARM Off Spin","Capped",""
+"Jason Behrendorff","1.5","44","BOWL","Australia","MI","FA5","313","34","","LEFT ARM Fast","Capped",""
+"Dushmantha Chameera","0.75","44","BOWL","Sri Lanka","LSG","FA5","314","33","","RIGHT ARM Fast 12","Capped",""
+"Nathan Ellis","1.25","44","BOWL","Australia","PBKS","FA5","315","30","","RIGHT ARM Fast Medium","Capped","PBKS"
+"Shamar Joseph","0.75","44","BOWL","West Indies","LSG","FA5","316","25","","RIGHT ARM Fast 6","Capped","LSG"
+"Josh Little","0.75","44","BOWL","Ireland","GT","FA5","317","25","","LEFT ARM Fast Medium","Capped","GT"
+"Shivam Mavi","0.75","44","BOWL","India","LSG","FA5","318","26","","RIGHT ARM Medium","Capped","LSG"
+"Jhye Richardson","1.5","44","BOWL","Australia","DC","FA5","319","28","","RIGHT ARM Fast 3","Capped","DC"
+"Navdeep Saini","0.75","44","BOWL","India","RR","FA5","320","32","","RIGHT ARM Fast 2","Capped",""
+"Tanmay Agarwal","0.3","45","BAT","India","","UBA5","321","29","","RIGHT ARM Leg Spin","Uncapped",""
+"Amandeep Khare","0.3","45","BAT","India","","UBA5","322","27","","RIGHT ARM Off Spin","Uncapped",""
+"Ayush Mhatre","0.3","45","BAT","India","","UBA5","323","17","","RIGHT ARM Off Spin","Uncapped",""
+"Salman Nizar","0.3","45","BAT","India","","UBA5","324","27","","-","Uncapped",""
+"Aniket Verma","0.3","45","BAT","India","","UBA5","325","23","","-","Uncapped",""
+"Sumeet Verma","0.3","45","BAT","India","","UBA5","326","34","","RIGHT ARM Leg Spin","Uncapped",""
+"Manan Vohra","0.3","45","BAT","India","","UBA5","327","31","","-","Uncapped",""
+"Samarth Vyas","0.3","45","BAT","India","","UBA5","328","29","","RIGHT ARM Leg Spin","Uncapped",""
+"Raj Angad Bawa","0.3","46","AR","India","","UAL5","329","22","","RIGHT ARM Fast Medium","Uncapped",""
+"Emanjot Chahal","0.3","46","AR","India","","UAL5","330","20","","LEFT ARM Slow Orthodox","Uncapped",""
+"Musheer Khan","0.3","46","AR","India","","UAL5","331","20","","LEFT ARM Slow Orthodox","Uncapped",""
+"Manyanth Kumar L","0.3","46","AR","India","","UAL5","332","21","","RIGHT ARM Medium","Uncapped",""
+"Mayank Rawat","0.3","46","AR","India","","UAL5","333","25","","RIGHT ARM Off Spin","Uncapped",""
+"Suryansh Shedge","0.3","46","AR","India","","UAL5","334","22","","RIGHT ARM Fast Medium","Uncapped",""
+"Hritik Shokeen","0.3","46","AR","India","","UAL5","335","24","","RIGHT ARM Off Spin","Uncapped",""
+"Sonu Yadav","0.3","46","AR","India","","UAL5","336","25","","RIGHT ARM Fast Medium","Uncapped",""
+"S. Rithik Easwaran","0.3","47","WK","India","","UWK5","337","23","","-","Uncapped",""
+"Anmol Malhotra","0.3","47","WK","India","","UWK5","338","29","","RIGHT ARM Off Spin","Uncapped",""
+"Pradosh Paul","0.3","47","WK","India","","UWK5","339","24","","RIGHT ARM Off Spin","Uncapped",""
+"Karteek Sharma","0.3","47","WK","India","","UWK5","340","23","","RIGHT ARM Off Spin","Uncapped",""
+"Akash Singh","0.3","47","WK","India","","UWK5","341","29","","RIGHT ARM Leg Spin","Uncapped",""
+"Tejasvi Singh","0.3","47","WK","India","","UWK5","342","22","","RIGHT ARM Off Spin","Uncapped",""
+"Siddharth Yadav","0.3","47","WK","India","","UWK5","343","21","","RIGHT ARM Medium","Uncapped",""
+"Saurabh Dubey","0.3","48","BOWL","India","","UFA5","344","27","","LEFT ARM Fast Medium","Uncapped",""
+"Aaqib Khan","0.3","48","BOWL","India","","UFA5","345","21","","RIGHT ARM Fast Medium","Uncapped",""
+"Kulwant Khejroliya","0.3","48","BOWL","India","","UFA5","346","33","","LEFT ARM Fast Medium","Uncapped",""
+"Ankit Singh Rajpoot","0.3","48","BOWL","India","","UFA5","347","31","","RIGHT ARM Fast Medium","Uncapped",""
+"Divesh Sharma","0.3","48","BOWL","India","","UFA5","348","23","","RIGHT ARM Fast","Uncapped",""
+"Naman Tiwari","0.3","48","BOWL","India","","UFA5","349","19","","LEFT ARM Fast","Uncapped",""
+"Prince Yadav","0.3","48","BOWL","India","","UFA5","350","23","","RIGHT ARM Fast","Uncapped",""
+"Kunal Singh Chibb","0.3","49","BOWL","India","","USP5","351","28","","RIGHT ARM Leg Spin","Uncapped",""
+"Yuvraj Chudasama","0.3","49","BOWL","India","","USP5","352","29","","RIGHT ARM Leg Spin","Uncapped",""
+"Deepak Devadiga","0.3","49","BOWL","India","","USP5","353","25","","RIGHT ARM Leg Spin","Uncapped",""
+"Ramesh Prasad","0.3","49","BOWL","India","","USP5","354","31","","LEFT ARM Slow Orthodox","Uncapped",""
+"Shivam Shukla","0.3","49","BOWL","India","","USP5","355","29","","RIGHT ARM Leg Spin","Uncapped",""
+"Himanshu Singh","0.3","49","BOWL","India","","USP5","356","27","","RIGHT ARM Leg Spin","Uncapped",""
+"Tejpreet Singh","0.3","49","BOWL","India","","USP5","357","24","","RIGHT ARM Leg Spin","Uncapped",""
+"Qais Ahmad","0.75","50","AR","Afghanistan","","AL6","358","24","","RIGHT ARM Leg Spin 2","Capped",""
+"Charith Asalanka","0.75","50","AR","Sri Lanka","","AL6","359","27","","RIGHT ARM Off Spin 5","Capped",""
+"Michael Bracewell","1.5","50","AR","New Zealand","","AL6","360","34","","RIGHT ARM Off Spin 5","Capped",""
+"Gudakesh Mottie","0.75","50","AR","West Indies","","AL6","361","30","","LEFT ARM Slow Orthodox 9","Capped",""
+"Daniel Mousley","0.75","50","AR","England","","AL6","362","23","","RIGHT ARM Off Spin","Capped",""
+"Jamie Overton","1.5","50","AR","England","","AL6","363","30","","RIGHT ARM Fast 1","Capped",""
+"Dunith Wellalage","0.75","50","AR","Sri Lanka","","AL6","364","22","","LEFT ARM Slow Orthodox 1","Capped",""
+"Ottneil Baartman","0.75","51","BOWL","South Africa","","FA6","365","32","","RIGHT ARM Fast Medium","Capped",""
+"Xavier Bartlett","0.75","51","BOWL","Australia","","FA6","366","26","","RIGHT ARM Fast","Capped",""
+"Dilshan Madushanka","0.75","51","BOWL","Sri Lanka","MI","FA6","367","24","","LEFT ARM Fast 1","Capped",""
+"Adam Milne","2","51","BOWL","New Zealand","","FA6","368","32","","RIGHT ARM Fast","Capped",""
+"Lungisani Ngidi","1","51","BOWL","South Africa","DC","FA6","369","29","","RIGHT ARM Fast Medium 19","Capped","DC"
+"William O'Rourke","1.5","51","BOWL","New Zealand","","FA6","370","23","","RIGHT ARM Fast 6","Capped",""
+"Chetan Sakariya","0.75","51","BOWL","India","KKR","FA6","371","27","","LEFT ARM Medium","Capped",""
+"Sandeep Warrier","0.75","51","BOWL","India","","FA6","372","34","","RIGHT ARM Fast Medium","Capped","GT"
+"Musaif Ajaz","0.3","52","BAT","India","","UBA6","373","22","","LEFT ARM Slow Orthodox","Uncapped",""
+"Agni Chopra","0.3","52","BAT","India","","UBA6","374","26","","-","Uncapped",""
+"Abhimanyu Easwaran","0.3","52","BAT","India","","UBA6","375","29","","RIGHT ARM Leg Spin","Uncapped",""
+"Sudip Gharami","0.3","52","BAT","India","","UBA6","376","26","","-","Uncapped",""
+"Shubham Khajuria","0.3","52","BAT","India","","UBA6","377","29","","RIGHT ARM Off Spin","Uncapped",""
+"Akhil Rawat","0.3","52","BAT","India","","UBA6","378","24","","-","Uncapped",""
+"Prateek Yadav","0.3","52","BAT","India","","UBA6","379","26","","RIGHT ARM Off Spin","Uncapped",""
+"Abdul Bazith","0.3","53","AR","India","","UAL6","380","26","","RIGHT ARM Leg Spin","Uncapped",""
+"K.C Cariappa","0.3","53","AR","India","","UAL6","381","30","","RIGHT ARM Leg Spin","Uncapped",""
+"Yuvraj Chaudhary","0.3","53","AR","India","","UAL6","382","23","","LEFT ARM Slow Orthodox","Uncapped",""
+"Aman Khan","0.3","53","AR","India","","UAL6","383","28","","RIGHT ARM Fast Medium","Uncapped",""
+"Sumit Kumar","0.3","53","AR","India","DC","UAL6","384","29","","RIGHT ARM Fast Medium","Uncapped","DC"
+"Kamlesh Nagarkoti","0.3","53","AR","India","","UAL6","385","25","","RIGHT ARM Fast","Uncapped",""
+"Hardik Raj","0.3","53","AR","India","","UAL6","386","19","","LEFT ARM Slow Orthodox","Uncapped",""
+"Harsh Tyagi","0.3","53","AR","India","","UAL6","387","25","","LEFT ARM Slow Orthodox","Uncapped",""
+"M. Ajnas","0.3","54","WK","India","","UWK6","388","27","","RIGHT ARM Off Spin","Uncapped",""
+"Unmukt Chand","0.3","54","WK","USA","","UWK6","389","32","","-","Associate",""
+"Tejasvi Daniya","0.3","54","WK","India","","UWK6","390","22","","-","Uncapped",""
+"Sumit Ghadigaonkar","0.3","54","WK","India","","UWK6","391","32","","-","Uncapped",""
+"Baba Indrajith","0.3","54","WK","India","","UWK6","392","30","","RIGHT ARM Off Spin","Uncapped",""
+"Muhammed Khan","0.3","54","WK","India","","UWK6","393","24","","RIGHT ARM Off Spin","Uncapped",""
+"Bhagender Lather","0.3","54","WK","India","","UWK6","394","27","","LEFT ARM Slow Orthodox","Uncapped",""
+"Baltej Dhanda","0.3","55","BOWL","India","","UFA6","395","34","","RIGHT ARM Fast Medium","Uncapped",""
+"Ali Khan","0.3","55","BOWL","USA","","UFA6","396","34","","RIGHT ARM Fast","Associate",""
+"Ravi Kumar","0.3","55","BOWL","India","","UFA6","397","21","","LEFT ARM Fast Medium","Uncapped",""
+"Vineet Panwar","0.3","55","BOWL","India","","UFA6","398","26","","RIGHT ARM Fast","Uncapped",""
+"Vidyadhar Patil","0.3","55","BOWL","India","","UFA6","399","24","","RIGHT ARM Fast Medium","Uncapped",""
+"Aradhya Shukla","0.3","55","BOWL","India","","UFA6","400","20","","RIGHT ARM Fast","Uncapped",""
+"Abhinandan Singh","0.3","55","BOWL","India","","UFA6","401","28","","RIGHT ARM Fast Medium","Uncapped",""
+"Cooper Connolly","0.75","56","AR","Australia","","AL7","402","21","","LEFT ARM Slow Orthodox","Capped",""
+"Dushan Hemantha","0.75","56","AR","Sri Lanka","","AL7","403","30","","RIGHT ARM Leg Spin","Capped",""
+"Jason Holder","2","56","AR","West Indies","","AL7","404","33","46","RIGHT ARM Fast","Capped",""
+"Karim Janat","0.75","56","AR","Afghanistan","","AL7","405","26","","RIGHT ARM Fast Medium","Capped",""
+"Jimmy Neesham","1.5","56","AR","New Zealand","","AL7","406","34","14","RIGHT ARM Fast Medium","Capped",""
+"Daniel Sams","1.5","56","AR","Australia","","AL7","407","32","16","LEFT ARM Fast","Capped",""
+"William Sutherland","0.75","56","AR","Australia","","AL7","408","25","","RIGHT ARM Fast","Capped",""
+"Taskin Ahmed","1","57","BOWL","Bangladesh","","FA7","409","30","","RIGHT ARM Fast","Capped",""
+"Ben Dwarshuis","0.75","57","BOWL","Australia","","FA7","410","30","0","LEFT ARM Fast","Capped",""
+"Obed McCoy","1.25","57","BOWL","West Indies","","FA7","411","28","8","LEFT ARM Fast","Capped",""
+"Riley Meredith","1.5","57","BOWL","Australia","","FA7","412","28","","RIGHT ARM Fast","Capped",""
+"Lance Morris","1.25","57","BOWL","Australia","","FA7","413","27","","RIGHT ARM Fast","Capped",""
+"Olly Stone","0.75","57","BOWL","England","","FA7","414","31","","RIGHT ARM Fast","Capped",""
+"Daniel Worrall","1.5","57","BOWL","England","","FA7","415","33","","RIGHT ARM Fast Medium","Capped",""
+"Pyla Avinash","0.3","58","BAT","India","","UBA7","416","24","","RIGHT ARM Fast Medium","Uncapped",""
+"Kiran Chormale","0.3","58","BAT","India","","UBA7","417","19","","RIGHT ARM Off Spin","Uncapped",""
+"Ashish Dahariya","0.3","58","BAT","India","","UBA7","418","20","","RIGHT ARM Leg Spin","Uncapped",""
+"Tushar Raheja","0.3","58","BAT","India","","UBA7","419","24","","-","Uncapped",""
+"Sarthak Ranjan","0.3","58","BAT","India","","UBA7","420","28","","RIGHT ARM Off Spin","Uncapped",""
+"Abhijeet Tomar","0.3","58","BAT","India","","UBA7","421","30","","RIGHT ARM Off Spin","Uncapped",""
+"Krish Bhagat","0.3","59","AR","India","","UAL7","422","20","","RIGHT ARM Fast Medium","Uncapped",""
+"Sohraab Dhaliwal","0.3","59","AR","India","","UAL7","423","33","","LEFT ARM Slow Orthodox","Uncapped",""
+"Harsh Dubey","0.3","59","AR","India","","UAL7","424","22","","LEFT ARM Slow Orthodox","Uncapped",""
+"Ramakrishna Ghosh","0.3","59","AR","India","","UAL7","425","27","","RIGHT ARM Fast","Uncapped",""
+"Raj Limbani","0.3","59","AR","India","","UAL7","426","20","","RIGHT ARM Fast Medium","Uncapped",""
+"Ninad Rathva","0.3","59","AR","India","","UAL7","427","26","","LEFT ARM Slow Orthodox","Uncapped",""
+"Vivrant Sharma","0.3","59","AR","India","","UAL7","428","25","","RIGHT ARM Leg Spin","Uncapped",""
+"Shiva Singh","0.3","59","AR","India","","UAL7","429","25","","LEFT ARM Slow Orthodox","Uncapped",""
+"Sayed Irfan Aftab","0.3","60","BOWL","India","","UFA7","430","21","","RIGHT ARM Fast","Uncapped",""
+"Anirudh Chowdhary","0.3","60","BOWL","India","","UFA7","431","25","","RIGHT ARM Fast Medium","Uncapped",""
+"Anshuman Hooda","0.3","60","BOWL","India","","UFA7","432","24","","RIGHT ARM Fast","Uncapped",""
+"Siddharth Kaul","0.4","60","BOWL","India","","UFA7","433","34","","RIGHT ARM Fast Medium","Uncapped",""
+"Prashant Sai Painkra","0.3","60","BOWL","India","","UFA7","434","22","","RIGHT ARM Fast Medium","Uncapped",""
+"Venkata Satyanarayana Pemnetsa","0.3","60","BOWL","India","","UFA7","435","25","","RIGHT ARM Fast Medium","Uncapped",""
+"Yeddala Reddy","0.3","60","BOWL","India","","UFA7","436","25","","RIGHT ARM Fast","Uncapped",""
+"Zak Foulkes","0.75","61","AR","New Zealand","","AL8","437","22","","RIGHT ARM Medium","Capped",""
+"Chris Green","1","61","AR","Australia","","AL8","438","31","","RIGHT ARM Off Spin","Capped",""
+"Shakib Al Hasan","1","61","AR","Bangladesh","","AL8","439","38","71","LEFT ARM Slow Orthodox","Capped",""
+"Mehidy Hasan Miraz","1","61","AR","Bangladesh","","AL8","440","27","","RIGHT ARM Off Spin","Capped",""
+"Wiaan Mulder","0.75","61","AR","South Africa","","AL8","441","27","","RIGHT ARM Medium","Capped",""
+"Dwaine Pretorius","0.75","61","AR","South Africa","","AL8","442","36","7","RIGHT ARM Fast Medium","Capped",""
+"Dasun Shanaka","0.75","61","AR","Sri Lanka","","AL8","443","33","3","RIGHT ARM Fast","Capped",""
+"Shoriful Islam","0.75","62","BOWL","Bangladesh","","FA8","444","23","","LEFT ARM Fast Medium","Capped",""
+"Blessing Muzarabani","0.75","62","BOWL","Zimbabwe","","FA8","445","28","","RIGHT ARM Fast","Capped",""
+"Matthew Potts","1.5","62","BOWL","England","","FA8","446","26","","RIGHT ARM Fast Medium","Capped",""
+"Tanzim Hasan Sakib","0.75","62","BOWL","Bangladesh","","FA8","447","22","","RIGHT ARM Fast","Capped",""
+"Benjamin Sears","1","62","BOWL","New Zealand","","FA8","448","27","","RIGHT ARM Fast","Capped",""
+"Tim Southee","1.5","62","BOWL","New Zealand","","FA8","449","36","54","RIGHT ARM Fast","Capped",""
+"John Turner","1.5","62","BOWL","England","","FA8","450","23","","RIGHT ARM Fast","Capped",""
+"Joshua Brown","0.3","63","BAT","Australia","","UBA8","451","31","","RIGHT ARM Off Spin","Uncapped",""
+"Oliver Davies","0.3","63","BAT","Australia","","UBA8","452","24","","RIGHT ARM Off Spin","Uncapped",""
+"Bevan John Jacobs","0.3","63","BAT","New Zealand","","UBA8","453","22","","RIGHT ARM Fast Medium","Uncapped",""
+"Atharva Kale","0.3","63","BAT","India","","UBA8","454","25","","RIGHT ARM Leg Spin","Uncapped",""
+"Abhishek Nair","0.3","63","BAT","India","","UBA8","455","20","","RIGHT ARM Off Spin","Uncapped",""
+"Vishwanath Pratap Singh","0.3","63","BAT","India","PBKS","UBA8","456","26","0","RIGHT ARM Off Spin","Uncapped",""
+"Nasir Lone","0.3","64","AR","India","","UAL8","457","27","","RIGHT ARM Fast Medium","Uncapped",""
+"Brandon McMullen","0.3","64","AR","Scotland","","UAL8","458","25","","RIGHT ARM Medium","Associate",""
+"S. Midhun","0.3","64","AR","India","","UAL8","459","30","","RIGHT ARM Leg Spin","Uncapped",""
+"Abid Mushtaq","0.3","64","AR","India","","UAL8","460","28","","LEFT ARM Slow Orthodox","Uncapped",""
+"Mahesh Pithiya","0.3","64","AR","India","","UAL8","461","23","","RIGHT ARM Off Spin","Uncapped",""
+"Maramreddy Reddy","0.3","64","AR","India","","UAL8","462","22","","RIGHT ARM Leg Spin","Uncapped",""
+"Atit Sheth","0.3","64","AR","India","","UAL8","463","29","","RIGHT ARM Fast Medium","Uncapped",""
+"Jonty Sidhu","0.3","64","AR","India","","UAL8","464","27","","RIGHT ARM Off Spin","Uncapped",""
+"Mohit Avasthi","0.3","65","BOWL","India","","UFA8","465","32","","RIGHT ARM Fast Medium","Uncapped",""
+"Faridoon Dawoodzai","0.3","65","BOWL","Afghanistan","","UFA8","466","19","","LEFT ARM Fast Medium","Uncapped",""
+"Praful Hinge","0.3","65","BOWL","India","","UFA8","467","23","","RIGHT ARM Fast","Uncapped",""
+"Pankaj Jaswal","0.3","65","BOWL","India","","UFA8","468","29","0","RIGHT ARM Fast","Uncapped",""
+"Vijay Kumar","0.3","65","BOWL","India","","UFA8","469","19","","RIGHT ARM Fast","Uncapped",""
+"Ashok Sharma","0.3","65","BOWL","India","","UFA8","470","22","","RIGHT ARM Fast","Uncapped",""
+"Mujtaba Yousuf","0.3","65","BOWL","India","","UFA8","471","22","","LEFT ARM Fast Medium","Uncapped",""
+"Ashton Agar","1.25","66","AR","Australia","","AL9","472","31","","LEFT ARM Slow Orthodox","Capped",""
+"Roston Chase","0.75","66","AR","West Indies","","AL9","473","33","","RIGHT ARM Off Spin","Capped",""
+"Junior Dala","0.75","66","AR","South Africa","","AL9","474","35","1","RIGHT ARM Fast","Capped",""
+"Mahedi Hasan","0.75","66","AR","Bangladesh","","AL9","475","30","","RIGHT ARM Off Spin","Capped",""
+"Nangeyalia Kharote","0.75","66","AR","Afghanistan","","AL9","476","20","","LEFT ARM Slow Orthodox","Capped",""
+"Dan Lawrence","1","66","AR","England","","AL9","477","27","","RIGHT ARM Off Spin","Capped",""
+"Nathan Smith","1","66","AR","New Zealand","","AL9","478","26","","RIGHT ARM Fast","Capped",""
+"James Anderson","1.25","67","BOWL","England","","FA9","479","42","","RIGHT ARM Fast","Capped",""
+"Kyle Jamieson","1.5","67","BOWL","New Zealand","","FA9","480","30","9","RIGHT ARM Fast","Capped",""
+"Chris Jordan","2","67","BOWL","England","","FA9","481","36","34","RIGHT ARM Fast","Capped",""
+"Hasan Mahmud","0.75","67","BOWL","Bangladesh","","FA9","482","28","","RIGHT ARM Fast Medium","Capped",""
+"Tymal Mills","2","67","BOWL","England","","FA9","483","32","10","LEFT ARM Fast","Capped",""
+"David Payne","1","67","BOWL","England","","FA9","484","34","","LEFT ARM Fast Medium","Capped",""
+"Nahid Rana","0.75","67","BOWL","Bangladesh","","FA9","485","22","","RIGHT ARM Fast","Capped",""
+"Prayas Ray Barman","0.3","68","BAT","India","","UBA9","486","22","1","RIGHT ARM Off Spin","Uncapped",""
+"Jafar Jamal","0.3","68","BAT","India","","UBA9","487","35","","RIGHT ARM Off Spin","Uncapped",""
+"Ayaz Khan","0.3","68","BAT","India","","UBA9","488","22","","LEFT ARM Slow Orthodox","Uncapped",""
+"Kaushik Maitty","0.3","68","BAT","India","","UBA9","489","25","","LEFT ARM Slow Orthodox","Uncapped",""
+"Rituraj Sharma","0.3","68","BAT","India","","UBA9","490","22","","RIGHT ARM Off Spin","Uncapped",""
+"Vaibhav Suryavanshi","0.3","68","BAT","India","","UBA9","491","14","","LEFT ARM Slow Orthodox","Uncapped",""
+"Kartik Chadha","0.3","69","AR","India","","UAL9","492","21","","RIGHT ARM Leg Spin","Uncapped",""
+"Writtick Chatterjee","0.3","69","AR","India","","UAL9","493","32","0","RIGHT ARM Off Spin","Uncapped",""
+"Prerit Dutta","0.3","69","AR","India","","UAL9","494","26","","LEFT ARM Slow Orthodox","Uncapped",""
+"Rajneesh Gurbani","0.3","69","AR","India","","UAL9","495","32","","RIGHT ARM Fast Medium","Uncapped",""
+"Shubhang Hegde","0.3","69","AR","India","","UAL9","496","24","","LEFT ARM Slow Orthodox","Uncapped",""
+"Saransh Jain","0.3","69","AR","India","","UAL9","497","32","","RIGHT ARM Off Spin","Uncapped",""
+"Ripal Patel","0.3","69","AR","India","","UAL9","498","29","9","RIGHT ARM Medium","Uncapped",""
+"Akash Vashisht","0.3","69","AR","India","","UAL9","499","30","0","LEFT ARM Slow Orthodox","Uncapped",""
+"Anirudh Kanwar","0.3","70","BOWL","India","","UFA9","500","31","","RIGHT ARM Fast","Uncapped",""
+"Shubham Kapse","0.3","70","BOWL","India","","UFA9","501","30","","RIGHT ARM Fast Medium","Uncapped",""
+"Atif Mushtaq","0.3","70","BOWL","India","","UFA9","502","22","","RIGHT ARM Fast","Uncapped",""
+"Dinesh Parwani","0.3","70","BOWL","India","","UFA9","503","25","","LEFT ARM Fast Medium","Uncapped",""
+"Manish Reddy","0.3","70","BOWL","India","","UFA9","504","26","","RIGHT ARM Fast Medium","Uncapped",""
+"Chetan Sharma","0.3","70","BOWL","India","","UFA9","505","19","","RIGHT ARM Fast Medium","Uncapped",""
+"Avinash Singh","0.3","70","BOWL","India","","UFA9","506","26","","RIGHT ARM Fast","Uncapped",""
+"Alick Athanaze","0.75","71","AR","West Indies","","AL10","507","26","","RIGHT ARM Off Spin","Capped",""
+"Hilton Cartwright","0.75","71","AR","Australia","","AL10","508","33","","RIGHT ARM Medium","Capped",""
+"Dominic Drakes","1.25","71","AR","West Indies","","AL10","509","27","0","LEFT ARM Fast","Capped",""
+"Daryn Dupavillon","0.75","72","BOWL","South Africa","","FA10","510","30","","RIGHT ARM Fast","Capped",""
+"Matthew Forde","1.25","72","AR","West Indies","","FA10","511","22","","RIGHT ARM Fast Medium","Capped",""
+"Patrick Kruger","0.75","72","AR","South Africa","","FA10","512","30","","RIGHT ARM Fast Medium","Capped",""
+"Lahiru Kumara","0.75","72","BOWL","Sri Lanka","","FA10","513","28","","RIGHT ARM Fast","Capped",""
+"Michael Neser","0.75","71","AR","Australia","","AL10","514","35","1","RIGHT ARM Fast Medium","Capped",""
+"Richard Ngarava","0.75","72","BOWL","Zimbabwe","","FA10","515","27","","LEFT ARM Fast Medium","Capped",""
+"Wayne Parnell","1","72","BOWL","South Africa","","FA10","516","35","33","LEFT ARM Fast Medium","Capped",""
+"Keemo Paul","1.25","71","AR","West Indies","","AL10","517","27","8","RIGHT ARM Fast","Capped",""
+"Odean Smith","0.75","71","AR","West Indies","","AL10","518","28","6","RIGHT ARM Medium","Capped",""
+"Andrew Tye","0.75","72","BOWL","Australia","","FA10","519","38","30","RIGHT ARM Fast Medium","Capped",""
+"Ajay Ahlawat","0.4","73","AR","India","","UAL10","520","27","","LEFT ARM Fast","Uncapped",""
+"Corbin Bosch","0.3","73","AR","South Africa","","UAL10","521","30","0","RIGHT ARM Fast","Uncapped",""
+"Mayank Gusain","0.3","73","AR","India","","UAL10","522","23","","RIGHT ARM Fast","Uncapped",""
+"Mukhtar Hussain","0.3","73","AR","India","","UAL10","523","26","","RIGHT ARM Fast Medium","Uncapped",""
+"Gurjith Reddy","0.3","73","AR","India","","UAL10","524","26","","RIGHT ARM Fast Medium","Uncapped",""
+"Jalaj Saxena","0.4","73","AR","India","","UAL10","525","38","1","RIGHT ARM Off Spin","Uncapped",""
+"Yajas Sharma","0.3","73","AR","India","","UAL10","526","19","","RIGHT ARM Off Spin","Uncapped",""
+"Sanjay Yadav","0.3","73","AR","India","","UAL10","527","29","1","LEFT ARM Slow Orthodox","Uncapped",""
+"Vishal Godara","0.3","74","BOWL","India","","UFA10","528","22","","RIGHT ARM Medium","Uncapped",""
+"Eshan Malinga","0.3","74","BOWL","Sri Lanka","","UFA10","529","24","","RIGHT ARM Fast","Uncapped",""
+"Samarth Nagraj","0.3","74","BOWL","India","","UFA10","530","19","","RIGHT ARM Fast","Uncapped",""
+"Abhishek Saini","0.3","74","BOWL","India","","UFA10","531","26","","RIGHT ARM Fast","Uncapped",""
+"Dumindu Sewmina","0.3","74","BOWL","Sri Lanka","","UFA10","532","20","","RIGHT ARM Medium","Uncapped",""
+"Pradyuman Kumar Singh","0.3","74","BOWL","India","","UFA10","533","23","","RIGHT ARM Fast","Uncapped",""
+"Vasu Vats","0.3","74","BOWL","India","","UFA10","534","22","","RIGHT ARM Fast","Uncapped",""
+"Umang Kumar","0.3","75","AR","India","","UAL11","535","24","","RIGHT ARM Off Spin","Uncapped",""
+"Mohamed Ali","0.3","75","AR","India","","UAL11","536","20","","RIGHT ARM Off Spin","Uncapped",""
+"Atharva Ankolekar","0.3","75","AR","India","","UAL11","537","24","","LEFT ARM Slow Orthodox","Uncapped",""
+"Vaisakh Chandran","0.3","75","AR","India","","UAL11","538","28","","RIGHT ARM Off Spin","Uncapped",""
+"Aquib Dar","0.3","75","AR","India","","UAL11","539","28","","RIGHT ARM Fast Medium","Uncapped",""
+"Rohit Rayudu","0.3","75","AR","India","","UAL11","540","30","","RIGHT ARM Off Spin","Uncapped",""
+"Uday Saharan","0.3","75","AR","India","","UAL11","541","20","","RIGHT ARM Off Spin","Uncapped",""
+"Ayush Vartak","0.3","75","AR","India","","UAL11","542","20","","RIGHT ARM Fast Medium","Uncapped",""
+"Baba Aparajith","0.3","76","AR","India","","UAL12","543","30","0","RIGHT ARM Off Spin","Uncapped",""
+"Sumit Kumar Benival","0.3","76","AR","India","","UAL12","544","25","","RIGHT ARM Fast","Uncapped",""
+"Nishunk Birla","0.3","76","AR","India","","UAL12","545","20","","LEFT ARM Slow Orthodox","Uncapped",""
+"Digvijay Deshmukh","0.3","76","AR","India","","UAL12","546","26","0","RIGHT ARM Fast Medium","Uncapped",""
+"Lakshay Jain","0.3","76","AR","India","","UAL12","547","22","","RIGHT ARM Off Spin","Uncapped",""
+"Duan Jansen","0.3","76","AR","South Africa","","UAL12","548","24","","LEFT ARM Fast","Uncapped",""
+"Kritagya Singh","0.3","76","AR","India","","UAL12","549","24","","LEFT ARM Slow Orthodox","Uncapped",""
+"P. Vignesh","0.3","76","AR","India","","UAL12","550","20","","LEFT ARM Slow Orthodox","Uncapped",""
+"Sabhay Chadha","0.3","77","AR","India","","UAL13","551","26","","RIGHT ARM Fast Medium","Uncapped",""
+"Ben Howell","0.5","77","AR","England","","UAL13","552","36","0","RIGHT ARM Leg Spin","Uncapped",""
+"Hemanth Kumar","0.3","77","AR","India","","UAL13","553","20","","LEFT ARM Slow Orthodox","Uncapped",""
+"Rohan Rana","0.3","77","AR","India","","UAL13","554","23","","RIGHT ARM Fast","Uncapped",""
+"Bharat Sharma","0.3","77","AR","India","","UAL13","555","29","","RIGHT ARM Off Spin","Uncapped",""
+"Pratham Singh","0.3","77","AR","India","","UAL13","556","32","0","RIGHT ARM Off Spin","Uncapped",""
+"Tripurana Vijay","0.3","77","AR","India","","UAL13","557","23","","RIGHT ARM Off Spin","Uncapped",""
+"Ravi Yadav","0.3","77","AR","India","","UAL13","558","27","","RIGHT ARM Leg Spin","Uncapped",""
+"Arjun Azad","0.3","78","AR","India","","UAL14","559","23","","RIGHT ARM Leg Spin","Uncapped",""
+"Abhay Choudhary","0.3","78","AR","India","","UAL14","560","22","","RIGHT ARM Leg Spin","Uncapped",""
+"Gaurav Gambhir","0.3","78","AR","India","","UAL14","561","37","","RIGHT ARM Off Spin","Uncapped",""
+"Shubham Garhwal","0.3","78","AR","India","","UAL14","562","29","","LEFT ARM Slow Orthodox","Uncapped",""
+"Tejasvi Jaiswal","0.3","78","AR","India","","UAL14","563","28","","RIGHT ARM Fast","Uncapped",""
+"Sairaj Patil","0.3","78","AR","India","","UAL14","564","28","","RIGHT ARM Fast Medium","Uncapped",""
+"Madhav Tiwari","0.3","78","AR","India","","UAL14","565","21","","RIGHT ARM Fast Medium","Uncapped",""
+"Kamal Tripathi","0.3","78","AR","India","","UAL14","566","26","","RIGHT ARM Off Spin","Uncapped",""
+"Prashant Chauhan","0.3","79","AR","India","","UAL15","567","24","","LEFT ARM Slow Orthodox","Uncapped",""
+"Yash Dabas","0.3","79","AR","India","","UAL15","568","20","","RIGHT ARM Fast Medium","Uncapped",""
+"Dhruv Kaushik","0.3","79","AR","India","","UAL15","569","24","","RIGHT ARM Off Spin","Uncapped",""
+"Khrievitso Kense","0.3","79","AR","India","","UAL15","570","21","","RIGHT ARM Leg Spin","Uncapped",""
+"Akash Parkar","0.3","79","AR","India","","UAL15","571","30","","RIGHT ARM Medium","Uncapped",""
+"Vignesh Puthur","0.3","79","AR","India","","UAL15","572","24","","LEFT ARM Slow Orthodox","Uncapped",""
+"Tripuresh Singh","0.3","79","AR","India","","UAL15","573","22","","RIGHT ARM Medium","Uncapped",""
+"Vijay Yadav","0.3","79","AR","India","","UAL15","574","23","","RIGHT ARM Off Spin","Uncapped",""
+"Jofra Archer","2","6","BOWL","England","RR","FA1","575","30","40","RIGHT ARM Fast","Capped",""
+"Saurabh Netravalkar","0.3","79","BOWL","USA","","UAL15","576","33","","LEFT ARM Fast Medium","Associate",""
+"Hardik Tamore","0.3","54","WK","India","","UWK6","577","33","","RIGHT ARM Off Spin","Uncapped",""
