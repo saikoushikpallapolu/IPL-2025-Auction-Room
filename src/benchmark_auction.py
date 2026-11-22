@@ -24,6 +24,8 @@ def simulate(catalog, seed, market=None):
             auction.act("nominate")
         elif auction.phase == "reveal":
             auction.act("open")
+        elif auction.phase == "result":
+            auction.act("next")
         else:
             auction.act("skip")
     ids = [result["id"] for result in auction.results if result["team"]]

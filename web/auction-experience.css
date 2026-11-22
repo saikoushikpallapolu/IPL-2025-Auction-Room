@@ -305,3 +305,30 @@ body:has(.arena-reveal) > main.shell { width: 100%; padding: 0; }
 @media (prefers-reduced-motion: reduce) {
   .arena-reveal .pouch i { animation: none; }
 }
+
+#nominations {
+  max-width: 58rem;
+  margin: 1rem auto 0;
+  background: #101d35;
+  color: #f3f7ff;
+  border-color: #637fa5;
+  color-scheme: dark;
+}
+#nominations .eyebrow, .nomination-reserve { color: #ffcf87; }
+#nomination-title { font-size: clamp(1.6rem, 4vw, 2.5rem); margin-block: .4rem; }
+#nominations .muted, .nomination-player small { color: #bfd0ea; }
+.nomination-filters { display: grid; grid-template-columns: 1.7fr 1fr; gap: .75rem; margin: 1rem 0; }
+.nomination-filters label { display: grid; gap: .3rem; font-size: .9rem; min-width: 0; }
+.nomination-filters input, .nomination-filters select {
+  width: 100%; font: inherit; color: inherit; background: #0a1428;
+  border: 1px solid #6680a2; border-radius: .45rem; padding: .55rem;
+}
+#nomination-count { font-size: .85rem; font-weight: 700; }
+#nomination-list { max-height: min(50svh, 28rem); overflow: auto; }
+.nomination-player {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center;
+  gap: .6rem; padding: .55rem .25rem; border-bottom: 1px solid #6e86a753;
+}
+.nomination-player:has(input:checked) { background: #2b3e5e; }
+.nomination-player small { display: block; margin-top: .15rem; }
+#submit-nominations { margin-top: .85rem; background: #ffcf87; color: #162038; }

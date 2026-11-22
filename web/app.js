@@ -246,19 +246,43 @@ function renderPerformance(stats) {
   }));
 }
 
+function updateNominationSheet() {
+  const query = $("nomination-search").value.trim().toLowerCase();
+  const role = $("nomination-role").value;
+  const boxes = [...$("nomination-list").querySelectorAll("input")];
+  const count = boxes.filter(box => box.checked).length;
+  for (const box of boxes) {
+    const row = box.closest("label");
+    row.hidden = Boolean((role && role !== row.dataset.role) || !row.textContent.toLowerCase().includes(query));
+    box.disabled = !box.checked && count >= state.nomination_limit;
+  }
+  $("nomination-count").textContent = `${count} / ${state.nomination_limit} selected`;
+  $("nomination-empty").hidden = boxes.some(box => !box.closest("label").hidden);
+  $("nomination-empty").textContent = boxes.length ? "No players match these filters." : "No eligible players are available for this round.";
+}
+
 function renderNominations(players) {
   $("nomination-search").value = "";
+  $("nomination-role").value = "";
+  const final = state.nomination_round === 2;
+  $("nomination-title").textContent = final ? "Final recall nominations" : "Accelerated round nominations";
+  $("nomination-rules").textContent = final
+    ? "Choose from players who went unsold or have yet to be called. Every franchise submits its own sheet before the final accelerated round."
+    : "Choose from later sets that have yet to be called. Every franchise submits a sheet, and each nominated player is offered once in this round.";
   $("nomination-list").replaceChildren(...players.map(player => {
-    const label = element("label", null, "retention");
+    const label = element("label", null, "nomination-player");
+    label.dataset.role = player.role;
     const box = element("input");
     box.type = "checkbox";
     box.value = player.id;
-    box.addEventListener("change", () => {
-      if ($("nomination-list").querySelectorAll("input:checked").length > 10) box.checked = false;
-    });
-    label.append(box, element("span", player.name), element("span", roles[player.role], "muted"));
+    box.addEventListener("change", updateNominationSheet);
+    const details = element("div");
+    details.append(element("strong", player.name), element("small",
+      [xiRoles[player.skill] || roles[player.role], player.country, player.recalled ? "Previously unsold" : "Uncalled"].filter(Boolean).join(" · ")));
+    label.append(box, details, element("strong", money(player.reserve), "nomination-reserve"));
     return label;
   }));
+  updateNominationSheet();
 }
 
 function renderFloor(call) {
@@ -329,7 +353,7 @@ function render(nextState) {
   $("progress").textContent = complete ? `${state.total} lots processed` : `Lot ${state.lot} · ${state.total} queued${setProgress}`;
   const call = state.cue === "once" ? "Going once…" : state.cue === "twice" ? "Going twice…" :
     leader ? `${config.teams[leader]} leads` : "Taking opening bids";
-  $("phase").textContent = complete ? "Complete" : bidding ? "Live bidding" : leader ? "Sold" : "Unsold";
+  $("phase").textContent = complete ? "Complete" : bidding ? (state.accelerated_round ? "Accelerated bidding" : "Live bidding") : matching ? "RTM" : leader ? "Sold" : "Unsold";
   if (!complete) {
     renderFloor(bidding ? call : matching ? (finalBid ? "Make your final offer" : `Right to Match · ${state.rtm_team}`) : leader ? `Sold to ${leader} · ${money(price)}` : "Unsold · no bids");
   } else {
@@ -366,7 +390,7 @@ function render(nextState) {
     state.rtm_stage === "offer" ? "Request Right to Match. The current leader can raise once before you decide." : "Match the final price to sign the player and use a card.") :
     bidding ? (leader === user ? "Your paddle has the high bid." : state.can_bid ?
       "Raise your paddle from your table any time before the hammer." : "Your purse or squad limits prevent another bid.") :
-      complete ? "Start a new auction to try another franchise." : "Continue to the next player when ready.";
+      complete ? "Start a new auction to try another franchise." : "Ready to continue? Bidding stays paused until you choose.";
   $("bid").textContent = matching ? (finalBid ? "Raise final bid" : state.rtm_stage === "offer" ? "Request RTM" : `Match ${money(price)}`) : leader === user ? "You lead" : `Bid ${money(state.next_price)}`;
   $("bid").hidden = !(bidding || matching);
   $("bid").disabled = bidding && !state.can_bid;
@@ -381,7 +405,7 @@ function render(nextState) {
   if (finalBid) $("bid").disabled = state.final_bid_min > state.final_bid_max;
   $("skip").hidden = !bidding;
   $("next").hidden = phase !== "result";
-  $("next").textContent = state.lot === state.total ? "Continue" : "Next player";
+  $("next").textContent = state.lot === state.total ? "Ready to continue" : "Ready for next player";
   $("rtm-count").textContent = `${state.rtm} RTM left`;
   $("current-set").hidden = complete;
   $("player-stats-button").hidden = complete;
@@ -432,10 +456,8 @@ $("bid").addEventListener("click", () => {
     move(state.phase === "rtm" ? "match" : "bid");
   }
 });
-$("nomination-search").addEventListener("input", event => {
-  const query = event.target.value.trim().toLowerCase();
-  for (const row of $("nomination-list").children) row.hidden = !row.textContent.toLowerCase().includes(query);
-});
+$("nomination-search").addEventListener("input", updateNominationSheet);
+$("nomination-role").addEventListener("change", updateNominationSheet);
 $("submit-nominations").addEventListener("click", () => {
   const nominations = [...$("nomination-list").querySelectorAll("input:checked")].map(box => box.value);
   move("nominate", { nominations });

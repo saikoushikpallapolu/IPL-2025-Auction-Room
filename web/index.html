@@ -74,12 +74,25 @@
         </div>
       </section>
       <section id="nominations" class="panel" aria-labelledby="nomination-title" hidden>
+        <p class="eyebrow">FRANCHISE NOMINATION SHEET</p>
         <h2 id="nomination-title">Accelerated round nominations</h2>
-        <p class="muted">Nominate up to 10 players from the available pool. AI teams submit their own choices.</p>
-        <label for="nomination-search">Find an available player</label>
-        <input id="nomination-search" type="search">
+        <p id="nomination-rules" class="muted"></p>
+        <div class="nomination-filters">
+          <label>Find a player<input id="nomination-search" type="search"></label>
+          <label>Role
+            <select id="nomination-role">
+              <option value="">All roles</option>
+              <option value="BAT">Batters</option>
+              <option value="WK">Wicketkeepers</option>
+              <option value="AR">All-rounders</option>
+              <option value="BOWL">Bowlers</option>
+            </select>
+          </label>
+        </div>
+        <p id="nomination-count" role="status"></p>
         <div id="nomination-list" class="retentions"></div>
-        <button id="submit-nominations" class="primary" type="button">Continue to accelerated round</button>
+        <p id="nomination-empty" class="muted" hidden></p>
+        <button id="submit-nominations" class="primary" type="button">Submit nomination sheet</button>
       </section>
       <div id="room-grid" hidden>
         <section id="auction-floor" class="auction-floor" aria-labelledby="player-name">

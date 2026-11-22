@@ -30,6 +30,9 @@ DATA = ROOT / "data/raw/ipl_auctions"
 PURSE = 12000
 OPENING_PAUSE = 2.4
 CALL_PAUSE = 2.6
+ACCELERATED_OPENING_PAUSE = 1.35
+ACCELERATED_CALL_PAUSE = 1.25
+NOMINATION_LIMIT = 10
 RTM_SECONDS = 30
 SQUAD_LIMIT = 25
 MIN_SQUAD = 18
@@ -242,6 +245,7 @@ class Auction:
             for code, roster in self.rosters.items()
         }
         self.recall_round = 0
+        self.nomination_sheets = {}
         self.results = []
         self.lineup = None
         self.version = 0
@@ -292,7 +296,7 @@ class Auction:
     def open_lot(self):
         self.phase = "bidding"
         self.cue = "open"
-        self.deadline = monotonic() + OPENING_PAUSE
+        self.deadline = monotonic() + (ACCELERATED_OPENING_PAUSE if self.recall_round else OPENING_PAUSE)
         player = self.player
         average = max(1, sum(self.purses.values()) / len(TEAMS))
         reserve = player["reserve"]
@@ -310,8 +314,8 @@ class Auction:
         market_interest = self.rng.uniform(0.66, 1.18)
         progress = min(1, (0.54 if self.recall_round else 0) + 0.46 * self.index / max(1, len(self.players) - 1))
         # Leave room for subsequent sets, especially overseas specialists.
-        held_slots = max(0, 4 - int(progress * 5))
-        held_overseas = max(0, 2 - int(progress * 3))
+        held_slots = max(0, 4 - int(progress * 5)) if self.recall_round < 2 else 0
+        held_overseas = max(0, 2 - int(progress * 3)) if self.recall_round < 2 else 0
         alternatives = Counter((p["skill"], p["overseas"]) for p in self.players[self.index + 1:])
         alternatives.update((p["skill"], p["overseas"]) for p in self.recall_pool.values() if p["id"] not in self.offered)
         remaining_slot_budgets = {
@@ -323,7 +327,8 @@ class Auction:
                 continue
             roster = self.rosters[code]
             overseas = sum(p["overseas"] for p in roster)
-            if not marquee and (len(roster) >= SQUAD_LIMIT - held_slots or (
+            nominated = player["id"] in self.nomination_sheets.get(code, ())
+            if not (marquee or nominated) and (len(roster) >= SQUAD_LIMIT - held_slots or (
                 player["overseas"] and overseas >= OVERSEAS_LIMIT - held_overseas
             )):
                 continue
@@ -339,7 +344,7 @@ class Auction:
                 interest *= min(1.15, 0.55 + 0.06 * (SQUAD_LIMIT - len(roster)))
                 if self.recall_round:
                     interest += self.market.late_interest * min(1, max(0, 22 - len(roster)) / 8)
-            if self.rng.random() > interest:
+            if not nominated and self.rng.random() > interest:
                 continue
             budget = (self.purses[code] / average) ** 0.35
             if self.market.slot_budget:
@@ -368,6 +373,9 @@ class Auction:
             if not self.recall_round:
                 accelerated_budget = int((PURSE - self.deductions[code]) * self.market.accelerated_purse_share)
                 limit = min(limit, self.purses[code] - accelerated_budget)
+            if nominated:
+                ceiling = max(reserve, ceiling)
+                limit = max(reserve, limit)
             self.ceilings[code] = min(int(ceiling), limit, self.purses[code])
         self.log("Bidding opened")
 
@@ -388,7 +396,8 @@ class Auction:
     def bid(self, code, price):
         self.leader, self.price = code, price
         self.cue = "open"
-        self.deadline = monotonic() + self.rng.uniform(1.45, 2.25)
+        delay = self.rng.uniform(.75, 1.20) if self.recall_round else self.rng.uniform(1.45, 2.25)
+        self.deadline = monotonic() + delay
         self.log("Raised a paddle", code, price, kind="bid")
 
     def rtm_eligible(self, code, price):
@@ -482,9 +491,11 @@ class Auction:
 
     def nominate(self, nominations):
         pool = self.nomination_pool()
-        if len(nominations) > 10 or any(player_id not in pool for player_id in nominations):
-            raise ValueError("Nominate up to 10 players available in this round.")
-        selected = set(nominations)
+        if (len(nominations) > NOMINATION_LIMIT or len(set(nominations)) != len(nominations)
+                or any(player_id not in pool for player_id in nominations)):
+            raise ValueError(f"Nominate up to {NOMINATION_LIMIT} distinct players available in this round.")
+        sheets = {self.user: set(nominations)} if self.user else {}
+        alternatives = Counter((p["skill"], p["overseas"]) for p in pool.values())
         for code, roster in self.rosters.items():
             if code == self.user or len(roster) >= SQUAD_LIMIT:
                 continue
@@ -493,14 +504,16 @@ class Auction:
                 if p["reserve"] <= self.bid_limit(code) and (not p["overseas"] or sum(r["overseas"] for r in roster) < OVERSEAS_LIMIT)
                 and (p["sale_probability"] or 0) >= 0.10
             ]
-            candidates.sort(key=lambda p: p["sale_probability"] * xi_fit(p, roster, Counter()) * p["market_value"] ** 0.45 * self.rng.uniform(0.7, 1.3), reverse=True)
+            candidates.sort(key=lambda p: p["sale_probability"] * xi_fit(p, roster, alternatives) * p["market_value"] ** 0.45 * self.rng.uniform(0.7, 1.3), reverse=True)
             quota = min(self.market.first_nominations if self.recall_round == 0 else self.market.second_nominations, 4 * (SQUAD_LIMIT - len(roster)))
-            selected.update(p["id"] for p in candidates[:quota])
+            sheets[code] = {p["id"] for p in candidates[:quota]}
+        self.nomination_sheets = sheets
+        selected = set().union(*sheets.values())
+        self.recall_round += 1
         if not selected:
-            self.phase = "complete"
+            self.phase = "nomination" if self.recall_round < 2 and self.recall_pool else "complete"
             self.version += 1
             return
-        self.recall_round += 1
         label = f"Accelerated round {self.recall_round}"
         players = [
             {**player, "set": label, "set_code": label} for player in self.recall_pool.values()
@@ -519,9 +532,7 @@ class Auction:
 
     def nomination_pool(self):
         if self.recall_round == 0:
-            uncalled = {key: p for key, p in self.recall_pool.items() if key not in self.offered}
-            if uncalled:
-                return uncalled
+            return {key: p for key, p in self.recall_pool.items() if key not in self.offered}
         return self.recall_pool
 
     def act(self, action, *, amount=None, nominations=()):
@@ -536,6 +547,8 @@ class Auction:
             self.advance()
             return
         if self.phase in {"bidding", "rtm", "result"} and action == "skip":
+            if self.phase == "result":
+                return
             if self.phase == "bidding":
                 while self.ai_bid():
                     pass
@@ -543,7 +556,7 @@ class Auction:
                 self.award()
             elif self.phase == "bidding":
                 self.settle(interactive=False)
-            self.advance()
+            self.version += 1
             return
         if self.phase == "rtm" and action in {"match", "pass", "raise"}:
             if self.rtm_stage == "final" and action in {"raise", "pass"}:
@@ -576,7 +589,7 @@ class Auction:
             else:
                 self.cue = "once" if self.cue == "open" else "twice"
                 self.log("Going once" if self.cue == "once" else "Going twice")
-                self.deadline = monotonic() + CALL_PAUSE
+                self.deadline = monotonic() + (ACCELERATED_CALL_PAUSE if self.recall_round else CALL_PAUSE)
         self.version += 1
 
     def save_lineup(self, order, keeper):
@@ -614,7 +627,14 @@ class Auction:
             ),
             "final_bid_min": self.price + 1 if self.phase == "rtm" and self.rtm_stage == "final" else None,
             "final_bid_max": self.bid_limit(self.user) if self.phase == "rtm" and self.rtm_stage == "final" else None,
-            "nominees": [{"id": p["id"], "name": p["name"], "role": p["role"]} for p in self.nomination_pool().values()] if self.phase == "nomination" else [],
+            "nomination_round": self.recall_round + 1 if self.phase == "nomination" else None,
+            "accelerated_round": self.recall_round,
+            "nomination_limit": NOMINATION_LIMIT,
+            "nominees": [
+                {key: p[key] for key in ("id", "name", "role", "country", "overseas", "reserve", "skill")}
+                | {"recalled": p["id"] in self.offered}
+                for p in self.nomination_pool().values()
+            ] if self.phase == "nomination" else [],
             "events": self.events[-30:], "results": self.results.copy(),
             "teams": {
                 code: {

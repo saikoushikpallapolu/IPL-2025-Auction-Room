@@ -79,11 +79,13 @@ def main():
     while (state := auction.snapshot())["phase"] != "complete":
         player = state["player"]
         if state["phase"] == "nomination":
-            print("\nNominate players for the accelerated round:")
+            print(f"\nNominate players for accelerated round {state['nomination_round']}:")
             for nominee in state["nominees"]:
-                print(f"  {nominee['id']}: {nominee['name']}")
+                status = "previously unsold" if nominee["recalled"] else "uncalled"
+                print(f"  {nominee['id']}: {nominee['name']} ({nominee['role']}, {status})")
             try:
-                auction.act("nominate", nominations=input("Enter up to 10 IDs separated by spaces: ").split())
+                limit = state["nomination_limit"]
+                auction.act("nominate", nominations=input(f"Enter up to {limit} IDs separated by spaces: ").split())
             except ValueError as error:
                 print(error)
             continue

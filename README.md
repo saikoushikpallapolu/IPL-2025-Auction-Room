@@ -1,31 +1,47 @@
+<img src="web/assets/auction-room.svg" width="64" height="64" alt="Auction Room gavel and cricket ball emblem">
+
 # IPL Auction Room
 
-**Run an IPL franchise from the auction table.**
+**Build an IPL squad from the auction table.**
 
-Pick your team, set your retentions, and raise your paddle against nine AI franchises in a browser recreation of the **2025 IPL mega auction**. Decide when to chase a marquee player, when to let a rival spend, and how much purse to save for the uncapped sets.
+Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. Set your retentions, bid against nine squad-aware AI franchises, and pick your Playing XI after the final hammer. The same player pool powers a reproducible sports ML benchmark for sale probability, price uncertainty, and franchise strategy.
 
-[Quick start](#quick-start) · [Auction room features](#auction-room-features) · [Sports ML benchmark](#sports-ml-benchmark) · [Architecture](#architecture) · [Contribute](#contribute)
+[Quick start](#quick-start) · [Inside the game](#inside-the-game) · [Sports ML benchmark](#sports-ml-benchmark) · [Simulator benchmarks](#simulator-versus-the-real-auction) · [Architecture](#architecture)
 
-| Franchises | Player registrations | Auction set groups | Historical training sales | Replay price MAE |
+| Franchises | Registered player pool | Published set groups | Historical training sales | Replay price MAE |
 | :---: | :---: | :---: | :---: | :---: |
 | **10** | **577** | **79** | **929** | **₹1.86 Cr** |
 
-The registration count comes from the revised auction list with player-specific Right to Match eligibility. The price error comes from the set-held-out 2025 replay benchmark below. [Revised IPL auction list](https://documents.iplt20.com/bcci/documents/1732248356511_TATA%20IPL%202025-%20Auction%20List%20with%20RTM%20-19.11.24.pdf)
+![Wide 3D auction room showing all ten team tables, the leading franchise spotlight, live bid controls, and the current player card](docs/screenshots/auction-room.jpg)
 
-## Auction room features
+*The wide camera during a live lot. The overhead spotlight follows the highest bidder.*
 
-| Feature | What you can do |
+## Inside the game
+
+| Feature | How it plays |
 | --- | --- |
-| **Live auction floor** | Bid directly from your franchise's table. See delegates raise paddles, bids arrive one at a time, and the auctioneer call the lot. |
-| **Franchise management** | Choose your retentions, track official opening purse deductions, and decide whether to match a final RTM bid. |
-| **Player scouting** | Compare reserve, sale probability, price range if sold, and available pre-auction form. |
-| **Rival squad inspection** | Open any rival table to see its purse, squad, and projected XI vacancies. |
-| **Set-by-set play** | Reveal opening sets, nominate players for accelerated rounds, or use **Skip player** to finish a lot and move on. |
-| **Auction record** | Review live bid history and completed results, including winning franchises, sale prices, and unsold players. |
+| **Franchise setup** | Pick a team and choose whom to retain. Retention deductions and the ₹120 Cr salary cap determine your opening purse. |
+| **Live 3D bidding** | Raise your paddle from the arena, switch between the wide camera and your seat, or use the lighter table view. The auctioneer gestures through the calls and strikes the gavel on a sale. Spoken calls and the hammer sound are optional. |
+| **Player and rival scouting** | The live board shows the reserve, last recorded sale and season when available, playing role, and applicable RTM. Open Player Stats for valuation, sale probability, conditional price range, and available form. Inspect rival purses, squads, and projected XI vacancies in the room. |
+| **Set reveals and shuffled lots** | Watch the pouch open inside the wide-camera arena. The roster card shows the category, order, and reserve prices. Players shuffle within each set while the published opening-set order stays intact. |
+| **Your pace between lots** | **Skip player** resolves the current lot and shows the result. Bidding remains paused until you select **Ready for next player**, including after a refresh. |
+| **Accelerated bidding and final recall** | Submit a searchable, role-filtered sheet of up to ten players. AI franchises submit their own shortlists based on squad fit and affordability. Shared nominations produce a single lot, and both accelerated stages use shorter bidding intervals. |
+| **Right to Match** | An eligible former franchise can request RTM, the winning bidder can make a final offer, and the eligible franchise can match that final price. Eligibility and remaining slots are tracked per franchise. |
+| **Sale ceremony and results** | A full-screen, team-colored SOLD reveal shows the winning franchise, player, and price. Review recent bids and sold or unsold outcomes from the arena. |
+| **Playing XI** | Start from a suggested XI, swap in players from your squad, reorder the batting lineup, and choose a wicketkeeper. The editor enforces the four-overseas limit. |
 
-The **3D room** opens automatically during bidding. Use **Wide camera** to see all ten tables, **Back to my seat** to return, and **Table view** for a lighter layout. Every confirmed sale displays the player and price in the winning team's colors. After the final lot, the **Playing XI** editor starts from a suggested lineup and lets you swap players, reorder the batting lineup, and choose a wicketkeeper.
+![Marquee set reveal with the animated pouch, team tables, and the upcoming players and reserve prices](docs/screenshots/set-reveal.jpg)
 
-The AI uses franchise preferences, positional needs, available alternatives, and money per open squad slot to decide whether to bid and where to stop. Teams earmark part of their opening purse for accelerated rounds. A lot can go unsold while teams still have cash and roster space.
+*The next set appears beside the arena. Select Open bidding when you are ready.*
+
+### How the auction moves
+
+1. **Opening sets.** Players are offered in shuffled order within each set. Teams can pass even when they have room and money.
+2. **Accelerated round.** Franchises nominate from later sets that have yet to be called. The merged shortlist goes under the hammer at a faster pace.
+3. **Final recall.** Franchises submit another sheet from players who went unsold or were never called. Eligible nominations are merged and offered in the final accelerated round.
+4. **Playing XI.** Review the results and select a lineup from your finished squad.
+
+The catalog count describes registrations. The live counter shows the current lot, the number queued so far, and the position within the set. Nomination rounds add lots to the queue, and a recalled player can appear twice. The nomination cap and exact bidding intervals are simulator settings. [Revised IPL auction list](https://documents.iplt20.com/bcci/documents/1732248356511_TATA%20IPL%202025-%20Auction%20List%20with%20RTM%20-19.11.24.pdf) · [BCCI accelerated procedure as reported by Cricbuzz](https://www.cricbuzz.com/cricket-news/132439/auction-register-churned-as-accelerated-process-to-begin-from-player-no117-cricbuzzcom)
 
 ## Quick start
 
@@ -61,7 +77,7 @@ The P20–P80 interval covered 64.3% of all sold players. The set-held-out resul
 
 ```bash
 python -m src.rebuild_pool --people people.csv --names names.csv ipl_json.zip t20s_male_json.zip bbl_json.zip psl_json.zip cpl_json.zip sma_json.zip sat_json.zip
-python -m src.benchmark_auction --seeds 30 --seed-start 20
+python -m src.benchmark_auction --seeds 30 --seed-start 0
 python -m unittest discover -s tests
 ```
 
@@ -96,15 +112,24 @@ All 46 premium sales in these folds were underpredicted by the current model. Th
 
 ### Simulator versus the real auction
 
-| Measure | Simulator, mean of 30 all-AI runs | Actual 2025 auction |
+| Measure | Simulator, 30 seeded all-AI runs | Actual 2025 auction |
 | --- | ---: | ---: |
-| Signings | 181.3 | 182 |
-| Overseas signings | 63.9 | 62 |
-| Auction spend | ₹618.02 Cr | ₹639.15 Cr |
-| Highest signing | ₹27.73 Cr | ₹27 Cr |
-| Marquee group spend | ₹211.42 Cr | ₹180.50 Cr |
+| Signings | 186.40 | 182 |
+| Overseas signings | 67.97 | 62 |
+| Auction spend | ₹631.91 Cr | ₹639.15 Cr |
+| Highest signing | ₹29.16 Cr | ₹27.00 Cr |
+| Marquee spend | ₹213.99 Cr | ₹180.50 Cr |
 
-These runs used seeds 20–49, separate from the calibration seeds, with the same 2025 player pool and outcomes as the benchmark. They averaged 106 accelerated-round signings, with 17.4% of called players finishing unsigned and 0.55 specialist XI vacancies per team. Mean absolute squad-size error was 2.32 players per franchise and mean absolute remaining-purse error was ₹2.13 Cr. Aggregate realism improved, but some individual sets still miss substantially. For example, FA2 averaged ₹2.91 Cr versus ₹46.90 Cr in actual spending. The tuning values are 2025 replay defaults. [Official IPL auction results](https://www.iplt20.com/auction/2025/teams) · [Franchise purse and squad totals](https://www.cricbuzz.com/cricket-series/ipl-2025/auction/teams)
+| Additional replay diagnostics | Mean |
+| --- | ---: |
+| Accelerated-round signings | 110.93 |
+| Called players who finished unsigned | 19.43% |
+| Full pool unsigned | 67.69% |
+| Specialist XI roles unfilled per team | 0.47 |
+| Final squad-size MAE per franchise | 2.04 players |
+| Remaining purse MAE per franchise | ₹0.89 Cr |
+
+These runs use seeds 0–29 with the two-stage nomination engine and fixed 2025 pool. The AI weighs squad needs, alternative players, franchise preferences, and slot-level budgets. Aggregate spend is close to the recorded auction, while the simulator overstates marquee spend and overseas signings. This benchmark measures the simulation's behavior on the replay pool. The separate model tables above measure prediction error. [Official IPL auction results](https://www.iplt20.com/auction/2025/teams) · [Franchise purse and squad totals](https://www.cricbuzz.com/cricket-series/ipl-2025/auction/teams)
 
 ## Architecture
 
@@ -144,3 +169,5 @@ A contribution is easiest to review when it includes a concrete auction scenario
 - [Revised auction registry with player-specific Right to Match eligibility](https://documents.iplt20.com/bcci/documents/1732248356511_TATA%20IPL%202025-%20Auction%20List%20with%20RTM%20-19.11.24.pdf)
 - [Official 2025 retention and purse allocations](https://www.iplt20.com/news/article/ipl-2025-player-retentions-list-announced)
 - [IPL 2025–27 player regulations](https://www.iplt20.com/news/article/ipl-governing-council-announces-tata-ipl-player-regulations-2025-27)
+
+The simulator is an independent fan project unaffiliated with the IPL, BCCI, or its franchises. The screenshots show the local browser build.
