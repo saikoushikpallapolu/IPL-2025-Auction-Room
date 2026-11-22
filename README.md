@@ -23,6 +23,8 @@ The registration count comes from the revised auction list with player-specific 
 | **Set-by-set play** | Reveal opening sets, nominate players for accelerated rounds, or use **Skip player** to finish a lot and move on. |
 | **Auction record** | Review live bid history and completed results, including winning franchises, sale prices, and unsold players. |
 
+The **3D room** opens automatically during bidding. Use **Wide camera** to see all ten tables, **Back to my seat** to return, and **Table view** for a lighter layout. Every confirmed sale displays the player and price in the winning team's colors. After the final lot, the **Playing XI** editor starts from a suggested lineup and lets you swap players, reorder the batting lineup, and choose a wicketkeeper.
+
 The AI uses franchise preferences, positional needs, available alternatives, and money per open squad slot to decide whether to bid and where to stop. Teams earmark part of their opening purse for accelerated rounds. A lot can go unsold while teams still have cash and roster space.
 
 ## Quick start
@@ -117,7 +119,7 @@ flowchart LR
 
 | Layer | Implementation |
 | --- | --- |
-| **Interactive browser UI** | [HTML, CSS, and JavaScript](web/index.html) for paddle animations, set reveals, and the stats panels. |
+| **Interactive browser UI** | [Three.js auction room](web/auction-room.js) with original animated geometry and [HTML controls](web/index.html) for bidding, scouting, and editing the Playing XI. |
 | **Auction session API** | [FastAPI](src/web_app.py) exposes configuration, session start, current state, and auction actions. |
 | **Simulation engine** | [Python auction state machine](src/simulator_engine.py) handles bidding, team eligibility, purses, lot settlement, and set transitions. |
 | **Playing XI selection** | [Roster strategy](src/team_strategy.py) uses sample-adjusted phase form and selects a lineup under a shared four-overseas limit. The selector fills specialist gaps first and then maximizes form. |

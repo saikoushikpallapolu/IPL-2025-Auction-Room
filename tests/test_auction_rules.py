@@ -59,6 +59,7 @@ class AuctionRulesTests(TestCase):
 
     def test_sold_players_cannot_be_recalled(self):
         auction = self.make_auction([player("a"), player("b")])
+        unsold, sold = (lot["id"] for lot in auction.players)
         auction.ceilings.clear()
         auction.act("skip")
         auction.bid("DC", 50)
@@ -66,9 +67,21 @@ class AuctionRulesTests(TestCase):
         auction.act("skip")
         self.assertEqual(auction.phase, "nomination")
         with self.assertRaises(ValueError):
-            auction.act("nominate", nominations=["b"])
-        auction.act("nominate", nominations=["a"])
-        self.assertEqual((auction.phase, auction.player["id"], auction.recall_round), ("reveal", "a", 1))
+            auction.act("nominate", nominations=[sold])
+        auction.act("nominate", nominations=[unsold])
+        self.assertEqual((auction.phase, auction.player["id"], auction.recall_round), ("reveal", unsold, 1))
+
+    def test_lots_are_shuffled_within_each_set(self):
+        first = [player(str(i)) for i in range(6)]
+        second = [dict(player(str(i)), set="7", set_code="FA2") for i in range(6, 12)]
+        auction = self.make_auction(first + second)
+        for original, actual in ((first, auction.players[:6]), (second, auction.players[6:])):
+            original_ids = [p["id"] for p in original]
+            actual_ids = [p["id"] for p in actual]
+            self.assertCountEqual(original_ids, actual_ids)
+            self.assertNotEqual(original_ids, actual_ids)
+            key = (actual[0]["set"], actual[0]["set_code"])
+            self.assertEqual([p["name"] for p in actual], [p["name"] for p in auction.sets[key]["players"]])
 
     def test_missing_death_bowler_has_higher_marginal_value(self):
         candidate = player("a")
@@ -79,6 +92,22 @@ class AuctionRulesTests(TestCase):
         skills = ["keeper", "death", "spin", "pace", "finisher"]
         roster = [{**player(str(i)), "overseas": True, "skill": skill} for i, skill in enumerate(skills)]
         self.assertEqual(len(projected_xi(roster)["players"]), 4)
+
+    def test_saved_lineup_checks_squad_eligibility(self):
+        auction = Auction(self.catalog, "CSK", [])
+        auction.phase = "complete"
+        auction.rosters["CSK"] = [
+            {"role": "WK" if i == 0 else "BAT", "overseas": i > 7}
+            for i in range(13)
+        ]
+        with self.assertRaises(ValueError):
+            auction.save_lineup([0] * 11, 0)
+        with self.assertRaises(ValueError):
+            auction.save_lineup([0, *range(3, 13)], 0)
+        with self.assertRaises(ValueError):
+            auction.save_lineup(list(range(11)), 1)
+        auction.save_lineup(list(range(11)), 0)
+        self.assertEqual(auction.lineup, {"order": list(range(11)), "keeper": 0})
 
     def test_projected_xi_preserves_overseas_slot_for_unique_keeper(self):
         roster = [

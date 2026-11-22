@@ -93,6 +93,7 @@ function choose(team) {
 
 function showSetup() {
   state = null;
+  presentation.reset();
   lastPaddle = null;
   $("setup").hidden = false;
   $("room").hidden = true;
@@ -301,6 +302,7 @@ function render(nextState) {
   $("room-grid").hidden = reveal || nominate;
   $("nominations").hidden = !nominate;
   if (nominate) {
+    presentation.sync(state, previous, config.teams);
     if ($("stats-dialog").open) $("stats-dialog").close();
     renderNominations(state.nominees);
     window.scrollTo(0, 0);
@@ -308,6 +310,7 @@ function render(nextState) {
   }
   if (state.set && (!previous || previous.set?.code !== state.set.code)) renderSet(state.set);
   if (reveal) {
+    presentation.sync(state, previous, config.teams);
     if ($("stats-dialog").open) $("stats-dialog").close();
     lastPaddle = null;
     window.scrollTo(0, 0);
@@ -397,6 +400,8 @@ function render(nextState) {
     if (event.price != null) row.append(element("strong", money(event.price)));
     return row;
   }));
+  presentation.sync(state, previous, config.teams);
+  lineupMaker.sync(state, previous);
 }
 
 async function move(action, options = {}) {
@@ -489,5 +494,10 @@ async function initialize() {
     showError(error.message);
   }
 }
+
+const presentation = createAuctionPresentation(colors, money, {
+  inspect: code => showStats("teams", code),
+});
+const lineupMaker = createLineupMaker(async lineup => render(await api("lineup", lineup)));
 
 initialize();

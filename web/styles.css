@@ -341,6 +341,82 @@ input[type="checkbox"] { width: 1.05rem; height: 1.05rem; accent-color: var(--ac
 .team-option { transition: background .2s, border-color .2s, transform .2s; }
 .team-option[aria-pressed="true"] { transform: translateY(-2px); box-shadow: 0 4px 11px #48228425; }
 .retention-panel { border-top: 3px solid var(--selection-color, var(--accent)); }
+
+body:has(#setup:not([hidden])) {
+  color-scheme: dark;
+  color: #f4f7ff;
+  background: #07152d;
+}
+body:has(#setup:not([hidden]))::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(90deg, #07152df5, #07152dbb 44%, transparent 75%),
+    url("/assets/auction-night.webp") right bottom / cover no-repeat;
+  pointer-events: none;
+}
+body:has(#setup:not([hidden])) > .top,
+body:has(#setup:not([hidden])) > main { position: relative; }
+body:has(#setup:not([hidden])) > .top {
+  background: #07152d80;
+  border-color: #a0bbe636;
+}
+body:has(#setup:not([hidden])) > .top .season { color: #e1e9f6; }
+body:has(#setup:not([hidden])) > main { padding-block: clamp(1.25rem, 3vw, 3rem) 1.5rem; }
+#setup .hero {
+  display: grid;
+  justify-content: start;
+  gap: .9rem;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
+#setup .hero::before { content: none; }
+#setup .hero h1 { font-size: clamp(2.55rem, 4.8vw, 5rem); margin: .5rem 0 .65rem; }
+#setup .hero .eyebrow { color: #ffcf87; }
+#setup .hero-metrics { gap: .55rem 1.2rem; }
+#setup .hero-metrics div { border-left: 2px solid #d6a265; padding-left: .6rem; }
+#setup .hero-metrics span { color: #e1e9f6; }
+#setup .setup-grid {
+  width: min(64%, 745px);
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
+  gap: .7rem;
+}
+#setup .panel {
+  background: #0a1830ed;
+  border-color: #8caed366;
+  padding: .85rem;
+}
+#setup .retention-panel { border-top-color: var(--selection-color, #d6a265); }
+#setup .muted, .landing-credit { color: #c5d2e8; }
+#setup .team-picker { gap: .35rem; margin-top: .7rem; }
+#setup .team-option { background: #162744; border-color: #809cc54f; font-size: .78rem; padding: .35rem; }
+#setup .team-option:hover, #setup .team-option[aria-pressed="true"] {
+  border-color: #ffcf87;
+  background: #263b5e;
+}
+#setup .purse-line { border-color: #809cc54f; }
+#setup .retention { min-height: 2rem; }
+#setup #start { background: #ffcf87; border-color: #ffcf87; color: #172137; }
+#setup #start:hover { background: #ffe0ae; }
+.landing-credit { font-size: .77rem; margin: .85rem 0 0; }
+
+@media (max-width: 1020px) {
+  #setup .setup-grid { width: min(70%, 580px); grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  body:has(#setup:not([hidden]))::before {
+    position: absolute;
+    background: linear-gradient(0deg, #07152d 12%, #07152d55 48%, #07152db8 100%),
+      url("/assets/auction-night.webp") right top / auto 60% no-repeat;
+  }
+  #setup .hero { min-height: 52svh; align-content: end; padding-bottom: .5rem; }
+  #setup .setup-grid { width: 100%; }
+  #setup .hero-metrics { gap: .55rem; }
+  #setup .hero-metrics strong { font-size: 1.15rem; }
+  #setup .hero-metrics span { font-size: .72rem; }
+}
+
 @keyframes table-arrival { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0; } }
 @media (max-width: 670px) {
   .delegates { transform: translateX(-50%) scale(.9); bottom: 4px; }

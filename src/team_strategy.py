@@ -82,8 +82,12 @@ def projected_xi(roster):
     _, selections = max(states.values(), key=lambda item: (len(item[1]), item[0]))
     remaining = XI_TARGETS.copy()
     starters = []
+    roster_indexes = {id(player): index for index, player in enumerate(roster)}
     for player in selections:
         skill = player["skill"]
-        starters.append({"name": player["name"], "skill": skill, "overseas": player["overseas"]})
+        starters.append({
+            "name": player["name"], "skill": skill, "overseas": player["overseas"],
+            "roster_index": roster_indexes[id(player)],
+        })
         remaining[skill] -= 1
     return {"players": starters, "vacancies": {skill: count for skill, count in remaining.items() if count}}

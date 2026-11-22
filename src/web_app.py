@@ -5,7 +5,7 @@ from uuid import uuid4
 
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StrictInt
 
 from .simulator_engine import Auction, Catalog, RETENTION_SLABS, TEAMS
 from .train_predictor import ROOT
@@ -23,6 +23,11 @@ class Move(BaseModel):
     price: int | None = None
     amount: int | None = None
     nominations: list[str] = Field(default_factory=list, max_length=10)
+
+
+class Lineup(BaseModel):
+    order: list[StrictInt] = Field(min_length=11, max_length=11)
+    keeper: StrictInt
 
 
 @asynccontextmanager
@@ -104,6 +109,17 @@ def action(move: Move, request: Request):
             return auction.snapshot()
         try:
             auction.act(move.action, amount=move.amount, nominations=move.nominations)
+        except ValueError as error:
+            raise HTTPException(400, str(error)) from error
+        return auction.snapshot()
+
+
+@app.post("/api/lineup")
+def save_lineup(lineup: Lineup, request: Request):
+    with lock:
+        auction = current_auction(request)
+        try:
+            auction.save_lineup(lineup.order, lineup.keeper)
         except ValueError as error:
             raise HTTPException(400, str(error)) from error
         return auction.snapshot()

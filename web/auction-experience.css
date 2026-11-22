@@ -1,0 +1,241 @@
+.view-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  padding: .5rem 0;
+}
+.view-controls button {
+  border: 1px solid #ffffff35;
+  background: #171b28;
+  color: #f3e8d4;
+  padding: .42rem .7rem;
+  border-radius: .45rem;
+  min-height: 2.2rem;
+  font-size: .82rem;
+}
+.view-controls button[aria-pressed="true"] {
+  color: #181421;
+  background: #f2d68d;
+  border-color: #f2d68d;
+}
+.room-viewport {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  height: clamp(300px, 43vw, 475px);
+  border: 1px solid #d7b47448;
+  border-radius: .65rem;
+  background: radial-gradient(ellipse at 52% 35%, #3c455f, #141925 75%);
+}
+#room-canvas, #room-canvas canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#room-canvas canvas { touch-action: manipulation; }
+#table-labels { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+#table-labels span {
+  position: absolute; transform: translate(-50%, -50%); width: max-content;
+  max-width: min(10%, 8.5rem); padding: .07rem .22rem;
+  border-bottom: 1px solid var(--table-color);
+  background: #080f21d9; color: #f4f7ff; text-align: center;
+  font-size: clamp(.48rem, .92vw, .84rem); line-height: 1.05; font-weight: 750;
+}
+@media (max-width: 660px) {
+  #table-labels span { max-width: 15%; padding-inline: .16rem; }
+}
+#table-labels .is-leading {
+  color: #ffe6b0; border-color: #fff0cf;
+  text-shadow: 0 0 9px #ffdc91a0;
+}
+#room-loading {
+  position: absolute; top: 48%; width: 100%; text-align: center; color: #f8e7c2;
+}
+.seat-marker {
+  position: absolute; left: .75rem; bottom: .65rem;
+  display: flex; gap: .55rem; align-items: center;
+  color: #faf5ed; background: #131722df; border: 1px solid #f7dca757;
+  padding: .35rem .54rem; font-size: .77rem; border-radius: .45rem;
+  pointer-events: none;
+}
+#seat-team {
+  color: #151521; background: var(--seat-color, #f4d88b);
+  font-weight: 850; padding: .23rem .35rem; border-radius: .25rem;
+}
+#room-bid:not([hidden]) {
+  position: absolute;
+  z-index: 4;
+  right: .75rem;
+  bottom: .65rem;
+}
+#room-bid .bid-at-table {
+  position: static; color: #251a28; background: #f6d683;
+  font: 850 1rem system-ui; box-shadow: 0 4px 15px #10101982, inset 0 -3px #b98741;
+  border: 1px solid #fce5bc; padding: .72rem .95rem; min-height: 2.8rem; border-radius: .5rem;
+  min-width: 8.2rem;
+}
+#room-bid .bid-at-table:hover:not(:disabled) { background: #ffe8a5; }
+.using-3d .stage-controls { margin-top: .45rem; }
+#sold-banner {
+  position: fixed; z-index: 7; left: 50%; bottom: clamp(.6rem, 4vh, 2rem);
+  width: min(31rem, calc(100% - 1.25rem)); transform: translateX(-50%);
+  display: flex; align-items: center; gap: .8rem; pointer-events: none;
+  background: linear-gradient(112deg, var(--winner-color), #1a1927 85%); color: #fff8e7;
+  border: 1px solid var(--winner-light); border-radius: .65rem; padding: .68rem .85rem;
+  box-shadow: 0 7px 40px #0807137d;
+  animation: confirm-sale .26s ease-out both;
+}
+#sold-banner.featured-sale { box-shadow: 0 6px 35px color-mix(in srgb, var(--winner-light), transparent 69%), 0 7px 40px #0807137d; }
+#sold-team {
+  display: grid; place-items: center; min-width: 2.75rem; height: 2.75rem;
+  background: var(--winner-light); color: #161522; border-radius: .4rem; font-weight: 900;
+}
+#sold-banner div { display: grid; flex: 1; gap: .12rem; }
+#sold-banner div span { color: var(--winner-light); font-size: .72rem; font-weight: 900; letter-spacing: .14em; }
+#sold-price { white-space: nowrap; }
+@keyframes confirm-sale { from { opacity: 0; transform: translate(-50%, 11px); } to { opacity: 1; transform: translate(-50%, 0); } }
+.lineup-maker { margin-top: 1rem; }
+.lineup-heading, .lineup-footer { display: flex; align-items: center; justify-content: space-between; gap: .65rem; flex-wrap: wrap; }
+.lineup-heading h2 { margin: .2rem 0; font-size: clamp(1.45rem, 4vw, 2.1rem); }
+#lineup-summary { margin-top: .8rem; font-weight: 700; }
+#lineup-balance { margin-top: .28rem; }
+.lineup-columns { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 1.15rem; margin: 1rem 0; }
+.lineup-columns h3 { margin: 0 0 .55rem; font-size: 1rem; }
+#lineup-slots { padding: 0 0 0 1.65rem; }
+#lineup-bench { list-style: none; padding: 0; margin: 0; }
+#lineup-slots li, #lineup-bench li {
+  padding: .43rem 0; min-height: 2.55rem; border-bottom: 1px solid var(--line);
+}
+#lineup-slots li > div { display: flex; flex: 0 0 auto; gap: .18rem; }
+#lineup-slots li > span { min-width: 0; }
+#lineup-slots small { display: block; color: var(--muted); }
+#lineup-bench li { display: flex; align-items: center; justify-content: space-between; gap: .35rem; font-size: .85rem; }
+#lineup-feedback { font-size: .9rem; }
+@media (min-width: 700px) {
+  #lineup-slots li > div { float: right; }
+  #lineup-slots li::after { content: ""; display: block; clear: both; }
+}
+@media (max-width: 700px) {
+  .lineup-columns { grid-template-columns: 1fr; }
+  #lineup-slots li > div { margin-top: .25rem; flex-wrap: wrap; }
+  .room-viewport { height: 360px; }
+}
+@media (prefers-reduced-motion: reduce) { #sold-banner { animation: none; } }
+
+/* Live arena: keep the controls on the same canvas as the room. */
+#arena-metrics { display: none; }
+body:has(.arena-active) { overflow: hidden; background: #070c18; }
+body:has(.arena-active) > .top { display: none; }
+body:has(.arena-active) > main.shell { width: 100%; max-width: none; padding: 0; }
+.arena-active .room-heading { display: none; }
+.arena-active .auction-floor {
+  --arena-edge: clamp(.55rem, 2vw, 1.5rem);
+  position: fixed; inset: 0; z-index: 4; margin: 0; padding: 0;
+  border: 0; border-radius: 0; background: #060d20;
+  overflow: hidden;
+}
+.arena-active .room-viewport {
+  position: absolute; inset: 0;
+  height: auto; border: 0; border-radius: 0;
+}
+.arena-active .room-viewport::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(#06091691, transparent 26%, transparent 69%, #050917ad 91%);
+}
+.arena-active .stage-scoreboard {
+  position: absolute; z-index: 3; top: var(--arena-edge); left: var(--arena-edge);
+  width: min(44rem, 53%); align-items: center; padding: .7rem .9rem;
+  border: 1px solid #9dbcfa55; border-left: 3px solid #63a9ff; border-radius: .7rem;
+  background: linear-gradient(100deg, #091427ef, #0a1225d2); box-shadow: 0 10px 45px #0306155c;
+}
+.arena-active .stage-scoreboard h2 { font-size: clamp(1.55rem, 3.1vw, 2.85rem); line-height: 1.02; }
+.arena-active #stage-price { font-size: clamp(1.2rem, 2.45vw, 2rem); color: white; }
+.arena-active #arena-metrics { list-style: none; display: flex; gap: .36rem .8rem; flex-wrap: wrap; padding: 0; margin: .45rem 0 0; }
+#arena-metrics li { display: grid; color: #bac9e1; font-size: .68rem; }
+#arena-metrics li strong { color: #fafcff; font-size: .78rem; }
+.arena-active .view-controls {
+  z-index: 3; position: absolute; right: var(--arena-edge); top: var(--arena-edge);
+  justify-content: flex-end; padding: 0; width: max-content; max-width: 44%;
+}
+.arena-active .view-controls button {
+  background: #0a152bdd; color: #e9f2ff; border-color: #8aaae357;
+}
+.arena-active .view-controls button[aria-pressed="true"] { background: #d8eaff; color: #0b1b37; }
+.arena-active .seat-marker { display: none; }
+.arena-active .stage-controls {
+  position: absolute; z-index: 3; bottom: calc(var(--arena-edge) + 108px);
+  left: var(--arena-edge); right: var(--arena-edge);
+  min-height: 0; padding: .5rem .65rem; border: 1px solid #86a8e758; border-radius: .65rem;
+  background: #081428e8; width: min(780px, calc(100% - 2 * var(--arena-edge))); margin-inline: auto;
+}
+.arena-active .stage-controls .buttons { align-items: center; justify-content: flex-end; }
+.arena-active #room-bid:not([hidden]) { position: static; }
+.arena-active #room-bid .bid-at-table { color: #07162d; background: #b6daff; box-shadow: inset 0 -2px #6295ce; border-color: #e4f4ff; }
+#arena-tables {
+  position: absolute; z-index: 3; left: var(--arena-edge); right: var(--arena-edge);
+  bottom: calc(var(--arena-edge) + 65px); display: grid; grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: .22rem; width: min(780px, calc(100% - 2 * var(--arena-edge))); margin-inline: auto;
+}
+#arena-tables button {
+  padding: .36rem .1rem; border-radius: .36rem; font-size: .74rem; font-weight: 850;
+  color: white; background: #0a1428eb; border: 1px solid #546988; border-bottom: 3px solid var(--team-light);
+}
+#arena-tables button.is-leading { background: color-mix(in srgb, var(--team-light) 45%, #081227); }
+.arena-active .stat-dock {
+  z-index: 3; position: absolute; left: var(--arena-edge); right: var(--arena-edge); bottom: var(--arena-edge);
+  margin: 0 auto; width: min(910px, calc(100% - 2 * var(--arena-edge)));
+  display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: .28rem;
+}
+.arena-active .stat-dock button {
+  min-height: 53px; padding: .34rem .55rem; border-radius: .42rem;
+  background: #101c34eb; color: #f5f9ff; border: 1px solid #7394c46b;
+}
+.arena-active .stat-dock button:hover { background: #23436a; }
+.arena-active .stat-dock span { color: #bfd2ee; }
+body:has(.arena-active) #error:not([hidden]) { position: fixed; z-index: 8; top: 7rem; right: 1rem; max-width: min(25rem, 90vw); }
+
+#sold-banner {
+  position: fixed; z-index: 10; inset: 0; width: auto; transform: none;
+  display: grid; place-items: center; padding: .7rem; border: 0; border-radius: 0;
+  background: radial-gradient(ellipse at 48% 30%, var(--winner-color), #080d1c 83%);
+  box-shadow: inset 0 0 9vw #070c17b0; animation: sale-enter .44s ease-out both;
+}
+#sold-banner .sale-content { display: grid; flex: none; gap: .35rem; text-align: center; justify-items: center; max-width: 100%; }
+#sold-banner #sold-team {
+  display: block; height: auto; border-radius: .3rem; padding: .35rem .65rem; color: #111730;
+  background: var(--winner-light); font-size: clamp(.75rem,2vw,1rem); letter-spacing: .09em;
+}
+#sold-player { font-size: clamp(2.25rem, 9vw, 8rem); line-height: .98; text-shadow: 0 .1em .45em #080b17ac; overflow-wrap: anywhere; }
+#sold-price { font-size: clamp(1.2rem, 4vw, 3rem); color: #fff3d7; }
+#sold-banner .gavel-scene { display: block; position: relative; width: clamp(170px, 31vw, 340px); height: clamp(100px, 16vw, 180px); margin-top: .35rem; }
+.hammer { position: absolute; width: 54%; height: 43%; left: 33%; top: 25%; transform-origin: 91% 85%; animation: gavel-strike .48s .07s both; }
+.hammer-head, .hammer-handle, .hammer-base { position: absolute; display: block; background: linear-gradient(#e5b882, #794428 30%, #412317 65%, #9c5e32); }
+.hammer-head { width: 34%; height: 89%; left: 0; top: 0; border-radius: 20%; box-shadow: inset .4rem 0 #55301e, inset -.4rem 0 #55301e, 0 5px 12px #0509159c; }
+.hammer-head::after { content: ""; position: absolute; inset: 8% 10%; border-block: 2px solid #f5cf91; border-radius: 10%; }
+.hammer-handle { width: 76%; height: 22%; left: 24%; top: 38%; border-radius: 18px; transform: rotate(14deg); }
+.hammer-base { width: 54%; height: 16%; left: 10%; bottom: 7%; border-radius: 50% / 33%; box-shadow: 0 10px 21px #030811; }
+#sold-banner .sold-stamp {
+  position: absolute; z-index: 1; right: -13%; bottom: 7%; padding: .05em .19em; border: .07em solid #ff342e;
+  color: #ff342e; background: #0c1221e0; font: 950 clamp(1.7rem, 4.9vw, 4.3rem)/1 system-ui;
+  transform: rotate(-9deg); letter-spacing: .08em; animation: stamp-hit .21s .44s both;
+}
+@keyframes sale-enter { 0% { opacity: 0; } 60% { opacity: .2; } 100% { opacity: 1; } }
+@keyframes gavel-strike { 0%, 18% { transform: translateY(-17%) rotate(49deg); } 75% { transform: translateY(21%) rotate(-13deg); } 100% { transform: translateY(13%) rotate(-7deg); } }
+@keyframes stamp-hit { from { opacity: 0; transform: scale(1.45) rotate(-9deg); } to { opacity: 1; transform: scale(1) rotate(-9deg); } }
+@media (max-width: 660px) {
+  .arena-active .auction-floor { display: flex; flex-direction: column; gap: .32rem; padding: var(--arena-edge); }
+  .arena-active .stage-scoreboard,
+  .arena-active .view-controls,
+  .arena-active .stage-controls,
+  .arena-active #arena-tables,
+  .arena-active .stat-dock { position: relative; inset: auto; width: 100%; flex: none; }
+  .arena-active .stage-scoreboard { padding: .42rem .55rem; }
+  .arena-active .view-controls { max-width: none; justify-content: flex-start; }
+  .arena-active .view-controls button { padding: .27rem .35rem; font-size: .66rem; min-height: 1.9rem; }
+  .arena-active .stage-controls { margin-top: auto; padding: .35rem; gap: .3rem; }
+  .arena-active .stage-controls .buttons { justify-content: flex-start; }
+  .arena-active .stage-controls p { max-width: 10rem; font-size: .69rem; }
+  #arena-tables button { font-size: .6rem; }
+  .arena-active .stat-dock button { min-height: 48px; padding: .25rem; }
+  .arena-active .stat-dock strong { font-size: .64rem; }
+  .arena-active .stat-dock span { font-size: .58rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #sold-banner, .hammer, #sold-banner .sold-stamp { animation: none; }
+}

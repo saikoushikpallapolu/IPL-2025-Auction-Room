@@ -1,6 +1,7 @@
 import csv
 from collections import Counter
 from dataclasses import dataclass
+from itertools import groupby
 from random import Random
 from time import monotonic
 
@@ -212,6 +213,12 @@ class Auction:
                 })
         self.recall_pool = {p["id"]: p for p in self.players if not p["set"].isdigit() or int(p["set"]) > 17}
         self.players = [p for p in self.players if p["id"] not in self.recall_pool]
+        shuffled = []
+        for _, members in groupby(self.players, key=lambda p: (p["set"], p["set_code"])):
+            lots = list(members)
+            self.rng.shuffle(lots)
+            shuffled.extend(lots)
+        self.players = shuffled
         self.offered = set()
         self.sets = {}
         for player in self.players:
@@ -227,6 +234,7 @@ class Auction:
         }
         self.recall_round = 0
         self.results = []
+        self.lineup = None
         self.version = 0
         self.index = -1
         self.advance()
@@ -491,6 +499,7 @@ class Auction:
         ]
         for registration_id in selected:
             self.recall_pool.pop(registration_id)
+        self.rng.shuffle(players)
         self.players.extend(players)
         self.sets[(label, label)] = {
             "number": label, "code": label, "category": label,
@@ -561,6 +570,19 @@ class Auction:
                 self.deadline = monotonic() + CALL_PAUSE
         self.version += 1
 
+    def save_lineup(self, order, keeper):
+        if self.phase != "complete" or self.user not in self.rosters:
+            raise ValueError("Complete the auction before saving your Playing XI.")
+        roster = self.rosters[self.user]
+        if len(order) != 11 or len(set(order)) != 11 or any(index < 0 or index >= len(roster) for index in order):
+            raise ValueError("Select eleven different players from your squad.")
+        if sum(roster[index]["overseas"] for index in order) > 4:
+            raise ValueError("Choose at most four overseas players.")
+        if keeper not in order or roster[keeper]["role"] != "WK":
+            raise ValueError("Select a wicketkeeper from your Playing XI.")
+        self.lineup = {"order": list(order), "keeper": keeper}
+        self.version += 1
+
     def snapshot(self):
         self.tick()
         timed = self.phase in {"bidding", "rtm"}
@@ -570,6 +592,7 @@ class Auction:
             "set": self.sets[(self.player["set"], self.player["set_code"])] if self.player else None,
             "leader": self.leader, "price": self.price,
             "cue": self.cue,
+            "lineup": self.lineup,
             "bid_id": len(self.events) if self.events and self.events[-1]["kind"] == "bid" else None,
             "next_price": self.ask_price() if self.phase == "bidding" else None,
             "can_bid": self.phase == "bidding" and self.leader != self.user and self.eligible(self.user, self.ask_price()),
