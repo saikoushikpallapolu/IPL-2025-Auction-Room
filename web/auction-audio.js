@@ -3,9 +3,9 @@ function bidCallClips(team, amount, variant) {
   const decimals = fraction.replace(/0$/, "");
   const price = [whole, ...(decimals === "0" ? [] : ["point", ...decimals]), "crore"];
   switch (variant % 3) {
-    case 0: return [team, "at", ...price];
-    case 1: return [...price, "with", team];
-    default: return ["now", ...price, "from", team];
+    case 0: return [`${team} at`, ...price];
+    case 1: return [...price, `with ${team}`];
+    default: return ["now", ...price, `from ${team}`];
   }
 }
 
@@ -87,11 +87,11 @@ function createAuctionAudio(node) {
 
   function loadVoice() {
     voiceLoading ||= Promise.all([
-      fetch("/assets/auction-voice.wav?v=varied-crore").then(response => {
+      fetch("/assets/auction-voice.wav?v=connected-calls").then(response => {
         if (!response.ok) throw new Error("Voice audio unavailable");
         return response.arrayBuffer();
       }).then(bytes => context.decodeAudioData(bytes)),
-      fetch("/assets/auction-voice.json?v=varied-crore").then(response => {
+      fetch("/assets/auction-voice.json?v=connected-calls").then(response => {
         if (!response.ok) throw new Error("Voice clip index unavailable");
         return response.json();
       }),
@@ -113,7 +113,8 @@ function createAuctionAudio(node) {
       source.connect(context.destination);
       activeClips.push(source);
       source.start(start, offset, duration);
-      start += duration;
+      const phraseGap = key.includes(" ") || key === "now" || key === "crore";
+      start += duration + (phraseGap ? .075 : .025);
     }
     const last = activeClips.at(-1);
     if (last) last.onended = () => {

@@ -112,23 +112,36 @@ function setLimb(node, from, to) {
   node.quaternion.setFromUnitVectors(UP, limbDirection.normalize());
 }
 
-function makeDelegate(parent, x, y, z, variant, accent, standing = false, paddleEnabled = false) {
+function makeDelegate(parent, x, y, z, variant, accent, standing = false, paddleEnabled = false, auctioneer = false) {
   const actor = group(parent, x, y, z);
   const torso = group(actor);
   const skin = material(PALETTE[variant % PALETTE.length], { roughness: .79 });
   const lips = material(new T.Color(PALETTE[variant % PALETTE.length]).multiplyScalar(.76));
-  const suit = material(SUITS[variant % SUITS.length]);
+  const suit = material(auctioneer ? 0x254450 : SUITS[variant % SUITS.length]);
   const tie = material(accent);
   const baseY = standing ? .28 : 0;
   oval(torso, suit, 0, 1.05 + baseY, 0, .23, .29, .13);
   oval(torso, shirt, 0, 1.17 + baseY, .116, .078, .18, .023);
-  box(torso, tie, 0, 1.11 + baseY, .142, .035, .14, .013).rotation.z = -.04;
+  if (auctioneer) {
+    for (const side of [-1, 1]) {
+      box(torso, tie, side * .05, 1.19 + baseY, .137, .026, .17, .012).rotation.z = -side * .32;
+    }
+  } else {
+    box(torso, tie, 0, 1.11 + baseY, .142, .035, .14, .013).rotation.z = -.04;
+  }
   cylinder(torso, skin, 0, 1.32 + baseY, 0, .062, .10);
   const head = group(torso, 0, 1.46 + baseY, .012);
   oval(head, skin, 0, 0, 0, .101, .137, .097);
   oval(head, skin, 0, -.066, .025, .083, .068, .072);
   oval(head, hair, 0, .070 + (variant % 3) * .006, -.029, .104, .080, .088);
   oval(head, hair, 0, .025, -.074, .093, .102, .049);
+  if (auctioneer) {
+    oval(head, hair, 0, .114, -.092, .082, .077, .069);
+    oval(head, hair, -.033, .083, .036, .074, .052, .068).rotation.z = -.27;
+    for (const side of [-1, 1]) {
+      oval(head, gold, side * .106, -.038, .012, .012, .021, .013);
+    }
+  }
   oval(head, skin, 0, -.014, .094, .024, .033, .033);
   for (const side of [-1, 1]) {
     oval(head, skin, side * .101, -.011, -.004, .016, .030, .019);
@@ -139,7 +152,7 @@ function makeDelegate(parent, x, y, z, variant, accent, standing = false, paddle
     brow.rotation.z = side * .09;
   }
   oval(head, lips, 0, -.066, .092, .036, .007, .008);
-  if (variant % 4 === 1) {
+  if (!auctioneer && variant % 4 === 1) {
     const frame = new T.TorusGeometry(.027, .003, 5, 20);
     for (const side of [-1, 1]) mesh(head, frame, dark, side * .037, .018, .105, 1, .70, 1);
     box(head, dark, 0, .02, .105, .023, .003, .005);
@@ -357,7 +370,7 @@ function makeStage(scene) {
     const display = new T.Mesh(new T.PlaneGeometry(width, width * .410), boardMaterial);
     board.add(display);
   }
-  const auctioneer = makeDelegate(scene, -.82, .48, STAGE_Z + .54, 9, "#ad7949", true);
+  const auctioneer = makeDelegate(scene, -.82, .48, STAGE_Z + .54, 9, "#ad7949", true, false, true);
   box(scene, walnut, -.82, 1.05, STAGE_Z + 1, .78, 1.08, .63).receiveShadow = true;
   box(scene, dark, -.82, 1.61, STAGE_Z + 1, .85, .08, .66);
   box(scene, gold, -.82, 1.33, STAGE_Z + 1.324, .49, .025, .025);
