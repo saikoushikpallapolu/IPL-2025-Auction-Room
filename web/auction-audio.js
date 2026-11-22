@@ -75,11 +75,11 @@ function createAuctionAudio(node) {
 
   function loadVoice() {
     voiceLoading ||= Promise.all([
-      fetch("/assets/auction-voice.wav").then(response => {
+      fetch("/assets/auction-voice.wav?v=decimal-crore").then(response => {
         if (!response.ok) throw new Error("Voice audio unavailable");
         return response.arrayBuffer();
       }).then(bytes => context.decodeAudioData(bytes)),
-      fetch("/assets/auction-voice.json").then(response => response.json()),
+      fetch("/assets/auction-voice.json?v=decimal-crore").then(response => response.json()),
     ]).then(([buffer, clips]) => { voicePack = { buffer, clips }; }).catch(() => {
       voiceLoading = null;
       node("auction-voice-status").textContent = "Voice audio could not load. Toggle Auctioneer to retry.";
@@ -184,11 +184,11 @@ function createAuctionAudio(node) {
         knocks ||= [wood(430, 65), wood(500, 77), wood(560, 81)];
         play(knocks[Math.floor(Math.random() * knocks.length)], ownTable ? .28 : .14, side);
       }
-      const crore = Math.floor(amount / 100);
-      const lakh = amount % 100;
-      const keys = [team];
-      if (crore) keys.push(String(crore), "crore");
-      if (lakh) keys.push(String(lakh), "lakh");
+      const [whole, fraction] = (amount / 100).toFixed(2).split(".");
+      const decimals = fraction.replace(/0$/, "");
+      const keys = [team, whole];
+      if (decimals !== "0") keys.push("point", ...decimals);
+      keys.push("crore");
       call(team, keys);
     },
     sold() {
