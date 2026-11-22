@@ -1,583 +1,575 @@
-player_name,reserve_price,set_name
-Jos Buttler,2.0,1
-Shreyas Iyer,2.0,1
-Rishabh Pant,2.0,1
-Kagiso Rabada,2.0,1
-Arshdeep Singh,2.0,1
-Mitchell Starc,2.0,1
-Yuzvendra Chahal,2.0,2
-Liam Livingstone,2.0,2
-David Miller,1.5,2
-KL Rahul,2.0,2
-Mohammad Shami,2.0,2
-Mohammad Siraj,2.0,2
-Harry Brook,2.0,3
-Devon Conway,2.0,3
-Jake Fraser-Mcgurk,2.0,3
-Aiden Markram,2.0,3
-Devdutt Padikkal,2.0,3
-Rahul Tripathi,0.75,3
-David Warner,2.0,3
-Ravichandaran Ashwin,2.0,4
-Venkatesh Iyer,2.0,4
-Mitchell Marsh,2.0,4
-Glenn Maxwell,2.0,4
-Harshal Patel,2.0,4
-Rachin Ravindra,1.5,4
-Marcus Stoinis,2.0,4
-Jonny Bairstow,2.0,5
-Quinton De Kock,2.0,5
-Rahmanullah Gurbaz,2.0,5
-Ishan Kishan,2.0,5
-Phil Salt,2.0,5
-Jitesh Sharma,1.0,5
-Syed Khaleel Ahmed,2.0,6
-Trent Boult,2.0,6
-Josh Hazlewood,2.0,6
-Avesh Khan,2.0,6
-Prasidh Krishna,2.0,6
-T. Natarajan,2.0,6
-Anrich Nortje,2.0,6
-Noor Ahmad,2.0,7
-Rahul Chahar,1.0,7
-Wanindu Hasaranga,2.0,7
-Waqar Salamkheil,0.75,7
-Maheesh Theekshana,2.0,7
-Adam Zampa,2.0,7
-Yash Dhull,0.3,8
-Abhinav Manohar,0.3,8
-Karun Nair,0.3,8
-Angkrish Raghuvanshi,0.3,8
-Anmolpreet Singh,0.3,8
-Atharva Taide,0.3,8
-Nehal Wadhera,0.3,8
-Harpreet Brar,0.3,9
-Naman Dhir,0.3,9
-Mahipal Lomror,0.5,9
-Sameer Rizvi,0.3,9
-Abdul Samad,0.3,9
-Vijay Shankar,0.3,9
-Ashutosh Sharma,0.3,9
-Nishant Sindhu,0.3,9
-Utkarsh Singh,0.3,9
-Aryan Juyal,0.3,10
-Kumar Kushagra,0.3,10
-Robin Minz,0.3,10
-Anuj Rawat,0.3,10
-Luvnith Sisodia,0.3,10
-First Name Surname,0.3,Set No.
-Vishnu Vinod,0.3,10
-Upendra Singh Yadav,0.3,10
-Vaibhav Arora,0.3,11
-Rasikh Dar,0.3,11
-Akash Madhwal,0.3,11
-Mohit Sharma,0.5,11
-Simarjeet Singh,0.3,11
-Yash Thakur,0.3,11
-Kartik Tyagi,0.4,11
-Vyshak Vijaykumar,0.3,11
-Piyush Chawla,0.5,12
-Shreyas Gopal,0.3,12
-Mayank Markande,0.3,12
-Suyash Sharma,0.3,12
-Karn Sharma,0.5,12
-Kumar Kartikeya Singh,0.3,12
-Manav Suthar,0.3,12
-Mayank Agarawal,1.0,13
-Faf Du Plessis,2.0,13
-Glenn Phillips,2.0,13
-Rovman Powell,1.5,13
-Ajinkya Rahane,1.5,13
-Prithvi Shaw,0.75,13
-Kane Williamson,2.0,13
-Sam Curran,2.0,14
-Marco Jansen,1.25,14
-Daryl Mitchell,2.0,14
-Krunal Pandya,2.0,14
-Nitish Rana,1.5,14
-Washington Sundar,2.0,14
-Shardul Thakur,2.0,14
-K.S Bharat,0.75,15
-Alex Carey,1.0,15
-Donovan Ferreira,0.75,15
-Shai Hope,1.25,15
-Josh Inglis,2.0,15
-Ryan Rickelton,1.0,15
-Deepak Chahar,2.0,16
-Gerald Coetzee,1.25,16
-Akash Deep,1.0,16
-Tushar Deshpande,1.0,16
-Lockie Ferguson,2.0,16
-Bhuvneshwar Kumar,2.0,16
-Mukesh Kumar,2.0,16
-Allah Ghazanfar,0.75,17
-Akeal Hosein,1.5,17
-Keshav Maharaj,0.75,17
-Mujeeb Ur Rahman,2.0,17
-Adil Rashid,2.0,17
-Vijayakanth Viyaskanth,0.75,17
-Ricky Bhui,0.3,18
-Swastik Chhikara,0.3,18
-Aarya Desai,0.3,18
-Shubham Dubey,0.3,18
-Madhav Kaushik,0.3,18
-Pukhraj Mann,0.3,18
-Shaik Rasheed,0.3,18
-Himmat Singh,0.3,18
-Mayank Dagar,0.3,19
-Anshul Kamboj,0.3,19
-Mohd. Arshad Khan,0.3,19
-Darshan Nalkande,0.3,19
-Suyash Prabhudessai,0.3,19
-Anukul Roy,0.3,19
-Swapnil Singh,0.3,19
-Sanvir Singh,0.3,19
-First Name Surname,0.3,Set No.
-Avanish Aravelly,0.3,20
-Vansh Bedi,0.3,20
-Saurav Chauhan,0.3,20
-Harvik Desai,0.3,20
-Tom Kohler-Cadmore,0.5,20
-Kunal Rathore,0.3,20
-B.R Sharath,0.3,20
-Gurnoor Singh Brar,0.3,21
-Mukesh Choudhary,0.3,21
-Sakib Hussain,0.3,21
-Vidwath Kaverappa,0.3,21
-Rajan Kumar,0.3,21
-Sushant Mishra,0.3,21
-Arjun Tendulkar,0.3,21
-Zeeshan Ansari,0.3,22
-Prince Choudhary,0.3,22
-Himanshu Sharma,0.3,22
-M. Siddharth,0.3,22
-Digvesh Singh,0.3,22
-Prashant Solanki,0.3,22
-Jhathavedh Subramanyan,0.3,22
-Finn Allen,2.0,23
-Dewald Brevis,0.75,23
-Ben Duckett,2.0,23
-Manish Pandey,0.75,23
-Rilee Rossouw,2.0,23
-Sherfane Rutherford,1.5,23
-Ashton Turner,1.0,23
-James Vince,2.0,23
-Shahbaz Ahamad,1.0,24
-Moeen Ali,2.0,24
-Tim David,2.0,24
-Deepak Hooda,0.75,24
-Will Jacks,2.0,24
-Azmatullah Omarzai,1.5,24
-R. Sai Kishore,0.75,24
-Romario Shepherd,1.5,24
-Tom Banton,2.0,25
-Sam Billings,1.5,25
-Jordan Cox,1.25,25
-Ben McDermott,0.75,25
-Kusal Mendis,0.75,25
-Kusal Perera,0.75,25
-Josh Philippe,0.75,25
-Tim Seifert,1.25,25
-Nandre Burger,1.25,26
-Spencer Johnson,2.0,26
-Umran Malik,0.75,26
-Mustafizur Rahman,2.0,26
-Ishant Sharma,0.75,26
-Nuwan Thushara,0.75,26
-Naveen Ul Haq,2.0,26
-Jaydev Unadkat,1.0,26
-Umesh Yadav,2.0,26
-Rishad Hossain,0.75,27
-Zahir Khan Pakten,0.75,27
-Nqabayomzi Peter,0.75,27
-Tanveer Sangha,0.75,27
-Tabraiz Shamsi,2.0,27
-Jeffery Vandersay,0.75,27
-Sachin Baby,0.3,28
-Priyam Garg,0.3,28
-Harnoor Pannu,0.3,28
-Smaran Ravichandran,0.3,28
-Shashwat Rawat,0.3,28
-Andre Siddarth,0.3,28
-First Name Surname,0.3,Set No.
-Avneesh Sudha,0.3,28
-Apoorv Wankhade,0.3,28
-Yudhvir Charak,0.3,29
-Rishi Dhawan,0.3,29
-Rajvardhan Hangargekar,0.3,29
-Tanush Kotian,0.3,29
-Arshin Kulkarni,0.3,29
-Shams Mulani,0.3,29
-Shivam Singh,0.3,29
-Lalit Yadav,0.3,29
-Mohammed Azharuddeen,0.3,30
-L.R Chethan,0.3,30
-Aryaman Singh Dhaliwal,0.3,30
-Urvil Patel,0.3,30
-Sanskar Rawat,0.3,30
-Bipin Saurabh,0.3,30
-Tanay Thyagarajann,0.3,30
-Money Grewal,0.3,31
-Ashwani Kumar,0.3,31
-Ishan Porel,0.3,31
-Abhilash Shetty,0.3,31
-Akash Singh,0.3,31
-Gurjapneet Singh,0.3,31
-Basil Thampi,0.3,31
-Murugan Ashwin,0.3,32
-Shreyas Chavan,0.3,32
-Chintal Gandhi,0.3,32
-Raghav Goyal,0.3,32
-Jagadeesha Suchith,0.3,32
-Roshan Waghsare,0.3,32
-Bailapudi Yeswanth,0.3,32
-Sediqullah Atal,0.3,33
-Matthew Breetzke,0.3,33
-Mark Chapman,0.3,33
-Brandon King,0.3,33
-Evin Lewis,0.3,33
-Pathum Nissanka,0.3,33
-Bhanuka Rajapaksa,0.3,33
-Steve Smith,0.3,33
-Gus Atkinson,2.0,34
-Tom Curran,2.0,34
-Krishnappa Gowtham,1.0,34
-Mohammad Nabi,1.5,34
-Gulbadin Naib,1.0,34
-Sikandar Raza,1.25,34
-Mitchell Santner,2.0,34
-Jayant Yadav,0.75,34
-Johnson Charles,0.3,35
-Litton Das,0.3,35
-Andre Fletcher,0.3,35
-Tom Latham,0.3,35
-Ollie Pope,0.3,35
-Kyle Verreynne,0.3,35
-Fazalhaq Farooqi,2.0,36
-Richard Gleeson,0.75,36
-Matt Henry,2.0,36
-Alzarri Joseph,2.0,36
-Kwena Maphaka,0.75,36
-Kuldeep Sen,0.75,36
-Reece Topley,0.75,36
-Lizaad Williams,0.75,36
-Luke Wood,0.75,36
-Sachin Dhas,0.3,37
-Leus Du Plooy,0.3,37
-Ashwin Hebbar,0.3,37
-Rohan Kunnummal,0.3,37
-First Name Surname,0.3,Set No.
-Ayush Pandey,0.3,37
-Akshat Raghuwanshi,0.3,37
-Shoun Roger,0.3,37
-Virat Singh,0.3,37
-Priyansh Arya,0.3,38
-Manoj Bhandage,0.3,38
-Pravin Dubey,0.3,38
-Ajay Mandal,0.3,38
-Prerak Mankad,0.3,38
-Vipraj Nigam,0.3,38
-Vicky Ostwal,0.3,38
-Shivalik Sharma,0.3,38
-Salil Arora,0.3,39
-Dinesh Bana,0.3,39
-Ajitesh Guruswamy,0.3,39
-Narayan Jagadeesan,0.3,39
-Shrijith Krish,0.3,39
-Michael Pepper,0.3,39
-Vishnu Solanki,0.3,39
-K.M Asif,0.3,40
-Akhil Chaudhary,0.3,40
-Himanshu Chauhan,0.3,40
-Arpit Guleria,0.3,40
-Nishanth Saranu,0.3,40
-Kuldip Yadav,0.3,40
-Prithviraj Yarra,0.3,40
-Shubham Agrawal,0.3,41
-Jass Inder Baidwan,0.3,41
-Jasmer Dhankhar,0.3,41
-Pulkit Narang,0.3,41
-Saumy Pandey,0.3,41
-Mohit Rathee,0.3,41
-Himanshu Singh,0.3,41
-Towhid Hridoy,0.3,42
-Mikyle Louis,0.3,42
-Harry Tector,0.3,42
-Rassie Van Der Dussen,0.3,42
-Will Young,0.3,42
-Najibullah Zadran,0.3,42
-Ibrahim Zadran,0.3,42
-Sean Abbott,0.3,43
-Jacob Bethell,0.3,43
-Brydon Carse,0.3,43
-Aaron Hardie,0.3,43
-Sarfaraz Khan,0.3,43
-Kyle Mayers,1.5,43
-Kamindu Mendis,0.3,43
-Matthew Short,0.3,43
-Jason Behrendorff,1.5,44
-Dushmantha Chameera,0.75,44
-Nathan Ellis,1.25,44
-Shamar Joseph,0.75,44
-Josh Little,0.75,44
-Shivam Mavi,0.75,44
-Jhye Richardson,1.5,44
-Navdeep Saini,0.75,44
-Tanmay Agarwal,0.3,45
-Amandeep Khare,0.3,45
-Ayush Mhatre,0.3,45
-Salman Nizar,0.3,45
-Aniket Verma,0.3,45
-Sumeet Verma,0.3,45
-Ma Vohra,0.3,45
-Samarth Vyas,0.3,45
-Raj Angad Bawa,0.3,46
-Emanjot Chahal,0.3,46
-First Name Surname,0.3,Set No.
-Musheer Khan,0.3,46
-Manvanth Kumar L,0.3,46
-Mayank Rawat,0.3,46
-Suryansh Shedge,0.3,46
-Hritik Shokeen,0.3,46
-Sonu Yadav,0.3,46
-S. Rithik Easwaran,0.3,47
-Anmol Malhotra,0.3,47
-Pradosh Paul,0.3,47
-Karteek Sharma,0.3,47
-Akash Singh,0.3,47
-Tejasvi Singh,0.3,47
-Siddharth Yadav,0.3,47
-Saurabh Dubey,0.3,48
-Aaqib Khan,0.3,48
-Kulwant Khejroliya,0.3,48
-Ankit Singh Rajpoot,0.3,48
-Divesh Sharma,0.3,48
-Naman Tiwari,0.3,48
-Prince Yadav,0.3,48
-Kunal Singh Chibb,0.3,49
-Yuvraj Chudasama,0.3,49
-Deepak Devadiga,0.3,49
-Ramesh Prasad,0.3,49
-Shivam Shukla,0.3,49
-Himanshu Singh,0.3,49
-Tejpreet Singh,0.3,49
-Qais Ahmad,0.3,50
-Charith Asalanka,0.3,50
-Michael Bracewell,0.3,50
-Gudakesh Motie,0.3,50
-Daniel Mousley,0.3,50
-Jamie Overton,0.3,50
-Dunith Wellalage,0.3,50
-Ottneil Baartman,0.3,51
-Xavier Bartlett,0.3,51
-Dilshan Madushanka,0.75,51
-Adam Milne,0.3,51
-Lungisani Ngidi,1.0,51
-William O'Rourke,0.3,51
-Chetan Sakariya,0.75,51
-Sandeep Warrier,0.3,51
-Musaif Ajaz,0.3,52
-Agni Chopra,0.3,52
-Abhimanyu Easwaran,0.3,52
-Sudip Gharami,0.3,52
-Shubham Khajuria,0.3,52
-Akhil Rawat,0.3,52
-Prateek Yadav,0.3,52
-Abdul Bazith,0.3,53
-K.C Cariappa,0.3,53
-Yuvraj Chaudhary,0.3,53
-Aman Khan,0.3,53
-Sumit Kumar,0.3,53
-Kamlesh Nagarkoti,0.3,53
-Hardik Raj,0.3,53
-Harsh Tyagi,0.3,53
-M. Ajnas,0.3,54
-Unmukt Chand,0.3,54
-Tejasvi Dahiya,0.3,54
-Sumit Ghadigaonkar,0.3,54
-Baba Indrajith,0.3,54
-Muhammed Khan,0.3,54
-Bhagmender Lather,0.3,54
-Baltej Dhanda,0.3,55
-Ali Khan,0.3,55
-First Name Surname,0.3,Set No.
-Ravi Kumar,0.3,55
-Vineet Panwar,0.3,55
-Vidyadhar Patil,0.3,55
-Aradhya Shukla,0.3,55
-Abhidan Singh,0.3,55
-Cooper Connolly,0.3,56
-Dushan Hemantha,0.3,56
-Jason Holder,0.3,56
-Karim Janat,0.3,56
-Jimmy Neesham,0.3,56
-Daniel Sams,0.3,56
-William Sutherland,0.3,56
-Taskin Ahmed,0.3,57
-Ben Dwarshuis,0.3,57
-Obed McCoy,0.3,57
-Riley Meredith,0.3,57
-Lance Morris,0.3,57
-Olly Stone,0.3,57
-Daniel Worrall,0.3,57
-Pyla Avinash,0.3,58
-Kiran Chormale,0.3,58
-Ashish Dahariya,0.3,58
-Tushar Raheja,0.3,58
-Sarthak Ranjan,0.3,58
-Abhijeet Tomar,0.3,58
-Krish Bhagat,0.3,59
-Sohraab Dhaliwal,0.3,59
-Harsh Dubey,0.3,59
-Ramakrishna Ghosh,0.3,59
-Raj Limbani,0.3,59
-Ninad Rathva,0.3,59
-Vivrant Sharma,0.3,59
-Shiva Singh,0.3,59
-Sayed Irfan Aftab,0.3,60
-Anirudh Chowdhary,0.3,60
-Anshuman Hooda,0.3,60
-Siddharth Kaul,0.3,60
-Prashant Sai Painkra,0.3,60
-Venkata Satyanarayana Penmetsa,0.3,60
-Yeddala Reddy,0.3,60
-Zak Foulkes,0.3,61
-Chris Green,0.3,61
-Shakib Al Hasan,0.3,61
-Mehidy Hasan Miraz,0.3,61
-Wiaan Mulder,0.3,61
-Dwaine Pretorius,0.3,61
-Dasun Shanaka,0.3,61
-Shoriful Islam,0.3,62
-Blessing Muzarabani,0.3,62
-Matthew Potts,0.3,62
-Tanzim Hasan Sakib,0.3,62
-Benjamin Sears,0.3,62
-Tim Southee,0.3,62
-John Turner,0.3,62
-Joshua Brown,0.3,63
-Oliver Davies,0.3,63
-Bevan John Jacobs,0.3,63
-Atharva Kale,0.3,63
-Abhishek Nair,0.3,63
-Vishwanath Pratap Singh,0.3,63
-Nasir Lone,0.3,64
-Brandon McMullen,0.3,64
-S. Midhun,0.3,64
-Abid Mushtaq,0.3,64
-Mahesh Pithiya,0.3,64
-Maramreddy Reddy,0.3,64
-First Name Surname,0.3,Set No.
-Atit Sheth,0.3,64
-Jonty Sidhu,0.3,64
-Mohit Avasthi,0.3,65
-Faridoon Dawoodzai,0.3,65
-Praful Hinge,0.3,65
-Pankaj Jaswal,0.3,65
-Vijay Kumar,0.3,65
-Ashok Sharma,0.3,65
-Mujtaba Yousuf,0.3,65
-Ashton Agar,0.3,66
-Roston Chase,0.3,66
-Junior Dala,0.3,66
-Mahedi Hasan,0.3,66
-Nangeyalia Kharote,0.3,66
-Dan Lawrence,0.3,66
-Nathan Smith,0.3,66
-James Anderson,0.3,67
-Kyle Jamieson,0.3,67
-Chris Jordan,0.3,67
-Hasan Mahmud,0.3,67
-Tymal Mills,0.3,67
-David Payne,0.3,67
-Nahid Rana,0.3,67
-Prayas Ray Barman,0.3,68
-Jafar Jamal,0.3,68
-Ayaz Khan,0.3,68
-Kaushik Maity,0.3,68
-Rituraj Sharma,0.3,68
-Vaibhav Suryavanshi,0.3,68
-Kartik Chadha,0.3,69
-Writtick Chatterjee,0.3,69
-Prerit Dutta,0.3,69
-Rajneesh Gurbani,0.3,69
-Shubhang Hegde,0.3,69
-Saransh Jain,0.3,69
-Ripal Patel,0.3,69
-Akash Vashisht,0.3,69
-Anirudh Kanwar,0.3,70
-Shubham Kapse,0.3,70
-Atif Mushtaq,0.3,70
-Dipesh Parwani,0.3,70
-Manish Reddy,0.3,70
-Chetan Sharma,0.3,70
-Avinash Singh,0.3,70
-Alick Athanaze,0.3,72
-Hilton Cartwright,0.3,72
-Dominic Drakes,0.3,72
-Daryn Dupavillon,0.3,72
-Matthew Forde,0.3,72
-Patrick Kruger,0.3,72
-Lahiru Kumara,0.3,72
-Michael Neser,0.3,72
-Richard Ngarava,0.3,72
-Wayne Parnell,0.3,72
-Keemo Paul,0.3,72
-Odean Smith,0.3,72
-Andrew Tye,0.3,72
-Ajay Ahlawat,0.3,73
-Corbin Bosch,0.3,73
-Mayank Gusain,0.3,73
-Mukhtar Hussain,0.3,73
-Girinath Reddy,0.3,73
-Jalaj Saxena,0.3,73
-Yajas Sharma,0.3,73
-Sanjay Yadav,0.3,73
-Vishal Godara,0.3,74
-First Name Surname,0.3,Set No.
-Eshan Malinga,0.3,74
-Samarth Nagraj,0.3,74
-Abhishek Saini,0.3,74
-Dumindu Sewmina,0.3,74
-Pradyuman Kumar Singh,0.3,74
-Vasu Vats,0.3,74
-Umang Kumar,0.3,75
-Mohamed Ali,0.3,75
-Atharva Ankolekar,0.3,75
-Vaisakh Chandran,0.3,75
-Auqib Dar,0.3,75
-Rohit Rayudu,0.3,75
-Uday Saharan,0.3,75
-Ayush Vartak,0.3,75
-Baba Aparajith,0.3,76
-Sumit Kumar Beniwal,0.3,76
-Nishunk Birla,0.3,76
-Digvijay Deshmukh,0.3,76
-Lakshay Jain,0.3,76
-Duan Jansen,0.3,76
-Kritagya Singh,0.3,76
-P. Vignesh,0.3,76
-Sabhay Chadha,0.3,77
-Ben Howell,0.3,77
-Hemanth Kumar,0.3,77
-Rohan Rana,0.3,77
-Bharat Sharma,0.3,77
-Pratham Singh,0.3,77
-Tripurana Vijay,0.3,77
-Ravi Yadav,0.3,77
-Arjun Azad,0.3,78
-Abhay Choudhary,0.3,78
-Gaurav Gambhir,0.3,78
-Shubham Garhwal,0.3,78
-Tejasvi Jaiswal,0.3,78
-Sairaj Patil,0.3,78
-Madhav Tiwari,0.3,78
-Kamal Tripathi,0.3,78
-Prashant Chauhan,0.3,79
-Yash Dabas,0.3,79
-Dhruv Kaushik,0.3,79
-Khrievitso Kense,0.3,79
-Akash Parkar,0.3,79
-Vignesh Puthur,0.3,79
-Tripuresh Singh,0.3,79
-Vijay Yadav,0.3,79
+player_name,reserve_price,set_name,role,country,previous_team,set_code
+Jos Buttler,2,1,WK,England,RR,M1
+Shreyas Iyer,2,1,BAT,India,KKR,M1
+Rishabh Pant,2,1,BAT,India,DC,M1
+Kagiso Rabada,2,1,BOWL,South Africa,PBKS,M1
+Arshdeep Singh,2,1,BOWL,India,PBKS,M1
+Mitchell Starc,2,1,BOWL,Australia,KKR,M1
+Yuzvendra Chahal,2,2,BOWL,India,RR,M2
+Liam Livingstone,2,2,AR,England,PBKS,M2
+David Miller,1.5,2,BAT,South Africa,GT,M2
+KL Rahul,2,2,WK,India,LSG,M2
+Mohammad Shami,2,2,BOWL,India,GT,M2
+Mohammad Siraj,2,2,BOWL,India,RCB,M2
+Harry Brook,2,3,BAT,England,DC,BA1
+Devon Conway,2,3,BAT,New Zealand,CSK,BA1
+Jake Fraser-Mcgurk,2,3,BAT,Australia,DC,BA1
+Aiden Markram,2,3,BAT,South Africa,SRH,BA1
+Devdutt Padikkal,2,3,BAT,India,LSG,BA1
+Rahul Tripathi,0.75,3,BAT,India,SRH,BA1
+David Warner,2,3,BAT,Australia,DC,BA1
+Ravichandaran Ashwin,2,4,AR,India,RR,AL1
+Venkatesh Iyer,2,4,AR,India,KKR,AL1
+Mitchell Marsh,2,4,AR,Australia,DC,AL1
+Glenn Maxwell,2,4,AR,Australia,RCB,AL1
+Harshal Patel,2,4,AR,India,PBKS,AL1
+Rachin Ravindra,1.5,4,AR,New Zealand,CSK,AL1
+Marcus Stoinis,2,4,AR,Australia,LSG,AL1
+Jonny Bairstow,2,5,WK,England,PBKS,WK1
+Quinton De Kock,2,5,WK,South Africa,LSG,WK1
+Rahmanullah Gurbaz,2,5,WK,Afghanistan,KKR,WK1
+Ishan Kishan,2,5,WK,India,MI,WK1
+Phil Salt,2,5,WK,England,KKR,WK1
+Jitesh Sharma,1,5,WK,India,PBKS,WK1
+Syed Khaleel Ahmed,2,6,BOWL,India,DC,FA1
+Trent Boult,2,6,BOWL,New Zealand,RR,FA1
+Josh Hazlewood,2,6,BOWL,Australia,,FA1
+Avesh Khan,2,6,BOWL,India,RR,FA1
+Prasidh Krishna,2,6,BOWL,India,RR,FA1
+T. Natarajan,2,6,BOWL,India,SRH,FA1
+Anrich Nortje,2,6,BOWL,South Africa,DC,FA1
+Noor Ahmad,2,7,BOWL,Afghanistan,GT,SP1
+Rahul Chahar,1,7,BOWL,India,PBKS,SP1
+Wanindu Hasaranga,2,7,BOWL,Sri Lanka,SRH,SP1
+Waqar Salamkheil,0.75,7,BOWL,Afghanistan,,SP1
+Maheesh Theekshana,2,7,BOWL,Sri Lanka,CSK,SP1
+Adam Zampa,2,7,BOWL,Australia,RR,SP1
+Yash Dhull,0.3,8,BAT,India,DC,UBA1
+Abhinav Manohar,0.3,8,BAT,India,GT,UBA1
+Karun Nair,0.3,8,BAT,India,,UBA1
+Angkrish Raghuvanshi,0.3,8,BAT,India,KKR,UBA1
+Anmolpreet Singh,0.3,8,BAT,India,SRH,UBA1
+Atharva Taide,0.3,8,BAT,India,PBKS,UBA1
+Nehal Wadhera,0.3,8,BAT,India,MI,UBA1
+Harpreet Brar,0.3,9,AR,India,PBKS,UAL1
+Naman Dhir,0.3,9,AR,India,MI,UAL1
+Mahipal Lomror,0.5,9,AR,India,RCB,UAL1
+Sameer Rizvi,0.3,9,AR,India,CSK,UAL1
+Abdul Samad,0.3,9,AR,India,SRH,UAL1
+Vijay Shankar,0.3,9,AR,India,GT,UAL1
+Ashutosh Sharma,0.3,9,AR,India,PBKS,UAL1
+Nishant Sindhu,0.3,9,AR,India,CSK,UAL1
+Utkarsh Singh,0.3,9,AR,India,,UAL1
+Aryan Juyal,0.3,10,WK,India,,UWK1
+Kumar Kushagra,0.3,10,WK,India,GT,UWK1
+Robin Minz,0.3,10,WK,India,GT,UWK1
+Anuj Rawat,0.3,10,WK,India,RCB,UWK1
+Luvnith Sisodia,0.3,10,WK,India,,UWK1
+Vishnu Vinod,0.3,10,WK,India,MI,UWK1
+Upendra Singh Yadav,0.3,10,WK,India,SRH,UWK1
+Vaibhav Arora,0.3,11,BOWL,India,KKR,UFA1
+Rasikh Dar,0.3,11,BOWL,India,DC,UFA1
+Akash Madhwal,0.3,11,BOWL,India,MI,UFA1
+Mohit Sharma,0.5,11,BOWL,India,GT,UFA1
+Simarjeet Singh,0.3,11,BOWL,India,CSK,UFA1
+Yash Thakur,0.3,11,BOWL,India,LSG,UFA1
+Kartik Tyagi,0.4,11,BOWL,India,GT,UFA1
+Vyshak Vijaykumar,0.3,11,BOWL,India,RCB,UFA1
+Piyush Chawla,0.5,12,BOWL,India,MI,USP1
+Shreyas Gopal,0.3,12,BOWL,India,MI,USP1
+Mayank Markande,0.3,12,BOWL,India,SRH,USP1
+Suyash Sharma,0.3,12,BOWL,India,KKR,USP1
+Karn Sharma,0.5,12,BOWL,India,RCB,USP1
+Kumar Kartikeya Singh,0.3,12,BOWL,India,MI,USP1
+Manav Suthar,0.3,12,BOWL,India,GT,USP1
+Mayank Agarawal,1,13,BAT,India,SRH,BA2
+Faf Du Plessis,2,13,BAT,South Africa,RCB,BA2
+Glenn Phillips,2,13,BAT,New Zealand,SRH,BA2
+Rovman Powell,1.5,13,BAT,West Indies,RR,BA2
+Ajinkya Rahane,1.5,13,BAT,India,CSK,BA2
+Prithvi Shaw,0.75,13,BAT,India,DC,BA2
+Kane Williamson,2,13,BAT,New Zealand,GT,BA2
+Sam Curran,2,14,AR,England,PBKS,AL2
+Marco Jansen,1.25,14,AR,South Africa,SRH,AL2
+Daryl Mitchell,2,14,AR,New Zealand,CSK,AL2
+Krunal Pandya,2,14,AR,India,LSG,AL2
+Nitish Rana,1.5,14,AR,India,KKR,AL2
+Washington Sundar,2,14,AR,India,SRH,AL2
+Shardul Thakur,2,14,AR,India,CSK,AL2
+K.S Bharat,0.75,15,WK,India,KKR,WK2
+Alex Carey,1,15,WK,Australia,,WK2
+Donovan Ferreira,0.75,15,WK,South Africa,RR,WK2
+Shai Hope,1.25,15,WK,West Indies,DC,WK2
+Josh Inglis,2,15,WK,Australia,,WK2
+Ryan Rickelton,1,15,WK,South Africa,,WK2
+Deepak Chahar,2,16,BOWL,India,CSK,FA2
+Gerald Coetzee,1.25,16,BOWL,South Africa,MI,FA2
+Akash Deep,1,16,BOWL,India,RCB,FA2
+Tushar Deshpande,1,16,BOWL,India,CSK,FA2
+Lockie Ferguson,2,16,BOWL,New Zealand,RCB,FA2
+Bhuvneshwar Kumar,2,16,BOWL,India,SRH,FA2
+Mukesh Kumar,2,16,BOWL,India,DC,FA2
+Allah Ghazanfar,0.75,17,BOWL,Afghanistan,KKR,SP2
+Akeal Hosein,1.5,17,BOWL,West Indies,,SP2
+Keshav Maharaj,0.75,17,BOWL,South Africa,RR,SP2
+Mujeeb Ur Rahman,2,17,BOWL,Afghanistan,,SP2
+Adil Rashid,2,17,BOWL,England,,SP2
+Vijayakanth Viyaskanth,0.75,17,BOWL,Sri Lanka,SRH,SP2
+Ricky Bhui,0.3,18,BAT,India,DC,UBA2
+Swastik Chhikara,0.3,18,BAT,India,DC,UBA2
+Aarya Desai,0.3,18,BAT,India,,UBA2
+Shubham Dubey,0.3,18,BAT,India,RR,UBA2
+Madhav Kaushik,0.3,18,BAT,India,,UBA2
+Pukhraj Mann,0.3,18,BAT,India,,UBA2
+Shaik Rasheed,0.3,18,BAT,India,CSK,UBA2
+Himmat Singh,0.3,18,BAT,India,,UBA2
+Mayank Dagar,0.3,19,AR,India,RCB,UAL2
+Anshul Kamboj,0.3,19,AR,India,MI,UAL2
+Mohd. Arshad Khan,0.3,19,AR,India,LSG,UAL2
+Darshan Nalkande,0.3,19,AR,India,GT,UAL2
+Suyash Prabhudessai,0.3,19,AR,India,RCB,UAL2
+Anukul Roy,0.3,19,AR,India,KKR,UAL2
+Swapnil Singh,0.3,19,AR,India,PBKS,UAL2
+Sanvir Singh,0.3,19,AR,India,SRH,UAL2
+Avanish Aravelly,0.3,20,WK,India,CSK,UWK2
+Vansh Bedi,0.3,20,WK,India,,UWK2
+Saurav Chauhan,0.3,20,WK,India,RCB,UWK2
+Harvik Desai,0.3,20,WK,India,MI,UWK2
+Tom Kohler-Cadmore,0.5,20,WK,England,RR,UWK2
+Kunal Rathore,0.3,20,WK,India,RR,UWK2
+B.R Sharath,0.3,20,WK,India,GT,UWK2
+Gurnoor Singh Brar,0.3,21,BOWL,India,GT,UFA2
+Mukesh Choudhary,0.3,21,BOWL,India,CSK,UFA2
+Sakib Hussain,0.3,21,BOWL,India,KKR,UFA2
+Vidwath Kaverappa,0.3,21,BOWL,India,PBKS,UFA2
+Rajan Kumar,0.3,21,BOWL,India,RCB,UFA2
+Sushant Mishra,0.3,21,BOWL,India,GT,UFA2
+Arjun Tendulkar,0.3,21,BOWL,India,MI,UFA2
+Zeeshan Ansari,0.3,22,BOWL,India,,USP2
+Prince Choudhary,0.3,22,BOWL,India,PBKS,USP2
+Himanshu Sharma,0.3,22,BOWL,India,RCB,USP2
+M. Siddharth,0.3,22,BOWL,India,LSG,USP2
+Digvesh Singh,0.3,22,BOWL,India,,USP2
+Prashant Solanki,0.3,22,BOWL,India,CSK,USP2
+Jhathavedh Subramanyan,0.3,22,BOWL,India,SRH,USP2
+Finn Allen,2,23,BAT,New Zealand,,BA3
+Dewald Brevis,0.75,23,BAT,South Africa,MI,BA3
+Ben Duckett,2,23,BAT,England,,BA3
+Manish Pandey,0.75,23,BAT,India,KKR,BA3
+Rilee Rossouw,2,23,BAT,South Africa,PBKS,BA3
+Sherfane Rutherford,1.5,23,BAT,West Indies,KKR,BA3
+Ashton Turner,1,23,BAT,Australia,LSG,BA3
+James Vince,2,23,BAT,England,,BA3
+Shahbaz Ahamad,1,24,AR,India,SRH,AL3
+Moeen Ali,2,24,AR,England,CSK,AL3
+Tim David,2,24,AR,Australia,MI,AL3
+Deepak Hooda,0.75,24,AR,India,LSG,AL3
+Will Jacks,2,24,AR,England,RCB,AL3
+Azmatullah Omarzai,1.5,24,AR,Afghanistan,GT,AL3
+R. Sai Kishore,0.75,24,AR,India,GT,AL3
+Romario Shepherd,1.5,24,AR,West Indies,MI,AL3
+Tom Banton,2,25,WK,England,,WK3
+Sam Billings,1.5,25,WK,England,,WK3
+Jordan Cox,1.25,25,WK,England,,WK3
+Ben McDermott,0.75,25,WK,Australia,,WK3
+Kusal Mendis,0.75,25,WK,Sri Lanka,,WK3
+Kusal Perera,0.75,25,WK,Sri Lanka,,WK3
+Josh Philippe,0.75,25,WK,Australia,,WK3
+Tim Seifert,1.25,25,WK,New Zealand,,WK3
+Nandre Burger,1.25,26,BOWL,South Africa,RR,FA3
+Spencer Johnson,2,26,BOWL,Australia,GT,FA3
+Umran Malik,0.75,26,BOWL,India,SRH,FA3
+Mustafizur Rahman,2,26,BOWL,Bangladesh,CSK,FA3
+Ishant Sharma,0.75,26,BOWL,India,DC,FA3
+Nuwan Thushara,0.75,26,BOWL,Sri Lanka,MI,FA3
+Naveen Ul Haq,2,26,BOWL,Afghanistan,LSG,FA3
+Jaydev Unadkat,1,26,BOWL,India,SRH,FA3
+Umesh Yadav,2,26,BOWL,India,GT,FA3
+Rishad Hossain,0.75,27,BOWL,Bangladesh,,SP3
+Zahir Khan Pakten,0.75,27,BOWL,Afghanistan,,SP3
+Nqabayomzi Peter,0.75,27,BOWL,South Africa,,SP3
+Tanveer Sangha,0.75,27,BOWL,Australia,,SP3
+Tabraiz Shamsi,2,27,BOWL,South Africa,,SP3
+Jeffery Vandersay,0.75,27,BOWL,Sri Lanka,,SP3
+Sachin Baby,0.3,28,BAT,India,,UBA3
+Priyam Garg,0.3,28,BAT,India,,UBA3
+Harnoor Pannu,0.3,28,BAT,India,,UBA3
+Smaran Ravichandran,0.3,28,BAT,India,,UBA3
+Shashwat Rawat,0.3,28,BAT,India,,UBA3
+Andre Siddarth,0.3,28,BAT,India,,UBA3
+Avneesh Sudha,0.3,28,BAT,India,,UBA3
+Apoorv Wankhade,0.3,28,BAT,India,,UBA3
+Yudhvir Charak,0.3,29,AR,India,LSG,UAL3
+Rishi Dhawan,0.3,29,AR,India,PBKS,UAL3
+Rajvardhan Hangargekar,0.3,29,AR,India,CSK,UAL3
+Tanush Kotian,0.3,29,AR,India,RR,UAL3
+Arshin Kulkarni,0.3,29,AR,India,LSG,UAL3
+Shams Mulani,0.3,29,AR,India,MI,UAL3
+Shivam Singh,0.3,29,AR,India,PBKS,UAL3
+Lalit Yadav,0.3,29,AR,India,DC,UAL3
+Mohammed Azharuddeen,0.3,30,WK,India,,UWK3
+L.R Chethan,0.3,30,WK,India,,UWK3
+Aryaman Singh Dhaliwal,0.3,30,WK,India,,UWK3
+Urvil Patel,0.3,30,WK,India,,UWK3
+Sanskar Rawat,0.3,30,WK,India,,UWK3
+Bipin Saurabh,0.3,30,WK,India,,UWK3
+Tanay Thyagarajann,0.3,30,WK,India,,UWK3
+Money Grewal,0.3,31,BOWL,India,,UFA3
+Ashwani Kumar,0.3,31,BOWL,India,,UFA3
+Ishan Porel,0.3,31,BOWL,India,,UFA3
+Abhilash Shetty,0.3,31,BOWL,India,,UFA3
+Akash Singh,0.3,31,BOWL,India,,UFA3
+Gurjapneet Singh,0.3,31,BOWL,India,,UFA3
+Basil Thampi,0.3,31,BOWL,India,,UFA3
+Murugan Ashwin,0.3,32,BOWL,India,,USP3
+Shreyas Chavan,0.3,32,BOWL,India,,USP3
+Chintal Gandhi,0.3,32,BOWL,India,,USP3
+Raghav Goyal,0.3,32,BOWL,India,,USP3
+Jagadeesha Suchith,0.3,32,BOWL,India,,USP3
+Roshan Waghsare,0.3,32,BOWL,India,,USP3
+Bailapudi Yeswanth,0.3,32,BOWL,India,,USP3
+Sediqullah Atal,0.75,33,BAT,Afghanistan,,BA4
+Matthew Breetzke,0.75,33,BAT,South Africa,,BA4
+Mark Chapman,1.5,33,BAT,New Zealand,,BA4
+Brandon King,0.75,33,BAT,West Indies,,BA4
+Evin Lewis,2,33,BAT,West Indies,,BA4
+Pathum Nissanka,0.75,33,BAT,Sri Lanka,,BA4
+Bhanuka Rajapaksa,0.75,33,BAT,Sri Lanka,,BA4
+Steve Smith,2,33,BAT,Australia,,BA4
+Gus Atkinson,2,34,AR,England,KKR,AL4
+Tom Curran,2,34,AR,England,RCB,AL4
+Krishnappa Gowtham,1,34,AR,India,LSG,AL4
+Mohammad Nabi,1.5,34,AR,Afghanistan,MI,AL4
+Gulbadin Naib,1,34,AR,Afghanistan,DC,AL4
+Sikandar Raza,1.25,34,AR,Zimbabwe,PBKS,AL4
+Mitchell Santner,2,34,AR,New Zealand,CSK,AL4
+Jayant Yadav,0.75,34,AR,India,GT,AL4
+Johnson Charles,0.75,35,WK,West Indies,,WK4
+Litton Das,0.75,35,WK,Bangladesh,,WK4
+Andre Fletcher,0.75,35,WK,West Indies,,WK4
+Tom Latham,1.5,35,WK,New Zealand,,WK4
+Ollie Pope,0.75,35,WK,England,,WK4
+Kyle Verreynne,0.75,35,WK,South Africa,,WK4
+Fazalhaq Farooqi,2,36,BOWL,Afghanistan,SRH,FA4
+Richard Gleeson,0.75,36,BOWL,England,CSK,FA4
+Matt Henry,2,36,BOWL,New Zealand,LSG,FA4
+Alzarri Joseph,2,36,BOWL,West Indies,RCB,FA4
+Kwena Maphaka,0.75,36,BOWL,South Africa,MI,FA4
+Kuldeep Sen,0.75,36,BOWL,India,RR,FA4
+Reece Topley,0.75,36,BOWL,England,RCB,FA4
+Lizaad Williams,0.75,36,BOWL,South Africa,DC,FA4
+Luke Wood,0.75,36,BOWL,England,MI,FA4
+Sachin Dhas,0.3,37,BAT,India,,UBA4
+Leus Du Plooy,0.5,37,BAT,England,,UBA4
+Ashwin Hebbar,0.3,37,BAT,India,,UBA4
+Rohan Kunnummal,0.3,37,BAT,India,,UBA4
+Ayush Pandey,0.3,37,BAT,India,,UBA4
+Akshat Raghuwanshi,0.3,37,BAT,India,,UBA4
+Shoun Roger,0.4,37,BAT,India,,UBA4
+Virat Singh,0.3,37,BAT,India,,UBA4
+Priyansh Arya,0.3,38,AR,India,,UAL4
+Manoj Bhandage,0.3,38,AR,India,RCB,UAL4
+Pravin Dubey,0.3,38,AR,India,DC,UAL4
+Ajay Mandal,0.3,38,AR,India,CSK,UAL4
+Prerak Mankad,0.3,38,AR,India,LSG,UAL4
+Vipraj Nigam,0.3,38,AR,India,,UAL4
+Vicky Ostwal,0.3,38,AR,India,DC,UAL4
+Shivalik Sharma,0.3,38,AR,India,MI,UAL4
+Salil Arora,0.3,39,WK,India,,UWK4
+Dinesh Bana,0.3,39,WK,India,,UWK4
+Ajitesh Guruswamy,0.3,39,WK,India,,UWK4
+Narayan Jagadeesan,0.3,39,WK,India,,UWK4
+Shrijith Krishnan,0.3,39,WK,India,,UWK4
+Michael Pepper,0.5,39,WK,England,,UWK4
+Vishnu Solanki,0.3,39,WK,India,,UWK4
+K.M Asif,0.3,40,BOWL,India,,UFA4
+Akhil Chaudhary,0.3,40,BOWL,India,,UFA4
+Himanshu Chauhan,0.3,40,BOWL,India,,UFA4
+Arpit Guleria,0.3,40,BOWL,India,,UFA4
+Nishanth Saranu,0.3,40,BOWL,India,,UFA4
+Kuldip Yadav,0.3,40,BOWL,India,,UFA4
+Prithviraj Yarra,0.3,40,BOWL,India,,UFA4
+Shubham Agrawal,0.3,41,BOWL,India,,USP4
+Jass Inder Baidwan,0.3,41,BOWL,India,,USP4
+Jasmer Dhankhar,0.3,41,BOWL,India,,USP4
+Pulkit Narang,0.3,41,BOWL,India,,USP4
+Saumy Pandey,0.3,41,BOWL,India,,USP4
+Mohit Rathee,0.3,41,BOWL,India,,USP4
+Himanshu Singh,0.3,41,BOWL,India,,USP4
+Towhid Hridoy,0.75,42,BAT,Bangladesh,,BA5
+Mikyle Louis,0.75,42,BAT,West Indies,,BA5
+Harry Tector,0.75,42,BAT,Ireland,,BA5
+Rassie Van Der Dussen,2,42,BAT,South Africa,,BA5
+Will Young,1.25,42,BAT,New Zealand,,BA5
+Najibullah Zadran,0.75,42,BAT,Afghanistan,,BA5
+Ibrahim Zadran,0.75,42,BAT,Afghanistan,,BA5
+Sean Abbott,2,43,AR,Australia,,AL5
+Jacob Bethell England None,1.25,43,AR,,,AL5
+Brydon Carse,1,43,AR,England,,AL5
+Aaron Hardie,1.25,43,AR,Australia,,AL5
+Sarfaraz Khan,0.75,43,AR,India,,AL5
+Kyle Mayers,1.5,43,AR,West Indies,LSG,AL5
+Kamindu Mendis,0.75,43,AR,Sri Lanka,,AL5
+Matthew Short,0.75,43,AR,Australia,,AL5
+Jason Behrendorff,1.5,44,BOWL,Australia,MI,FA5
+Dushmantha Chameera,0.75,44,BOWL,Sri Lanka,LSG,FA5
+Nathan Ellis,1.25,44,BOWL,Australia,PBKS,FA5
+Shamar Joseph,0.75,44,BOWL,West Indies,LSG,FA5
+Josh Little,0.75,44,BOWL,Ireland,GT,FA5
+Shivam Mavi,0.75,44,BOWL,India,GT,FA5
+Jhye Richardson,1.5,44,BOWL,Australia,DC,FA5
+Navdeep Saini,0.75,44,BOWL,India,RR,FA5
+Tanmay Agarwal,0.3,45,BAT,India,,UBA5
+Amandeep Khare,0.3,45,BAT,India,,UBA5
+Ayush Mhatre,0.3,45,BAT,India,,UBA5
+Salman Nizar,0.3,45,BAT,India,,UBA5
+Aniket Verma,0.3,45,BAT,India,,UBA5
+Sumeet Verma,0.3,45,BAT,India,,UBA5
+Manan Vohra,0.3,45,BAT,India,,UBA5
+Samarth Vyas,0.3,45,BAT,India,,UBA5
+Raj Angad Bawa,0.3,46,AR,India,,UAL5
+Emanjot Chahal,0.3,46,AR,India,,UAL5
+Musheer Khan,0.3,46,AR,India,,UAL5
+Manvanth Kumar L,0.3,46,AR,India,,UAL5
+Mayank Rawat,0.3,46,AR,India,,UAL5
+Suryansh Shedge,0.3,46,AR,India,,UAL5
+Hritik Shokeen,0.3,46,AR,India,,UAL5
+Sonu Yadav,0.3,46,AR,India,,UAL5
+S. Rithik Easwaran,0.3,47,WK,India,,UWK5
+Anmol Malhotra,0.3,47,WK,India,,UWK5
+Pradosh Paul,0.3,47,WK,India,,UWK5
+Karteek Sharma,0.3,47,WK,India,,UWK5
+Akash Singh,0.3,47,WK,India,,UWK5
+Tejasvi Singh,0.3,47,WK,India,,UWK5
+Siddharth Yadav,0.3,47,WK,India,,UWK5
+Saurabh Dubey,0.3,48,BOWL,India,,UFA5
+Aaqib Khan,0.3,48,BOWL,India,,UFA5
+Kulwant Khejroliya,0.3,48,BOWL,India,,UFA5
+Ankit Singh Rajpoot,0.3,48,BOWL,India,,UFA5
+Divesh Sharma,0.3,48,BOWL,India,,UFA5
+Naman Tiwari,0.3,48,BOWL,India,,UFA5
+Prince Yadav,0.3,48,BOWL,India,,UFA5
+Kunal Singh Chibb,0.3,49,BOWL,India,,USP5
+Yuvraj Chudasama,0.3,49,BOWL,India,,USP5
+Deepak Devadiga,0.3,49,BOWL,India,,USP5
+Ramesh Prasad,0.3,49,BOWL,India,,USP5
+Shivam Shukla,0.3,49,BOWL,India,,USP5
+Himanshu Singh,0.3,49,BOWL,India,,USP5
+Tejpreet Singh,0.3,49,BOWL,India,,USP5
+Qais Ahmad,0.75,50,AR,Afghanistan,,AL6
+Charith Asalanka,0.75,50,AR,Sri Lanka,,AL6
+Michael Bracewell,1.5,50,AR,New Zealand,,AL6
+Gudakesh Motie,0.75,50,AR,West Indies,,AL6
+Daniel Mousley,0.75,50,AR,England,,AL6
+Jamie Overton,1.5,50,AR,England,,AL6
+Dunith Wellalage,0.75,50,AR,Sri Lanka,,AL6
+Ottneil Baartman,0.75,51,BOWL,South Africa,,FA6
+Xavier Bartlett,0.75,51,BOWL,Australia,,FA6
+Dilshan Madushanka,0.75,51,BOWL,Sri Lanka,MI,FA6
+Adam Milne,2,51,BOWL,New Zealand,,FA6
+Lungisani Ngidi,1,51,BOWL,South Africa,DC,FA6
+William O'Rourke,1.5,51,BOWL,New Zealand,,FA6
+Chetan Sakariya,0.75,51,BOWL,India,KKR,FA6
+Sandeep Warrier,0.75,51,BOWL,India,,FA6
+Musaif Ajaz,0.3,52,BAT,India,,UBA6
+Agni Chopra,0.3,52,BAT,India,,UBA6
+Abhimanyu Easwaran,0.3,52,BAT,India,,UBA6
+Sudip Gharami,0.3,52,BAT,India,,UBA6
+Shubham Khajuria,0.3,52,BAT,India,,UBA6
+Akhil Rawat,0.3,52,BAT,India,,UBA6
+Prateek Yadav,0.3,52,BAT,India,,UBA6
+Abdul Bazith,0.3,53,AR,India,,UAL6
+K.C Cariappa,0.3,53,AR,India,,UAL6
+Yuvraj Chaudhary,0.3,53,AR,India,,UAL6
+Aman Khan,0.3,53,AR,India,,UAL6
+Sumit Kumar,0.3,53,AR,India,,UAL6
+Kamlesh Nagarkoti,0.3,53,AR,India,,UAL6
+Hardik Raj,0.3,53,AR,India,,UAL6
+Harsh Tyagi,0.3,53,AR,India,,UAL6
+M. Ajnas,0.3,54,WK,India,,UWK6
+Unmukt Chand,0.3,54,WK,USA,,UWK6
+Tejasvi Dahiya,0.3,54,WK,India,,UWK6
+Sumit Ghadigaonkar,0.3,54,WK,India,,UWK6
+Baba Indrajith,0.3,54,WK,India,,UWK6
+Muhammed Khan,0.3,54,WK,India,,UWK6
+Bhagmender Lather,0.3,54,WK,India,,UWK6
+Baltej Dhanda,0.3,55,BOWL,India,,UFA6
+Ali Khan,0.3,55,BOWL,USA,,UFA6
+Ravi Kumar,0.3,55,BOWL,India,,UFA6
+Vineet Panwar,0.3,55,BOWL,India,,UFA6
+Vidyadhar Patil,0.3,55,BOWL,India,,UFA6
+Aradhya Shukla,0.3,55,BOWL,India,,UFA6
+Abhinandan Singh,0.3,55,BOWL,India,,UFA6
+Cooper Connolly,0.75,56,AR,Australia,,AL7
+Dushan Hemantha,0.75,56,AR,Sri Lanka,,AL7
+Jason Holder,2,56,AR,West Indies,,AL7
+Karim Janat,0.75,56,AR,Afghanistan,,AL7
+Jimmy Neesham,1.5,56,AR,New Zealand,,AL7
+Daniel Sams,1.5,56,AR,Australia,,AL7
+William Sutherland,0.75,56,AR,Australia,,AL7
+Taskin Ahmed,1,57,BOWL,Bangladesh,,FA7
+Ben Dwarshuis,0.75,57,BOWL,Australia,,FA7
+Obed McCoy,1.25,57,BOWL,West Indies,,FA7
+Riley Meredith,1.5,57,BOWL,Australia,,FA7
+Lance Morris,1.25,57,BOWL,Australia,,FA7
+Olly Stone,0.75,57,BOWL,England,,FA7
+Daniel Worrall,1.5,57,BOWL,England,,FA7
+Pyla Avinash,0.3,58,BAT,India,,UBA7
+Kiran Chormale,0.3,58,BAT,India,,UBA7
+Ashish Dahariya,0.3,58,BAT,India,,UBA7
+Tushar Raheja,0.3,58,BAT,India,,UBA7
+Sarthak Ranjan,0.3,58,BAT,India,,UBA7
+Abhijeet Tomar,0.3,58,BAT,India,,UBA7
+Krish Bhagat,0.3,59,AR,India,,UAL7
+Sohraab Dhaliwal,0.3,59,AR,India,,UAL7
+Harsh Dubey,0.3,59,AR,India,,UAL7
+Ramakrishna Ghosh,0.3,59,AR,India,,UAL7
+Raj Limbani,0.3,59,AR,India,,UAL7
+Ninad Rathva,0.3,59,AR,India,,UAL7
+Vivrant Sharma,0.3,59,AR,India,,UAL7
+Shiva Singh,0.3,59,AR,India,,UAL7
+Sayed Irfan Aftab,0.3,60,BOWL,India,,UFA7
+Anirudh Chowdhary,0.3,60,BOWL,India,,UFA7
+Anshuman Hooda,0.3,60,BOWL,India,,UFA7
+Siddharth Kaul,0.4,60,BOWL,India,,UFA7
+Prashant Sai Painkra,0.3,60,BOWL,India,,UFA7
+Venkata Satyanarayana Penmetsa,0.3,60,BOWL,India,,UFA7
+Yeddala Reddy,0.3,60,BOWL,India,,UFA7
+Zak Foulkes,0.75,61,AR,New Zealand,,AL8
+Chris Green,1,61,AR,Australia,,AL8
+Shakib Al Hasan,1,61,AR,Bangladesh,,AL8
+Mehidy Hasan Miraz,1,61,AR,Bangladesh,,AL8
+Wiaan Mulder,0.75,61,AR,South Africa,,AL8
+Dwaine Pretorius,0.75,61,AR,South Africa,,AL8
+Dasun Shanaka,0.75,61,AR,Sri Lanka,,AL8
+Shoriful Islam,0.75,62,BOWL,Bangladesh,,FA8
+Blessing Muzarabani,0.75,62,BOWL,Zimbabwe,,FA8
+Matthew Potts,1.5,62,BOWL,England,,FA8
+Tanzim Hasan Sakib,0.75,62,BOWL,Bangladesh,,FA8
+Benjamin Sears,1,62,BOWL,New Zealand,,FA8
+Tim Southee,1.5,62,BOWL,New Zealand,,FA8
+John Turner,1.5,62,BOWL,England,,FA8
+Joshua Brown,0.3,63,BAT,Australia,,UBA8
+Oliver Davies,0.3,63,BAT,Australia,,UBA8
+Bevan John Jacobs,0.3,63,BAT,New Zealand,,UBA8
+Atharva Kale,0.3,63,BAT,India,,UBA8
+Abhishek Nair,0.3,63,BAT,India,,UBA8
+Vishwanath Pratap Singh,0.3,63,BAT,India,,UBA8
+Nasir Lone,0.3,64,AR,India,,UAL8
+Brandon McMullen,0.3,64,AR,Scotland,,UAL8
+S. Midhun,0.3,64,AR,India,,UAL8
+Abid Mushtaq,0.3,64,AR,India,,UAL8
+Mahesh Pithiya,0.3,64,AR,India,,UAL8
+Maramreddy Reddy,0.3,64,AR,India,,UAL8
+Atit Sheth,0.3,64,AR,India,,UAL8
+Jonty Sidhu,0.3,64,AR,India,,UAL8
+Mohit Avasthi,0.3,65,BOWL,India,,UFA8
+Faridoon Dawoodzai,0.3,65,BOWL,Afghanistan,,UFA8
+Praful Hinge,0.3,65,BOWL,India,,UFA8
+Pankaj Jaswal,0.3,65,BOWL,India,,UFA8
+Vijay Kumar,0.3,65,BOWL,India,,UFA8
+Ashok Sharma,0.3,65,BOWL,India,,UFA8
+Mujtaba Yousuf,0.3,65,BOWL,India,,UFA8
+Ashton Agar,1.25,66,AR,Australia,,AL9
+Roston Chase,0.75,66,AR,West Indies,,AL9
+Junior Dala,0.75,66,AR,South Africa,,AL9
+Mahedi Hasan,0.75,66,AR,Bangladesh,,AL9
+Nangeyalia Kharote,0.75,66,AR,Afghanistan,,AL9
+Dan Lawrence,1,66,AR,England,,AL9
+Nathan Smith,1,66,AR,New Zealand,,AL9
+James Anderson,1.25,67,BOWL,England,,FA9
+Kyle Jamieson,1.5,67,BOWL,New Zealand,,FA9
+Chris Jordan,2,67,BOWL,England,,FA9
+Hasan Mahmud,0.75,67,BOWL,Bangladesh,,FA9
+Tymal Mills,2,67,BOWL,England,,FA9
+David Payne,1,67,BOWL,England,,FA9
+Nahid Rana,0.75,67,BOWL,Bangladesh,,FA9
+Prayas Ray Barman,0.3,68,BAT,India,,UBA9
+Jafar Jamal,0.3,68,BAT,India,,UBA9
+Ayaz Khan,0.3,68,BAT,India,,UBA9
+Kaushik Maity,0.3,68,BAT,India,,UBA9
+Rituraj Sharma,0.3,68,BAT,India,,UBA9
+Vaibhav Suryavanshi,0.3,68,BAT,India,,UBA9
+Kartik Chadha,0.3,69,AR,India,,UAL9
+Writtick Chatterjee,0.3,69,AR,India,,UAL9
+Prerit Dutta,0.3,69,AR,India,,UAL9
+Rajneesh Gurbani,0.3,69,AR,India,,UAL9
+Shubhang Hegde,0.3,69,AR,India,,UAL9
+Saransh Jain,0.3,69,AR,India,,UAL9
+Ripal Patel,0.3,69,AR,India,,UAL9
+Akash Vashisht,0.3,69,AR,India,,UAL9
+Anirudh Kanwar,0.3,70,BOWL,India,,UFA9
+Shubham Kapse,0.3,70,BOWL,India,,UFA9
+Atif Mushtaq,0.3,70,BOWL,India,,UFA9
+Dipesh Parwani,0.3,70,BOWL,India,,UFA9
+Manish Reddy,0.3,70,BOWL,India,,UFA9
+Chetan Sharma,0.3,70,BOWL,India,,UFA9
+Avinash Singh,0.3,70,BOWL,India,,UFA9
+Alick Athanaze,0.75,72,AR,West Indies,,AL10
+Hilton Cartwright,0.75,72,AR,Australia,,AL10
+Dominic Drakes,1.25,72,AR,West Indies,,AL10
+Daryn Dupavillon,0.75,72,BOWL,South Africa,,FA10
+Matthew Forde,1.25,72,AR,West Indies,,AL10
+Patrick Kruger,0.75,72,AR,South Africa,,AL10
+Lahiru Kumara,0.75,72,BOWL,Sri Lanka,,FA10
+Michael Neser,0.75,72,AR,Australia,,AL10
+Richard Ngarava,0.75,72,BOWL,Zimbabwe,,FA10
+Wayne Parnell,1,72,BOWL,South Africa,,FA10
+Keemo Paul,1.25,72,AR,West Indies,,AL10
+Odean Smith,0.75,72,AR,West Indies,,AL10
+Andrew Tye,0.75,72,BOWL,Australia,,FA10
+Ajay Ahlawat,0.4,73,AR,India,,UAL10
+Corbin Bosch,0.3,73,AR,South Africa,,UAL10
+Mayank Gusain,0.3,73,AR,India,,UAL10
+Mukhtar Hussain,0.3,73,AR,India,,UAL10
+Girinath Reddy,0.3,73,AR,India,,UAL10
+Jalaj Saxena,0.4,73,AR,India,,UAL10
+Yajas Sharma,0.3,73,AR,India,,UAL10
+Sanjay Yadav,0.3,73,AR,India,,UAL10
+Vishal Godara,0.3,74,BOWL,India,,UFA10
+Eshan Malinga,0.3,74,BOWL,Sri Lanka,,UFA10
+Samarth Nagraj,0.3,74,BOWL,India,,UFA10
+Abhishek Saini,0.3,74,BOWL,India,,UFA10
+Dumindu Sewmina,0.3,74,BOWL,Sri Lanka,,UFA10
+Pradyuman Kumar Singh,0.3,74,BOWL,India,,UFA10
+Vasu Vats,0.3,74,BOWL,India,,UFA10
+Umang Kumar,0.3,75,AR,India,,UAL11
+Mohamed Ali,0.3,75,AR,India,,UAL11
+Atharva Ankolekar,0.3,75,AR,India,,UAL11
+Vaisakh Chandran,0.3,75,AR,India,,UAL11
+Auqib Dar,0.3,75,AR,India,,UAL11
+Rohit Rayudu,0.3,75,AR,India,,UAL11
+Uday Saharan,0.3,75,AR,India,,UAL11
+Ayush Vartak,0.3,75,AR,India,,UAL11
+Baba Aparajith,0.3,76,AR,India,,UAL12
+Sumit Kumar Beniwal,0.3,76,AR,India,,UAL12
+Nishunk Birla,0.3,76,AR,India,,UAL12
+Digvijay Deshmukh,0.3,76,AR,India,,UAL12
+Lakshay Jain,0.3,76,AR,India,,UAL12
+Duan Jansen,0.3,76,AR,South Africa,,UAL12
+Kritagya Singh,0.3,76,AR,India,,UAL12
+P. Vignesh,0.3,76,AR,India,,UAL12
+Sabhay Chadha,0.3,77,AR,India,,UAL13
+Ben Howell,0.5,77,AR,England,,UAL13
+Hemanth Kumar,0.3,77,AR,India,,UAL13
+Rohan Rana,0.3,77,AR,India,,UAL13
+Bharat Sharma,0.3,77,AR,India,,UAL13
+Pratham Singh,0.3,77,AR,India,,UAL13
+Tripurana Vijay,0.3,77,AR,India,,UAL13
+Ravi Yadav,0.3,77,AR,India,,UAL13
+Arjun Azad,0.3,78,AR,India,,UAL14
+Abhay Choudhary,0.3,78,AR,India,,UAL14
+Gaurav Gambhir,0.3,78,AR,India,,UAL14
+Shubham Garhwal,0.3,78,AR,India,,UAL14
+Tejasvi Jaiswal,0.3,78,AR,India,,UAL14
+Sairaj Patil,0.3,78,AR,India,,UAL14
+Madhav Tiwari,0.3,78,AR,India,,UAL14
+Kamal Tripathi,0.3,78,AR,India,,UAL14
+Prashant Chauhan,0.3,79,AR,India,,UAL15
+Yash Dabas,0.3,79,AR,India,,UAL15
+Dhruv Kaushik,0.3,79,AR,India,,UAL15
+Khrievitso Kense,0.3,79,AR,India,,UAL15
+Akash Parkar,0.3,79,AR,India,,UAL15
+Vignesh Puthur,0.3,79,AR,India,,UAL15
+Tripuresh Singh,0.3,79,AR,India,,UAL15
+Vijay Yadav,0.3,79,AR,India,,UAL15

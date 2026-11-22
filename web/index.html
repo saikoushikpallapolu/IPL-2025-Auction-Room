@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Run your own IPL 2025 auction against nine simulated franchises.">
+  <title>IPL Auction Room</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="shell top-inner">
+      <a href="/" class="brand" aria-label="IPL Auction Room home"><span class="brand-mark" aria-hidden="true">IPL</span><span>Auction Room</span></a>
+      <span class="season">2025 Mega Auction</span>
+      <button id="restart" class="secondary compact" hidden>New auction</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <p id="error" class="error" role="alert" hidden></p>
+
+    <section id="setup" hidden>
+      <div class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">FRANCHISE SIMULATOR</p>
+          <h1>Own the<br>auction room.</h1>
+          <p>Pick a franchise, keep your core, and build a squad against nine AI teams.</p>
+        </div>
+        <div class="hero-metrics">
+          <div><strong>10</strong><span>Franchises</span></div>
+          <div><strong id="pool-count"></strong><span>Auction players</span></div>
+          <div><strong>₹120 Cr</strong><span>Starting purse</span></div>
+        </div>
+      </div>
+      <div class="setup-grid">
+        <section class="panel">
+          <h2>Choose your franchise</h2>
+          <div id="team-picker" class="team-picker" role="group" aria-label="Franchises"></div>
+        </section>
+        <section class="panel retention-panel">
+          <h2>Set your retentions</h2>
+          <p class="muted">Uncheck players to release them into the auction.</p>
+          <div id="retentions" class="retentions"></div>
+          <div class="purse-line"><span>Auction purse</span><strong id="starting-purse"></strong></div>
+          <button id="start" class="primary">Enter auction room</button>
+        </section>
+      </div>
+    </section>
+
+    <section id="room" hidden>
+      <div class="room-heading">
+        <div><p class="eyebrow">2025 MEGA AUCTION</p><h1>Auction room</h1></div>
+        <div id="your-team" class="team-chip"></div>
+      </div>
+      <section id="set-reveal" class="set-reveal" aria-labelledby="set-name" hidden>
+        <div class="pouch-scene" aria-hidden="true">
+          <div class="pouch-light"></div>
+          <div class="pouch-ticket"><strong id="pouch-code"></strong></div>
+          <div class="pouch"><i></i><b>IPL</b></div>
+          <div class="pouch-plinth"></div>
+        </div>
+        <div class="reveal-content">
+          <p class="eyebrow" id="set-kicker"></p>
+          <h2 id="set-name"></h2>
+          <p id="set-count"></p>
+          <ol id="set-list" class="set-list"></ol>
+          <button id="open-set" class="primary">Open bidding</button>
+        </div>
+      </section>
+      <div id="room-grid" hidden>
+        <section id="auction-floor" class="auction-floor" aria-labelledby="player-name">
+          <header class="stage-scoreboard">
+            <div>
+              <p class="stage-progress"><span id="progress"></span> <span id="phase"></span></p>
+              <h2 id="player-name"></h2>
+              <p id="player-meta"></p>
+            </div>
+            <div class="stage-call">
+              <p id="floor-call" role="status" aria-live="polite"></p>
+              <strong id="stage-price"></strong>
+            </div>
+          </header>
+          <div id="floor-tables" class="floor-tables"></div>
+          <button id="bid" class="team-desk bid-at-table" type="button" hidden></button>
+          <footer class="stage-controls">
+            <p id="action-note"></p>
+            <div class="buttons">
+              <button id="pass" class="secondary" hidden>Decline RTM</button>
+              <button id="skip" class="secondary" hidden>Skip player</button>
+              <button id="next" class="primary" hidden>Next player</button>
+            </div>
+          </footer>
+        </section>
+
+        <nav class="stat-dock" aria-label="Auction statistics">
+          <button type="button" data-stats="player" id="player-stats-button"><strong>Player stats</strong><span id="player-preview"></span></button>
+          <button type="button" data-stats="teams"><strong>Franchises</strong><span id="teams-preview"></span></button>
+          <button type="button" data-stats="set" id="current-set"><strong>Current set</strong><span id="current-set-label"></span></button>
+          <button type="button" data-stats="results"><strong>Results</strong><span id="result-count"></span></button>
+          <button type="button" data-stats="activity" id="activity-button"><strong>Bid history</strong><span id="activity-preview"></span></button>
+        </nav>
+      </div>
+
+      <dialog id="stats-dialog" aria-labelledby="stats-title">
+        <div class="dialog-heading">
+          <h2 id="stats-title"></h2>
+          <form method="dialog"><button class="secondary compact">Close</button></form>
+        </div>
+        <div class="dialog-content">
+          <section id="stats-player" hidden>
+            <p class="muted" id="price-source"></p>
+            <dl class="detail-stats">
+              <div><dt>Reserve price</dt><dd id="reserve"></dd></div>
+              <div><dt>Model valuation</dt><dd id="valuation"></dd></div>
+              <div><dt id="current-label">Current bid</dt><dd id="current-price"></dd></div>
+              <div><dt>Previous franchise</dt><dd id="previous-franchise"></dd></div>
+            </dl>
+            <div id="performance-stats"></div>
+          </section>
+          <section id="stats-teams" hidden>
+            <p class="muted" id="rtm-count"></p>
+            <div id="standings" class="standings"></div>
+          </section>
+          <section id="stats-set" hidden><ol id="current-set-list" class="set-list"></ol></section>
+          <section id="stats-results" hidden><div id="results" class="rows"></div></section>
+          <section id="stats-activity" hidden><ol id="activity" class="activity"></ol></section>
+        </div>
+      </dialog>
+    </section>
+  </main>
+</body>
+</html>

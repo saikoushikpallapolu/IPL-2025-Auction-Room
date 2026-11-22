@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from rapidfuzz import process, fuzz
+from src.simulator_engine import name_key
 
 def build_auction_feature_matrix():
     raw_dir = Path("data/raw")
@@ -24,6 +25,9 @@ def build_auction_feature_matrix():
     
     auc_2025 = pd.read_csv(processed_dir / "standardized_2025_auction.csv")
     auc_2025.columns = [c.lower().strip() for c in auc_2025.columns]
+    registry = pd.read_csv(raw_dir / "ipl_auctions/registered_auction_pool_2025.csv")
+    registry["key"] = registry["player_name"].map(name_key)
+    registry = registry.drop_duplicates("key", keep=False).set_index("key")
 
     combined_auctions = pd.concat([hist_auc_renamed, auc_2025], ignore_index=True)
 
@@ -46,7 +50,8 @@ def build_auction_feature_matrix():
 
     for chunk in pd.read_csv(global_csv, usecols=lambda c: any(x in c for x in ['match_id', 'start_date', 'match_type', 'season', 'striker', 'batter', 'bowler', 'runs_off_bat', 'wides', 'noballs', 'wicket_type']), chunksize=250000, low_memory=False):
         chunk.columns = [c.lower().strip() for c in chunk.columns]
-        chunk['year'] = pd.to_datetime(chunk['start_date'], errors='coerce').dt.year
+        chunk['date'] = pd.to_datetime(chunk['start_date'], errors='coerce')
+        chunk['year'] = chunk['date'].dt.year
         chunk = chunk.dropna(subset=['year', 'match_id']).copy()
         chunk['year'] = chunk['year'].astype(int)
         
@@ -71,7 +76,7 @@ def build_auction_feature_matrix():
                 bid = int(bid)
                 if bid not in player_history: player_history[bid] = []
                 player_history[bid].append({
-                    'type': 'bat', 'year': year, 'match_id': m_id, 'format': m_type,
+                    'type': 'bat', 'year': year, 'date': row['date'], 'match_id': m_id, 'format': m_type,
                     'runs': row['runs_off_bat'], 'balls': row['is_ball_faced'], 'weight': w_coeff
                 })
                 
@@ -80,7 +85,7 @@ def build_auction_feature_matrix():
                 wid = int(wid)
                 if wid not in player_history: player_history[wid] = []
                 player_history[wid].append({
-                    'type': 'bowl', 'year': year, 'match_id': m_id, 'format': m_type,
+                    'type': 'bowl', 'year': year, 'date': row['date'], 'match_id': m_id, 'format': m_type,
                     'runs_conceded': row['conceded_runs'], 'balls_bowled': row['is_legal_ball'],
                     'wickets': row['is_wicket'], 'weight': w_coeff
                 })
@@ -108,6 +113,14 @@ def build_auction_feature_matrix():
         if 'BOWLER' in raw_role or 'BOWL' in raw_role: player_role = 'BOWL'
         elif 'ALL-ROUNDER' in raw_role or 'AR' in raw_role: player_role = 'AR'
         elif 'WICKET' in raw_role or 'WK' in raw_role or 'KEEPER' in raw_role: player_role = 'WK'
+        overseas = 'overseas' in str(row['nationality']).lower()
+        if auc_year == 2025:
+            key = name_key(auc_name)
+            if key not in registry.index:
+                continue
+            registration = registry.loc[key]
+            player_role = registration["role"]
+            overseas = registration["country"] != "India"
 
         p_logs = player_history.get(int(player_id), [])
         
@@ -123,7 +136,8 @@ def build_auction_feature_matrix():
         last_active_year = 0
 
         for log in p_logs:
-            if log['year'] >= auc_year: continue
+            if log['year'] >= auc_year or (auc_year == 2025 and log["date"] >= pd.Timestamp("2024-11-24")):
+                continue
             
             fmt = log['format']
             if fmt in ['test', 'odi', 't20i']:
@@ -176,7 +190,7 @@ def build_auction_feature_matrix():
             "player_name": auc_name,
             "auction_year": auc_year,
             "player_role": player_role,
-            "is_overseas": 1 if 'overseas' in str(row['nationality']).lower() else 0,
+            "is_overseas": int(overseas),
             
             "career_runs": c_runs, "career_wickets": c_wickets, "career_matches": len(c_matches),
             "career_strike_rate": c_sr, "career_economy": c_econ,
