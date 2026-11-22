@@ -1,3 +1,14 @@
+function bidCallClips(team, amount, variant) {
+  const [whole, fraction] = (amount / 100).toFixed(2).split(".");
+  const decimals = fraction.replace(/0$/, "");
+  const price = [whole, ...(decimals === "0" ? [] : ["point", ...decimals]), "crore"];
+  switch (variant % 3) {
+    case 0: return [team, "at", ...price];
+    case 1: return [...price, "with", team];
+    default: return ["now", ...price, "from", team];
+  }
+}
+
 function createAuctionAudio(node) {
   const panel = node("auction-audio-panel");
   const menu = node("auction-audio");
@@ -11,6 +22,7 @@ function createAuctionAudio(node) {
   let voiceLoading;
   let activeClips = [];
   let nextPollAt = 0;
+  let bidCallIndex = 0;
   let musicGain;
   let live = false;
   let knocks;
@@ -75,11 +87,14 @@ function createAuctionAudio(node) {
 
   function loadVoice() {
     voiceLoading ||= Promise.all([
-      fetch("/assets/auction-voice.wav?v=decimal-crore").then(response => {
+      fetch("/assets/auction-voice.wav?v=varied-crore").then(response => {
         if (!response.ok) throw new Error("Voice audio unavailable");
         return response.arrayBuffer();
       }).then(bytes => context.decodeAudioData(bytes)),
-      fetch("/assets/auction-voice.json?v=decimal-crore").then(response => response.json()),
+      fetch("/assets/auction-voice.json?v=varied-crore").then(response => {
+        if (!response.ok) throw new Error("Voice clip index unavailable");
+        return response.json();
+      }),
     ]).then(([buffer, clips]) => { voicePack = { buffer, clips }; }).catch(() => {
       voiceLoading = null;
       node("auction-voice-status").textContent = "Voice audio could not load. Toggle Auctioneer to retry.";
@@ -160,7 +175,7 @@ function createAuctionAudio(node) {
     if (!voicePack) node("auction-voice-status").textContent = "Loading auctioneer voice…";
     await loadVoice();
     if (voice.checked && voicePack) {
-      node("auction-voice-status").textContent = "Built-in auctioneer voice ready";
+      node("auction-voice-status").textContent = "Auctioneer ready · bids called in crore";
     }
   });
   document.addEventListener("visibilitychange", () => {
@@ -184,12 +199,7 @@ function createAuctionAudio(node) {
         knocks ||= [wood(430, 65), wood(500, 77), wood(560, 81)];
         play(knocks[Math.floor(Math.random() * knocks.length)], ownTable ? .28 : .14, side);
       }
-      const [whole, fraction] = (amount / 100).toFixed(2).split(".");
-      const decimals = fraction.replace(/0$/, "");
-      const keys = [team, whole];
-      if (decimals !== "0") keys.push("point", ...decimals);
-      keys.push("crore");
-      call(team, keys);
+      if (voice.checked && voicePack) call(team, bidCallClips(team, amount, bidCallIndex++));
     },
     sold() {
       if (canPlayEffects()) {
