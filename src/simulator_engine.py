@@ -101,6 +101,11 @@ class Catalog:
             })
 
         pool = read_rows("registered_auction_pool_2025.csv")
+        # Published top buys from https://www.iplt20.com/auction/2024.
+        official_prior = {
+            name_key(row["player_name"]): float(row["price_crore"])
+            for row in read_rows("official_2024_top_sales.csv")
+        }
         forecasts = {
             row["registration_id"]: row for row in pd.read_csv(
                 ESTIMATES, dtype={"registration_id": str}
@@ -121,6 +126,9 @@ class Catalog:
             estimate = forecasts.get(registration_id, {})
             form = {k: v for k, v in estimate.items() if k.startswith(("death_", "middle_", "powerplay_", "recent_")) and pd.notna(v)}
             prior = estimate.get("prior_sale_cr")
+            prior_year = estimate.get("prior_sale_year")
+            if pool_names[key] == 1 and key in official_prior:
+                prior, prior_year = official_prior[key], 2024
             player = {
                 "id": registration_id,
                 "name": row["player_name"], "role": role, "country": row["country"],
@@ -135,6 +143,7 @@ class Catalog:
                 "bowling_style": row["bowling_style"],
                 "form": form,
                 "prior_sale": round(prior * 100) if pd.notna(prior) else None,
+                "prior_sale_year": int(prior_year) if pd.notna(prior_year) else None,
                 "sale_probability": estimate.get("sale_probability"),
                 "price_range": [round(estimate[f"price_p{i}_cr"] * 100) for i in (20, 50, 80)] if estimate else None,
             }
@@ -227,7 +236,7 @@ class Auction:
                 "number": player["set"], "code": code, "category": set_category(code),
                 "players": [],
             })
-            group["players"].append({"name": player["name"], "role": player["role"]})
+            group["players"].append({"id": player["id"], "name": player["name"], "role": player["role"], "reserve": player["reserve"]})
         self.rtm_slots = {
             code: Counter("uncapped" if player["uncapped"] else "capped" for player in roster)
             for code, roster in self.rosters.items()
@@ -503,7 +512,7 @@ class Auction:
         self.players.extend(players)
         self.sets[(label, label)] = {
             "number": label, "code": label, "category": label,
-            "players": [{"name": p["name"], "role": p["role"]} for p in players],
+            "players": [{"id": p["id"], "name": p["name"], "role": p["role"], "reserve": p["reserve"]} for p in players],
         }
         self.index -= 1
         self.advance()
@@ -599,6 +608,10 @@ class Auction:
             "seconds": max(0, self.deadline - monotonic()) if timed else None,
             "rtm": self.rtm, "rtm_stage": self.rtm_stage if self.phase == "rtm" else None,
             "rtm_team": self.rtm_holder if self.phase == "rtm" else None,
+            "rtm_eligible_team": (
+                self.player["rtm_team"] if self.phase == "bidding" and self.leader
+                and self.rtm_eligible(self.player["rtm_team"], self.price) else None
+            ),
             "final_bid_min": self.price + 1 if self.phase == "rtm" and self.rtm_stage == "final" else None,
             "final_bid_max": self.bid_limit(self.user) if self.phase == "rtm" and self.rtm_stage == "final" else None,
             "nominees": [{"id": p["id"], "name": p["name"], "role": p["role"]} for p in self.nomination_pool().values()] if self.phase == "nomination" else [],

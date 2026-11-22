@@ -6,6 +6,8 @@ function createAuctionPresentation(colors, formatPrice, actions) {
   };
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
   const restartHome = node("restart").parentElement;
+  const venue = node("room-viewport");
+  const venueHome = venue.parentElement;
   let selected = "3d";
   let scene;
   let loading;
@@ -30,10 +32,18 @@ function createAuctionPresentation(colors, formatPrice, actions) {
   }
 
   function showView() {
+    const reveal = latest?.phase === "reveal";
     const show3d = selected === "3d" && isLive();
+    const reveal3d = reveal && !failed;
+    const venueParent = reveal3d ? node("set-venue") : venueHome;
+    if (venue.parentElement !== venueParent) {
+      if (reveal3d) venueParent.append(venue);
+      else venueParent.insertBefore(venue, node("floor-tables"));
+    }
+    node("room").classList.toggle("arena-reveal", reveal);
     node("auction-floor").classList.toggle("using-3d", Boolean(show3d));
     node("room").classList.toggle("arena-active", Boolean(show3d));
-    node("room-viewport").hidden = !show3d;
+    venue.hidden = !(show3d || reveal3d);
     node("floor-tables").hidden = Boolean(show3d);
     node("room-bid").hidden = !show3d;
     node("view-3d").setAttribute("aria-pressed", String(Boolean(show3d)));
@@ -49,12 +59,13 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     if (node("restart").parentElement !== restartParent) restartParent.append(node("restart"));
     if (failed) node("view-3d").textContent = "3D unavailable";
     if (isLive()) placeBid();
-    scene?.show(Boolean(show3d));
-    if (show3d && !scene && !loading) {
+    scene?.show(Boolean(show3d || reveal3d));
+    if ((show3d || reveal3d) && !scene && !loading) {
       node("room-loading").hidden = false;
       loading = import("./auction-room.js").then(({ createRoom }) => {
         scene = createRoom(node("room-canvas"), node("table-labels"), {
           table(code) {
+            if (!isLive()) return;
             if (code === latest?.user) node("bid").click();
             else actions.inspect(code);
           },
@@ -76,15 +87,28 @@ function createAuctionPresentation(colors, formatPrice, actions) {
   }
 
   function updateScene() {
-    if (!latest?.player || !isLive()) return;
+    if (!latest?.player) return;
+    if (latest.phase === "reveal") {
+      if (!scene) return;
+      scene.configure(latest.user, tones, teamNames);
+      scene.wide(true, true);
+      scene.call(null);
+      scene.lead(null);
+      scene.scoreboard([latest.set.category, `${latest.set.players.length} players`, "Next set", null]);
+      return;
+    }
+    if (!isLive()) return;
     const player = latest.player;
+    const lastSale = Number.isFinite(player.prior_sale)
+      ? [formatPrice(player.prior_sale), player.prior_sale_year].filter(Boolean).join(" · ")
+      : "No prior sale recorded";
     const metrics = [
       ["Reserve", formatPrice(player.reserve)],
-      player.price_range && ["Est. sale price", formatPrice(player.price_range[1])],
-      Number.isFinite(player.form?.recent_runs) && ["Recent runs", player.form.recent_runs],
-      Number.isFinite(player.form?.recent_wickets) && ["Recent wickets", player.form.recent_wickets],
-      Number.isFinite(player.stats?.career_strike_rate) && player.stats.career_strike_rate > 0 && ["Career strike rate", player.stats.career_strike_rate.toFixed(1)],
-    ].filter(Boolean).slice(0, 4);
+      ["Last recorded sale", lastSale],
+      ["Role", actions.playerRole(player)],
+    ];
+    const rtmTeam = latest.rtm_team || latest.rtm_eligible_team;
+    if (rtmTeam && latest.phase !== "result") metrics.push(["RTM", rtmTeam]);
     node("arena-metrics").replaceChildren(...metrics.map(([label, value]) => {
       const item = document.createElement("li");
       const text = document.createElement("span");
@@ -235,6 +259,7 @@ function createAuctionPresentation(colors, formatPrice, actions) {
       if (audioEnabled) window.speechSynthesis?.cancel();
       node("sold-banner").hidden = true;
       node("room").classList.remove("arena-active");
+      node("room").classList.remove("arena-reveal");
       restartHome.append(node("restart"));
       scene?.resetSale();
       scene?.show(false);

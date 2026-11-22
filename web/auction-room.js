@@ -1,6 +1,5 @@
 import * as T from "./vendor/three.module.min.js";
 
-const WARM = 0xf6cf95;
 const STAGE_Z = -10.2;
 const UP = new T.Vector3(0, 1, 0);
 const limbDirection = new T.Vector3();
@@ -63,7 +62,6 @@ const white = material(0xe7ddd3);
 const iris = material(0x353022);
 const paper = material(0xd5cab2);
 const screen = new T.MeshBasicMaterial({ color: 0x294157 });
-const bulb = new T.MeshBasicMaterial({ color: WARM });
 let woodTexture;
 
 function prepareMaterials() {
@@ -279,10 +277,6 @@ function makeHall(scene) {
   }
   box(scene, wall, 0, 4.2, -14, 27, 8.4, .28);
   for (const z of [-8.4, -3.5, 1.4, 6.4]) {
-    for (const x of [-9, -6, -3, 0, 3, 6, 9]) {
-      const fixture = box(scene, bulb, x, 6.45, z, .17, .025, .17);
-      fixture.rotation.y = .24;
-    }
     const pool = new T.PointLight(z < 0 ? 0x528dff : 0xd9ebff, 50, 14, 2);
     pool.position.set(0, 5.8, z);
     scene.add(pool);
@@ -303,18 +297,20 @@ function makeStage(scene) {
       new T.Vector3(width, .5, depth),
     ], false, "centripetal");
     scene.add(new T.Mesh(new T.TubeGeometry(path, 48, .21, 6, false), neon));
-    for (let i = 0; i <= 26; i++) {
-      const point = path.getPoint(i / 26);
-      box(scene, ice, point.x, point.y, point.z + .22, .105, .065, .04);
-    }
   }
   box(scene, dark, 0, .05, STAGE_Z + 2.22, 5, .10, .66);
   box(scene, dark, 0, .14, STAGE_Z + 1.93, 5, .22, .56);
   box(scene, gold, 0, .49, STAGE_Z + 1.91, 13.5, .025, .023);
-  const scoreboard = canvasTexture(1024, 420, (ctx, w, h, data) => {
+  const emblem = new Image();
+  let boardData = ["Auction Room", "", "2025 Mega Auction"];
+  const scoreboard = canvasTexture(2048, 840, (ctx, width, height, data) => {
+    const w = width / 2;
+    const h = height / 2;
+    ctx.setTransform(2, 0, 0, 2, 0, 0);
     const [name, amount, line, color, metrics = []] = data;
     const gradient = ctx.createLinearGradient(0, 0, w, h);
     gradient.addColorStop(0, "#11265a");
+    gradient.addColorStop(.8, "#102044");
     gradient.addColorStop(1, color || "#1b45a7");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, w, h);
@@ -323,12 +319,13 @@ function makeStage(scene) {
     ctx.strokeStyle = "#84bdff";
     ctx.lineWidth = 3;
     ctx.strokeRect(21, 21, w - 42, h - 42);
+    if (emblem.complete && emblem.naturalWidth) ctx.drawImage(emblem, 40, 39, 64, 64);
     ctx.fillStyle = "#ebcf9e";
     ctx.textAlign = "center";
     ctx.font = "600 27px system-ui";
-    ctx.fillText(line.toUpperCase(), w / 2, 79, w - 100);
+    ctx.fillText(line.toUpperCase(), w / 2, 79, w - 235);
     ctx.fillStyle = "#fff4dc";
-    ctx.font = "bold 74px Georgia";
+    ctx.font = "bold 74px system-ui";
     ctx.fillText(name, w / 2, 181, w - 110);
     ctx.font = "600 54px system-ui";
     ctx.fillText(amount, w / 2, 264);
@@ -345,7 +342,13 @@ function makeStage(scene) {
       ctx.fillText(value, left + cell / 2, 363, cell - 18);
     });
   });
-  scoreboard.draw(["Auction Room", "", "2025 Mega Auction"]);
+  function drawBoard(data) {
+    boardData = data;
+    scoreboard.draw(data);
+  }
+  emblem.onload = () => drawBoard(boardData);
+  emblem.src = "/assets/auction-room.svg";
+  drawBoard(boardData);
   const boardMaterial = new T.MeshBasicMaterial({ map: scoreboard.texture, toneMapped: false });
   for (const [x, y, width, depth, angle] of [[0, 4.02, 10.8, -1.30, 0], [-8.10, 2.77, 4.25, -.85, .13], [8.10, 2.77, 4.25, -.85, -.13]]) {
     const board = group(scene, x, y, STAGE_Z + depth);
@@ -364,7 +367,7 @@ function makeStage(scene) {
   const head = cylinder(gavel, walnut, 0, .012, -.026, .050, .14);
   head.rotation.z = Math.PI / 2;
   box(gavel, gold, 0, .012, -.026, .032, .104, .104);
-  return { scoreboard, auctioneer, gavel };
+  return { drawBoard, auctioneer, gavel };
 }
 
 export function createRoom(host, labels, handlers) {
@@ -373,7 +376,7 @@ export function createRoom(host, labels, handlers) {
   const context = canvas.getContext("webgl2", { alpha: false, antialias: true });
   if (!context) throw new Error("WebGL 2 unavailable");
   const renderer = new T.WebGLRenderer({ canvas, context, antialias: true, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.setPixelRatio(Math.min(Math.max(window.devicePixelRatio || 1, 1.35), 2));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = T.PCFShadowMap;
   renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -437,6 +440,7 @@ export function createRoom(host, labels, handlers) {
   const clock = performance.now();
   let visible = false;
   let wide = false;
+  let revealing = false;
   let reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let user;
   let frame = 0;
@@ -513,7 +517,7 @@ export function createRoom(host, labels, handlers) {
     const focus = floorTables.get(sale?.team);
     const overview = wide && !(cut && focus);
     const portraitDistance = overview ? Math.max(0, 1 / camera.aspect - 1) * 8 : 0;
-    camera.fov = overview ? Math.max(51, Math.min(94, 61 / camera.aspect)) : camera.aspect < 1 ? 66 : 53;
+    camera.fov = overview ? Math.max(revealing ? 62 : 51, Math.min(94, 61 / camera.aspect)) : camera.aspect < 1 ? 66 : 53;
     camera.updateProjectionMatrix();
     if (cut && focus) {
       const point = focus.table.position;
@@ -572,8 +576,8 @@ export function createRoom(host, labels, handlers) {
         cancelAnimationFrame(frame);
       }
     },
-    wide(value) { wide = value; },
-    scoreboard(data) { stage.scoreboard.draw(data); },
+    wide(value, reveal = false) { wide = value; revealing = reveal; },
+    scoreboard(data) { stage.drawBoard(data); },
     lead(code) {
       if (code === leader) return;
       floorTables.get(leader)?.label.classList.remove("is-leading");

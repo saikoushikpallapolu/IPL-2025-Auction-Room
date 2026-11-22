@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Run your own IPL 2025 auction against nine simulated franchises.">
   <title>IPL Auction Room</title>
+  <link rel="icon" href="/assets/auction-room.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/auction-experience.css">
   <script src="/auction-presentation.js" defer></script>
@@ -13,7 +14,7 @@
 <body>
   <header class="top">
     <div class="shell top-inner">
-      <a href="/" class="brand" aria-label="Auction Room home"><span class="brand-mark" aria-hidden="true">AR</span><span>Auction Room</span></a>
+      <a href="/" class="brand" aria-label="Auction Room home"><img class="game-emblem" src="/assets/auction-room.svg" alt=""><span>Auction Room</span></a>
       <span class="season">2025 Mega Auction</span>
       <button id="restart" class="secondary compact" hidden>New auction</button>
     </div>
@@ -57,10 +58,11 @@
         <div id="your-team" class="team-chip"></div>
       </div>
       <section id="set-reveal" class="set-reveal" aria-labelledby="set-name" hidden>
+        <div id="set-venue" aria-hidden="true"></div>
         <div class="pouch-scene" aria-hidden="true">
           <div class="pouch-light"></div>
           <div class="pouch-ticket"><strong id="pouch-code"></strong></div>
-          <div class="pouch"><i></i><b>IPL</b></div>
+          <div class="pouch"><i></i><img class="game-emblem" src="/assets/auction-room.svg" alt=""></div>
           <div class="pouch-plinth"></div>
         </div>
         <div class="reveal-content">
@@ -94,6 +96,7 @@
             </div>
           </header>
           <div id="view-controls" class="view-controls" role="group" aria-label="Auction room view">
+            <img class="game-emblem" src="/assets/auction-room.svg" alt="">
             <button id="view-3d" type="button" aria-pressed="true">3D room</button>
             <button id="view-floor" type="button" aria-pressed="false">Table view</button>
             <button id="view-wide" type="button" aria-pressed="false">Wide camera</button>

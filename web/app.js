@@ -148,7 +148,7 @@ function updateClock() {
 
 function renderSet(group) {
   const { code, number, category, players } = group;
-  $("pouch-code").textContent = number === code ? "Retentions" : code;
+  $("pouch-code").textContent = number === code ? (code.startsWith("Accelerated") ? `A${code.at(-1)}` : "RET") : code;
   $("set-kicker").textContent = number === code ? "ADDITIONAL LOTS" : `SET ${number} · ${code}`;
   $("set-name").textContent = category;
   $("set-count").textContent = `${players.length} ${players.length === 1 ? "player" : "players"} in this pouch`;
@@ -158,6 +158,7 @@ function renderSet(group) {
     list.replaceChildren(...players.map((player, index) => {
       const row = element("li", player.name);
       row.append(element("span", roles[player.role]));
+      if (Number.isFinite(player.reserve)) row.append(element("strong", money(player.reserve), "set-reserve"));
       row.style.setProperty("--order", index);
       return row;
     }));
@@ -323,9 +324,11 @@ function render(nextState) {
   }
   if (!previous || previous.user !== user || !$("floor-tables").children.length) buildFloor(user);
   $("auction-floor").classList.toggle("is-complete", complete);
-  $("progress").textContent = complete ? `${state.total} lots processed` : `Lot ${state.lot} of ${state.total} · ${state.set.code}`;
+  const setIndex = state.set?.players.findIndex(entry => entry.id === player?.id || entry.name === player?.name);
+  const setProgress = setIndex >= 0 ? ` · ${state.set.code} ${setIndex + 1}/${state.set.players.length}` : "";
+  $("progress").textContent = complete ? `${state.total} lots processed` : `Lot ${state.lot} · ${state.total} queued${setProgress}`;
   const call = state.cue === "once" ? "Going once…" : state.cue === "twice" ? "Going twice…" :
-    leader ? `${leader} bid ${money(price)}` : "Taking opening bids";
+    leader ? `${config.teams[leader]} leads` : "Taking opening bids";
   $("phase").textContent = complete ? "Complete" : bidding ? "Live bidding" : leader ? "Sold" : "Unsold";
   if (!complete) {
     renderFloor(bidding ? call : matching ? (finalBid ? "Make your final offer" : `Right to Match · ${state.rtm_team}`) : leader ? `Sold to ${leader} · ${money(price)}` : "Unsold · no bids");
@@ -347,7 +350,9 @@ function render(nextState) {
   $("sale-probability").textContent = player?.sale_probability == null ? "—" : `${Math.round(player.sale_probability * 100)}%`;
   $("median-price").textContent = money(player?.price_range?.[1]);
   $("price-range").textContent = player?.price_range ? `${money(player.price_range[0])} – ${money(player.price_range[2])}` : "—";
-  $("prior-sale").textContent = money(player?.prior_sale);
+  $("prior-sale").textContent = Number.isFinite(player?.prior_sale)
+    ? [money(player.prior_sale), player.prior_sale_year].filter(Boolean).join(" · ")
+    : "No prior sale recorded";
   $("xi-role").textContent = xiRoles[player?.skill] || "—";
   $("phase-stats").textContent = player?.form && Object.keys(player.form).length ?
     `Pre-auction T20 form · ${player.form.recent_runs} runs · ${player.form.recent_wickets} wickets · ${player.form.death_bowl_balls} death-over balls bowled` : "";
@@ -497,6 +502,7 @@ async function initialize() {
 
 const presentation = createAuctionPresentation(colors, money, {
   inspect: code => showStats("teams", code),
+  playerRole: player => xiRoles[player.skill] || roles[player.role],
 });
 const lineupMaker = createLineupMaker(async lineup => render(await api("lineup", lineup)));
 

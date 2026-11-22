@@ -140,7 +140,7 @@ body:has(.arena-active) > main.shell { width: 100%; max-width: none; padding: 0;
 }
 .arena-active .stage-scoreboard {
   position: absolute; z-index: 3; top: var(--arena-edge); left: var(--arena-edge);
-  width: min(44rem, 53%); align-items: center; padding: .7rem .9rem;
+  width: min(33rem, 46%); align-items: center; padding: .7rem .9rem;
   border: 1px solid #9dbcfa55; border-left: 3px solid #63a9ff; border-radius: .7rem;
   background: linear-gradient(100deg, #091427ef, #0a1225d2); box-shadow: 0 10px 45px #0306155c;
 }
@@ -238,4 +238,70 @@ body:has(.arena-active) #error:not([hidden]) { position: fixed; z-index: 8; top:
 }
 @media (prefers-reduced-motion: reduce) {
   #sold-banner, .hammer, #sold-banner .sold-stamp { animation: none; }
+}
+
+.game-emblem { width: 2.35rem; height: 2.35rem; flex: none; }
+.view-controls .game-emblem { width: 1.95rem; height: 1.95rem; }
+.pouch .game-emblem { position: absolute; width: 3rem; height: 3rem; left: 50%; top: 61%; transform: translate(-50%, -50%); }
+
+body:has(.arena-reveal) { background: #070d20; color: #f3f7ff; }
+body:has(.arena-reveal) > .top { background: #0a152b; border-color: #35547a; }
+body:has(.arena-reveal) > .top .season { color: #bdd0ed; }
+body:has(.arena-reveal) > main.shell { width: 100%; padding: 0; }
+.arena-reveal .room-heading { display: none; }
+.arena-reveal .set-reveal {
+  position: relative; isolation: isolate;
+  min-height: calc(100svh - 69px);
+  grid-template-columns: minmax(0, 1.9fr) minmax(19rem, 1fr);
+  margin: 0; border: 0; border-radius: 0;
+  background: #0a1327;
+}
+#set-venue { display: none; }
+.arena-reveal #set-venue {
+  display: block; position: absolute; inset: 0; grid-area: 1 / 1 / 2 / 2; z-index: 0;
+  background: #090f25 url("/assets/auction-night.webp") right center / cover;
+}
+.arena-reveal .room-viewport { position: absolute; inset: 0; height: auto; border: 0; border-radius: 0; }
+.arena-reveal .seat-marker { display: none; }
+.arena-reveal .pouch-scene {
+  grid-area: 1 / 1; z-index: 1; align-self: start;
+  width: 48%;
+  min-height: min(36vh, 290px); pointer-events: none;
+  background: radial-gradient(ellipse at 50% 55%, #090f2519 24%, transparent 56%);
+}
+.arena-reveal .pouch-light {
+  width: min(21rem, 60%); background: radial-gradient(circle, #ffdc8460, transparent 68%);
+}
+.arena-reveal .pouch { scale: .83; }
+.arena-reveal .pouch i { animation: reveal-pouch-mouth .72s ease-out both; }
+@keyframes reveal-pouch-mouth {
+  0%, 18% { transform: scaleY(.24); }
+  62% { transform: scaleY(1.45); }
+  100% { transform: scaleY(1); }
+}
+.arena-reveal .pouch-plinth { top: calc(50% + 69px); width: 210px; height: 24px; }
+.arena-reveal .pouch-ticket { z-index: 3; transform-origin: center; }
+.arena-reveal .reveal-content {
+  grid-area: 1 / 2; z-index: 2; align-self: center;
+  margin: clamp(.85rem, 2vw, 1.75rem);
+  background: linear-gradient(145deg, #192b4d, #0c1529);
+  color: #f6f8ff; color-scheme: dark; border: 1px solid #5475a4; border-radius: 1rem;
+  box-shadow: 0 18px 60px #01071996;
+}
+.arena-reveal .reveal-content h2 { font-size: clamp(1.8rem, 3vw, 3rem); }
+.arena-reveal .reveal-content .eyebrow { color: #ffcf87; }
+.arena-reveal #set-count, .arena-reveal .set-list li span { color: #c0d1eb; }
+.arena-reveal .set-list { color: #f5f8ff; max-height: min(45svh, 24rem); }
+.arena-reveal .set-list li { border-color: #62799c66; }
+.set-reserve { float: right; margin-left: .45rem; white-space: nowrap; color: #ffcf87; }
+#current-set-list .set-reserve { color: var(--ink); }
+.arena-reveal #open-set { background: #ffcf87; color: #14203a; width: 100%; }
+.arena-reveal #open-set:hover { background: #ffe1b4; }
+@media (max-width: 700px) {
+  .arena-reveal .set-reveal { grid-template-columns: 1fr; grid-template-rows: minmax(290px, 47svh) auto; }
+  .arena-reveal .reveal-content { grid-area: 2 / 1; margin: 0 .75rem .75rem; }
+  .arena-reveal .pouch-scene { min-height: 165px; margin-top: 1.3rem; scale: .68; transform-origin: top center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arena-reveal .pouch i { animation: none; }
 }
