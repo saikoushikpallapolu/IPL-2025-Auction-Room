@@ -9,7 +9,8 @@ function createAuctionAudio(node) {
   let instrumental;
   let voicePack;
   let voiceLoading;
-  let clipSource;
+  let activeClips = [];
+  let nextPollAt = 0;
   let musicGain;
   let live = false;
   let knocks;
@@ -86,32 +87,33 @@ function createAuctionAudio(node) {
     return voiceLoading;
   }
 
-  function playClips(keys, index = 0) {
-    if (index >= keys.length) {
-      if (musicGain) musicGain.gain.setTargetAtTime(.10, context.currentTime, .15);
-      return;
+  function playClips(keys) {
+    let start = context.currentTime + .015;
+    for (const key of keys) {
+      const clip = voicePack.clips[key];
+      if (!clip) continue;
+      const [offset, duration] = clip;
+      const source = context.createBufferSource();
+      source.buffer = voicePack.buffer;
+      source.connect(context.destination);
+      activeClips.push(source);
+      source.start(start, offset, duration);
+      start += duration;
     }
-    const clip = voicePack.clips[keys[index]];
-    if (!clip) return playClips(keys, index + 1);
-    const [offset, duration] = clip;
-    const source = context.createBufferSource();
-    source.buffer = voicePack.buffer;
-    source.connect(context.destination);
-    source.onended = () => {
-      if (clipSource !== source) return;
-      clipSource = null;
-      playClips(keys, index + 1);
+    const last = activeClips.at(-1);
+    if (last) last.onended = () => {
+      if (activeClips.at(-1) !== last) return;
+      activeClips = [];
+      nextPollAt = performance.now() + 650;
+      if (musicGain) musicGain.gain.setTargetAtTime(.10, context.currentTime, .15);
     };
-    clipSource = source;
-    source.start(0, offset, duration);
   }
 
   function stopVoice() {
-    if (clipSource) {
-      const source = clipSource;
-      clipSource = null;
-      source.stop();
-    }
+    const clips = activeClips;
+    activeClips = [];
+    nextPollAt = 0;
+    for (const clip of clips) clip.stop();
     if (musicGain) musicGain.gain.setTargetAtTime(.10, context.currentTime, .1);
   }
 
@@ -159,7 +161,6 @@ function createAuctionAudio(node) {
     await loadVoice();
     if (voice.checked && voicePack) {
       node("auction-voice-status").textContent = "Built-in auctioneer voice ready";
-      call("Auctioneer ready.");
     }
   });
   document.addEventListener("visibilitychange", () => {
@@ -174,6 +175,8 @@ function createAuctionAudio(node) {
 
   return {
     live(value) { live = value; setMusic(); },
+    speaking() { return activeClips.length > 0; },
+    waitingForBid() { return activeClips.length > 0 || performance.now() < nextPollAt; },
     stopVoice,
     call,
     bid(team, amount, ownTable, side) {

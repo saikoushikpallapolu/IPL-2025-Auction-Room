@@ -141,6 +141,11 @@ function renderStandings() {
 }
 
 function updateClock() {
+  if (state?.phase === "bidding") {
+    const speaking = presentation.speaking();
+    $("bid").disabled = !state.can_bid || speaking;
+    $("bid").title = speaking ? "Wait for the auctioneer to finish the call." : "";
+  }
   if (state?.phase !== "rtm") return;
   const seconds = Math.max(0, Math.ceil((countdownEnd - performance.now()) / 1000));
   $("phase").textContent = `Match window · ${seconds}s`;
@@ -393,7 +398,9 @@ function render(nextState) {
       complete ? "Start a new auction to try another franchise." : "Ready to continue? Bidding stays paused until you choose.";
   $("bid").textContent = matching ? (finalBid ? "Raise final bid" : state.rtm_stage === "offer" ? "Request RTM" : `Match ${money(price)}`) : leader === user ? "You lead" : `Bid ${money(state.next_price)}`;
   $("bid").hidden = !(bidding || matching);
-  $("bid").disabled = bidding && !state.can_bid;
+  $("bid").disabled = bidding && (!state.can_bid || presentation.speaking());
+  if (bidding && presentation.speaking()) $("bid").title = "Wait for the auctioneer to finish the call.";
+  if (!bidding) $("bid").removeAttribute("title");
   $("pass").hidden = !matching;
   $("pass").textContent = finalBid ? "Keep current bid" : "Decline RTM";
   $("final-raise").hidden = !finalBid;
@@ -447,6 +454,7 @@ async function move(action, options = {}) {
 }
 
 $("bid").addEventListener("click", () => {
+  if (state.phase === "bidding" && presentation.speaking()) return;
   if (state.rtm_stage === "final") {
     const price = $("final-amount");
     if (price.reportValidity() && Number.isFinite(price.valueAsNumber)) {
@@ -493,12 +501,12 @@ $("start").addEventListener("click", async () => {
 });
 
 async function sync() {
-  if (busy || syncing || !state || state.seconds == null) return;
+  if (busy || syncing || !state || state.seconds == null || (state.phase === "bidding" && presentation.waitingForBid())) return;
   const previous = state;
   syncing = true;
   try {
     const latest = await api(`state?after=${previous.version}`);
-    if (latest && !busy && state === previous) render(latest);
+    if (latest && !busy && state === previous && !presentation.speaking()) render(latest);
   } catch (error) {
     if (!busy && state === previous) showError(error.message);
   } finally {

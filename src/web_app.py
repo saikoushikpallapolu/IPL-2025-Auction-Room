@@ -99,12 +99,13 @@ def state(request: Request, after: int | None = None):
 def action(move: Move, request: Request):
     with lock:
         auction = current_auction(request)
-        auction.tick()
         same_lot = move.lot == auction.index + 1
         current_offer = (
             move.action == "bid" and same_lot and auction.phase == "bidding"
             and move.price == auction.ask_price()
         )
+        if not current_offer:
+            auction.tick()
         if move.version != auction.version and not (current_offer or move.action == "skip" and same_lot):
             return auction.snapshot()
         try:

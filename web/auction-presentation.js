@@ -135,6 +135,7 @@ function createAuctionPresentation(colors, formatPrice, actions) {
   }
 
   function announce(result, featured, name) {
+    audio.stopVoice();
     clearTimeout(saleTimeout);
     const banner = node("sold-banner");
     banner.style.setProperty("--winner-color", tones[result.team]);
@@ -158,9 +159,15 @@ function createAuctionPresentation(colors, formatPrice, actions) {
   motion.addEventListener("change", () => scene?.reduced(motion.matches));
   window.addEventListener("pagehide", () => clearTimeout(impactTimeout));
   return {
+    speaking: audio.speaking,
+    waitingForBid: audio.waitingForBid,
     sync(state, previous, teams) {
       latest = state;
       teamNames = teams;
+      if (previous && (state.lot !== previous.lot || state.phase !== previous.phase)) {
+        audio.stopVoice();
+        clearTimeout(impactTimeout);
+      }
       audio.live(state.phase !== "complete");
       if (!previous || previous.user !== state.user) {
         node("arena-tables").replaceChildren(...Object.entries(teams).map(([code, name]) => {
