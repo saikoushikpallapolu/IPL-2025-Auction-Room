@@ -527,8 +527,11 @@ export function createRoom(host, labels, handlers) {
       cameraPos.set(0, 13.4 + portraitDistance * .34, 22.6 + portraitDistance);
       cameraAim.set(0, -.65, -1.6);
     } else {
-      cameraPos.set(1.32, 1.74, 8.66);
-      cameraAim.set(-.13, 1.63, -7.55);
+      const desk = floorTables.get(user)?.table;
+      cameraPos.set(.22, 3.25, -5.65);
+      if (desk) desk.localToWorld(cameraPos);
+      else cameraPos.z = 12.11;
+      cameraAim.set(0, .95, -7.55);
     }
     const step = cameraReady && !reducedMotion ? 1 - Math.exp(-dt * 5.8) : 1;
     camera.position.lerp(cameraPos, step);

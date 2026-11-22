@@ -332,3 +332,13 @@ body:has(.arena-reveal) > main.shell { width: 100%; padding: 0; }
 .nomination-player:has(input:checked) { background: #2b3e5e; }
 .nomination-player small { display: block; margin-top: .15rem; }
 #submit-nominations { margin-top: .85rem; background: #ffcf87; color: #162038; }
+
+.auction-audio-panel {
+  position: absolute; top: calc(100% + .35rem); right: 0; z-index: 2;
+  width: min(15rem, 86vw); display: grid; gap: .48rem; padding: .7rem;
+  border: 1px solid #7394c46b; border-radius: .5rem; background: #0a152b;
+  color: #e9f2ff; box-shadow: 0 .4rem 1rem #050a16aa; text-align: left;
+}
+.view-controls { position: relative; }
+.auction-audio-panel label { display: flex; align-items: center; gap: .45rem; font-size: .83rem; }
+.auction-audio-panel small { color: #c0d1eb; font-size: .7rem; }

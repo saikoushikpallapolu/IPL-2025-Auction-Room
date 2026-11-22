@@ -8,6 +8,7 @@
   <link rel="icon" href="/assets/auction-room.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/auction-experience.css">
+  <script src="/auction-audio.js" defer></script>
   <script src="/auction-presentation.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
@@ -113,7 +114,13 @@
             <button id="view-3d" type="button" aria-pressed="true">3D room</button>
             <button id="view-floor" type="button" aria-pressed="false">Table view</button>
             <button id="view-wide" type="button" aria-pressed="false">Wide camera</button>
-            <button id="auction-audio" type="button" aria-pressed="false">Auction audio off</button>
+            <button id="auction-audio" type="button" aria-expanded="false" aria-controls="auction-audio-panel">Audio</button>
+            <div id="auction-audio-panel" class="auction-audio-panel" hidden>
+              <label><input id="auction-voice" type="checkbox"> Auctioneer voice</label>
+              <label><input id="auction-effects" type="checkbox"> Paddle and gavel</label>
+              <label><input id="auction-music" type="checkbox"> Instrumental music</label>
+              <small id="auction-voice-status"></small>
+            </div>
           </div>
           <div id="room-viewport" class="room-viewport">
             <div id="room-canvas" aria-hidden="true"></div>

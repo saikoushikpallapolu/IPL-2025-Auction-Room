@@ -21,7 +21,7 @@ Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. 
 | Feature | How it plays |
 | --- | --- |
 | **Franchise setup** | Pick a team and choose whom to retain. Retention deductions and the ₹120 Cr salary cap determine your opening purse. |
-| **Live 3D bidding** | Raise your paddle from the arena, switch between the wide camera and your seat, or use the lighter table view. The auctioneer gestures through the calls and strikes the gavel on a sale. Spoken calls and the hammer sound are optional. |
+| **Live 3D bidding** | Raise your paddle from the arena, switch between the wide camera and **My table** behind your delegation, or use the lighter table view. The **Audio** menu independently controls the built-in auctioneer, wooden paddle and gavel effects, and a looping original instrumental. |
 | **Player and rival scouting** | The live board shows the reserve, last recorded sale and season when available, playing role, and applicable RTM. Open Player Stats for valuation, sale probability, conditional price range, and available form. Inspect rival purses, squads, and projected XI vacancies in the room. |
 | **Set reveals and shuffled lots** | Watch the pouch open inside the wide-camera arena. The roster card shows the category, order, and reserve prices. Players shuffle within each set while the published opening-set order stays intact. |
 | **Your pace between lots** | **Skip player** resolves the current lot and shows the result. Bidding remains paused until you select **Ready for next player**, including after a refresh. |
@@ -181,3 +181,5 @@ A contribution is easiest to review when it includes a concrete auction scenario
 - [IPL 2025–27 player regulations](https://www.iplt20.com/news/article/ipl-governing-council-announces-tata-ipl-player-regulations-2025-27)
 
 The simulator is an independent fan project unaffiliated with the IPL, BCCI, or its franchises. The screenshots show the local browser build.
+
+The instrumental is synthesized in the app from an original note sequence. Auctioneer clips are generated with Piper’s LJSpeech voice, trained on public-domain recordings. [Voice model card](https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/ljspeech/medium/MODEL_CARD) · [LJ Speech Dataset](https://keithito.com/LJ-Speech-Dataset/)

@@ -18,8 +18,7 @@ function createAuctionPresentation(colors, formatPrice, actions) {
   let impactTimeout;
   let wide = true;
   let lastBid;
-  let audioEnabled = false;
-  let audioContext;
+  const audio = createAuctionAudio(node);
 
   function isLive() {
     return latest && !["reveal", "nomination", "complete"].includes(latest.phase);
@@ -50,7 +49,7 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     node("view-floor").setAttribute("aria-pressed", String(!show3d));
     node("view-wide").hidden = !show3d;
     node("view-wide").setAttribute("aria-pressed", String(wide));
-    node("view-wide").textContent = wide ? "Back to my seat" : "Wide camera";
+    node("view-wide").textContent = wide ? "My table" : "Wide camera";
     node("arena-tables").hidden = !show3d;
     node("view-3d").disabled = Boolean(failed);
     node("view-3d").title = failed ? "3D is unavailable on this device. The table view is ready." : "";
@@ -135,39 +134,6 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     scene.lead(["bidding", "rtm"].includes(latest.phase) ? latest.leader : null);
   }
 
-  function speak(text) {
-    if (!audioEnabled || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
-    window.speechSynthesis.cancel();
-    const call = new SpeechSynthesisUtterance(text);
-    const voice = window.speechSynthesis.getVoices().find(voice => voice.lang.toLowerCase() === "en-in");
-    if (voice) call.voice = voice;
-    call.lang = voice?.lang || "en";
-    call.rate = .92;
-    window.speechSynthesis.speak(call);
-  }
-
-  function strike() {
-    if (!audioEnabled) return;
-    if (audioContext?.state === "running") {
-      const beat = audioContext.currentTime;
-      for (const [wave, high, low, length, volume] of [
-        ["triangle", 180, 58, .19, .27], ["square", 780, 260, .045, .045],
-      ]) {
-        const tone = audioContext.createOscillator();
-        const envelope = audioContext.createGain();
-        tone.type = wave;
-        tone.frequency.setValueAtTime(high, beat);
-        tone.frequency.exponentialRampToValueAtTime(low, beat + length * .8);
-        envelope.gain.setValueAtTime(volume, beat);
-        envelope.gain.exponentialRampToValueAtTime(.001, beat + length);
-        tone.connect(envelope).connect(audioContext.destination);
-        tone.start(beat);
-        tone.stop(beat + length);
-      }
-    }
-    speak("Sold!");
-  }
-
   function announce(result, featured, name) {
     clearTimeout(saleTimeout);
     const banner = node("sold-banner");
@@ -181,10 +147,8 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     banner.setAttribute("aria-label", `${result.name} sold to ${name} for ${formatPrice(result.price)}`);
     banner.getAnimations({ subtree: true }).forEach(animation => { animation.currentTime = 0; animation.play(); });
     scene?.sold(result.team, featured);
-    if (audioEnabled) {
-      clearTimeout(impactTimeout);
-      impactTimeout = setTimeout(strike, motion.matches ? 0 : 440);
-    }
+    clearTimeout(impactTimeout);
+    impactTimeout = setTimeout(audio.sold, motion.matches ? 0 : 440);
     saleTimeout = setTimeout(() => { banner.hidden = true; }, featured && !motion.matches ? 2800 : 2000);
   }
 
@@ -192,27 +156,12 @@ function createAuctionPresentation(colors, formatPrice, actions) {
   node("view-floor").addEventListener("click", () => { selected = "table"; showView(); });
   node("view-wide").addEventListener("click", () => { wide = !wide; scene?.wide(wide); showView(); });
   motion.addEventListener("change", () => scene?.reduced(motion.matches));
-  const audioButton = node("auction-audio");
-  audioButton.addEventListener("click", () => {
-    audioEnabled = !audioEnabled;
-    if (audioEnabled && window.AudioContext) {
-      audioContext ||= new AudioContext();
-      audioContext.resume().catch(() => {});
-    } else if (!audioEnabled) {
-      clearTimeout(impactTimeout);
-      window.speechSynthesis?.cancel();
-    }
-    audioButton.setAttribute("aria-pressed", String(audioEnabled));
-    audioButton.textContent = audioEnabled ? "Auction audio on" : "Auction audio off";
-  });
-  window.addEventListener("pagehide", () => {
-    clearTimeout(impactTimeout);
-    if (audioEnabled) window.speechSynthesis?.cancel();
-  });
+  window.addEventListener("pagehide", () => clearTimeout(impactTimeout));
   return {
     sync(state, previous, teams) {
       latest = state;
       teamNames = teams;
+      audio.live(state.phase !== "complete");
       if (!previous || previous.user !== state.user) {
         node("arena-tables").replaceChildren(...Object.entries(teams).map(([code, name]) => {
           const button = document.createElement("button");
@@ -234,14 +183,21 @@ function createAuctionPresentation(colors, formatPrice, actions) {
       updateScene();
       if (previous && state.phase === "bidding" &&
           (state.lot !== previous.lot || state.cue !== previous.cue)) {
-        if (state.cue === "once") speak("Going once.");
-        if (state.cue === "twice") speak("Going twice.");
+        if (state.cue === "once") audio.call("Going once.");
+        if (state.cue === "twice") audio.call("Going twice.");
       }
       const bid = state.bid_id && `${state.lot}:${state.bid_id}`;
       if (bid && bid !== lastBid && state.leader) {
         lastBid = bid;
         if (previous) {
           scene?.raise(state.leader);
+          const ownTable = state.leader === state.user;
+          const names = Object.keys(teams).filter(team => team !== state.user);
+          names.splice(7, 0, state.user);
+          const side = (names.indexOf(state.leader) % 5 - 2) * .24;
+          const bidder = state.leader === "RCB" ? "Bengaluru"
+            : state.leader === "SRH" ? "Hyderabad" : teams[state.leader].split(" ")[0];
+          audio.bid(bidder, state.price, ownTable, side);
         }
       }
       const result = state.results.at(-1);
@@ -256,7 +212,8 @@ function createAuctionPresentation(colors, formatPrice, actions) {
       lastBid = null;
       clearTimeout(saleTimeout);
       clearTimeout(impactTimeout);
-      if (audioEnabled) window.speechSynthesis?.cancel();
+      audio.stopVoice();
+      audio.live(false);
       node("sold-banner").hidden = true;
       node("room").classList.remove("arena-active");
       node("room").classList.remove("arena-reveal");
