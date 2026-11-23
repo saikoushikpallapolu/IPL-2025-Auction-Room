@@ -8,6 +8,8 @@ function createAuctionPresentation(colors, formatPrice, actions) {
   const restartHome = node("restart").parentElement;
   const venue = node("room-viewport");
   const venueHome = venue.parentElement;
+  const roster = node("table-roster");
+  const rosterHome = roster.parentElement;
   let selected = "3d";
   let scene;
   let loading;
@@ -82,6 +84,11 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     node("view-controls").hidden = !isLive();
     const restartParent = show3d ? node("view-controls") : restartHome;
     if (node("restart").parentElement !== restartParent) restartParent.append(node("restart"));
+    const rosterParent = show3d ? node("view-controls") : rosterHome;
+    if (roster.parentElement !== rosterParent) {
+      if (show3d) rosterParent.append(roster);
+      else rosterHome.insertBefore(roster, rosterHome.querySelector(".stage-controls"));
+    }
     if (failed) node("view-3d").textContent = "3D unavailable";
     if (isLive()) placeBid();
     scene?.show(Boolean(show3d || reveal3d));
@@ -290,7 +297,7 @@ function createLineupMaker(save) {
   let suggested = [];
   let keeper;
   let confirmState;
-  let dragSlot;
+  let draggedPlayer;
   let editingDraft = false;
   const roles = { BAT: "Batter", BOWL: "Bowler", AR: "All-rounder", WK: "Wicketkeeper" };
 
@@ -323,6 +330,71 @@ function createLineupMaker(save) {
     node("lineup-slots").children[to]?.querySelector("button")?.focus();
   }
 
+  function canAdd(index) {
+    return order.length < 11 && (!roster[index].overseas || order.filter(i => roster[i].overseas).length < 4);
+  }
+
+  function addPlayer(index, position = order.length) {
+    if (!canAdd(index)) return;
+    order.splice(position, 0, index);
+    changed();
+  }
+
+  function removePlayer(index) {
+    order = order.filter(player => player !== index);
+    changed();
+  }
+
+  function endDrag() {
+    draggedPlayer = null;
+    editor.classList.remove("dragging-lineup");
+  }
+
+  function makeDraggable(row, index) {
+    row.dataset.lineupPlayer = index;
+    row.addEventListener("pointerdown", event => {
+      if (event.button !== 0 || event.target.closest("button")) return;
+      event.preventDefault();
+      draggedPlayer = { index, from: order.indexOf(index), x: event.clientX, y: event.clientY, pointer: event.pointerId };
+      editor.setPointerCapture(event.pointerId);
+    });
+  }
+
+  function showEmptyHint(list, text) {
+    if (list.children.length) return;
+    const row = document.createElement("li");
+    row.className = "lineup-empty";
+    row.textContent = text;
+    list.append(row);
+  }
+
+  editor.addEventListener("pointermove", event => {
+    if (draggedPlayer?.pointer !== event.pointerId) return;
+    if (Math.hypot(event.clientX - draggedPlayer.x, event.clientY - draggedPlayer.y) >= 5) {
+      editor.classList.add("dragging-lineup");
+    }
+  });
+  editor.addEventListener("pointerup", event => {
+    if (draggedPlayer?.pointer !== event.pointerId) return;
+    const { index, from } = draggedPlayer;
+    const moved = editor.classList.contains("dragging-lineup");
+    endDrag();
+    if (!moved) return;
+    const target = document.elementFromPoint(event.clientX, event.clientY);
+    if (target?.closest("#lineup-bench") && from >= 0) {
+      removePlayer(index);
+    } else if (target?.closest("#lineup-slots")) {
+      const row = target.closest("[data-lineup-player]");
+      const bounds = row?.getBoundingClientRect();
+      const position = row
+        ? order.indexOf(Number(row.dataset.lineupPlayer)) + Number(event.clientY > bounds.top + bounds.height / 2)
+        : order.length;
+      if (from < 0) addPlayer(index, position);
+      else reorder(from, from < position ? position - 1 : position);
+    }
+  });
+  editor.addEventListener("pointercancel", endDrag);
+
   function draw() {
     const players = order.map(index => roster[index]);
     const overseas = players.filter(player => player.overseas).length;
@@ -338,18 +410,7 @@ function createLineupMaker(save) {
     node("lineup-slots").replaceChildren(...order.map((index, position) => {
       const player = roster[index];
       const row = document.createElement("li");
-      row.draggable = true;
-      row.addEventListener("dragstart", event => {
-        dragSlot = position;
-        event.dataTransfer.setData("text/plain", String(position));
-      });
-      row.addEventListener("dragend", () => { dragSlot = null; });
-      row.addEventListener("dragover", event => { if (dragSlot != null) event.preventDefault(); });
-      row.addEventListener("drop", event => {
-        event.preventDefault();
-        reorder(dragSlot, position);
-        dragSlot = null;
-      });
+      makeDraggable(row, index);
       const label = document.createElement("span");
       label.textContent = `${player.name}${player.overseas ? " · Overseas" : ""}`;
       const info = document.createElement("small");
@@ -362,7 +423,7 @@ function createLineupMaker(save) {
       down.disabled = position === order.length - 1;
       controls.append(up, down);
       if (player.role === "WK" && index !== keeper) controls.append(button("Keep", () => { keeper = index; changed(); }, `Make ${player.name} wicketkeeper`));
-      controls.append(button("Remove", () => { order.splice(position, 1); changed(); }, `Remove ${player.name} from XI`));
+      controls.append(button(editingDraft ? "−" : "Remove", () => removePlayer(index), `Remove ${player.name} from XI`));
       row.append(label, controls);
       return row;
     }));
@@ -370,13 +431,16 @@ function createLineupMaker(save) {
     node("lineup-bench").replaceChildren(...roster.flatMap((player, index) => {
       if (selected.has(index)) return [];
       const row = document.createElement("li");
+      makeDraggable(row, index);
       const label = document.createElement("span");
       label.textContent = `${player.name} · ${roles[player.role]}${player.overseas ? " · Overseas" : ""}`;
-      const add = button("Add", () => { order.push(index); changed(); }, `Add ${player.name} to XI`);
-      add.disabled = players.length >= 11 || (player.overseas && overseas >= 4);
+      const add = button(editingDraft ? "+" : "Add", () => addPlayer(index), `Add ${player.name} to XI`);
+      add.disabled = !canAdd(index);
       row.append(label, add);
       return [row];
     }));
+    showEmptyHint(node("lineup-bench"), "Drop a player here to return them to the squad.");
+    showEmptyHint(node("lineup-slots"), "Drop a player here to start your XI.");
   }
 
   async function submit() {
@@ -442,6 +506,7 @@ function createLineupMaker(save) {
     },
     closeDraft() {
       if (!editingDraft) return;
+      endDrag();
       editingDraft = false;
       node("live-lineup-host").hidden = true;
       editor.hidden = true;

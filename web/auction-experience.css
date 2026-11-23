@@ -471,7 +471,7 @@ body:has(.arena-reveal) > main.shell { width: 100%; padding: 0; }
   color: #f6f8ff; margin: .7rem 0 .7rem auto;
 }
 .arena-active .table-roster {
-  position: absolute; z-index: 2; right: var(--arena-edge); top: calc(var(--arena-edge) + 77px);
+  position: absolute; z-index: 1; right: 0; top: calc(100% + .55rem);
   width: min(21vw, 17.5rem); margin: 0;
 }
 .table-roster h3 { display: flex; align-items: center; gap: .4rem; margin: 0; font-size: .85rem; }
@@ -480,20 +480,56 @@ body:has(.arena-reveal) > main.shell { width: 100%; padding: 0; }
 .table-roster ul { list-style: none; margin: 0; padding: 0; max-height: min(30svh, 16rem); overflow: auto; }
 .table-roster li { display: flex; justify-content: space-between; gap: .35rem; padding: .3rem 0; border-top: 1px solid #c3d9fa2e; font-size: .72rem; }
 .table-roster li span { color: var(--roster-light); font-size: .69rem; }
-.franchise-panel.editing-xi .franchise-columns { display: none; }
-#live-lineup-host { flex: 1; overflow: auto; min-height: 0; }
+.franchise-panel.editing-xi {
+  inset: clamp(.3rem, 2vw, 1.4rem);
+  width: auto; overflow: visible; color-scheme: dark;
+}
+.franchise-panel.editing-xi .franchise-columns, .franchise-panel.editing-xi .franchise-metrics { display: none; }
+#live-lineup-host { flex: 1; min-height: 0; }
 #room #live-lineup-host .lineup-maker {
+  display: flex; flex-direction: column; min-height: 100%;
   margin: 0; border: 0; border-radius: 0; background: transparent; padding: .65rem;
 }
-#live-lineup-host .lineup-columns { grid-template-columns: repeat(2,minmax(0,1fr)); gap: .65rem; }
+#live-lineup-host .lineup-columns {
+  flex: 1; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; gap: .65rem;
+}
 #live-lineup-host .lineup-columns > :first-child { grid-column: 2; grid-row: 1; }
 #live-lineup-host .lineup-columns > :last-child { grid-column: 1; grid-row: 1; }
-#live-lineup-host #lineup-slots li { font-size: .82rem; }
-#live-lineup-host #lineup-slots li > div { float: none; }
+#live-lineup-host #lineup-slots,
+#live-lineup-host #lineup-bench {
+  min-height: 5rem; padding: .3rem .5rem; border: 1px solid #a8bddf5c; border-radius: .45rem;
+  background: #090f1e60;
+}
+#live-lineup-host #lineup-slots { padding-left: 1.6rem; list-style: none; counter-reset: batting-order; }
+#live-lineup-host #lineup-bench { display: grid; gap: .1rem .6rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#live-lineup-host #lineup-slots li, #live-lineup-host #lineup-bench li { font-size: .78rem; padding: .2rem 0; min-height: 1.8rem; }
+#live-lineup-host #lineup-slots li[data-lineup-player] {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center;
+  gap: .4rem; counter-increment: batting-order;
+}
+#live-lineup-host #lineup-slots li[data-lineup-player]::before {
+  position: absolute; right: 100%; margin-right: .35rem; content: counter(batting-order);
+  color: #d5e0f1;
+}
+#live-lineup-host #lineup-slots li::after { content: none; }
+#live-lineup-host #lineup-slots li > div { float: none; margin: 0; }
+#live-lineup-host #lineup-slots small { color: #c5d5ec; }
+#live-lineup-host .lineup-empty { grid-column: 1 / -1; color: #c5d5ec; }
 #live-lineup-host .lineup-heading h2 { font-size: 1.1rem; }
-#live-lineup-host button { font-size: .7rem; }
+#live-lineup-host button { font-size: .7rem; padding: .2rem .3rem; }
+.lineup-drag-hint { margin-top: .25rem; color: #c5d5ec; font-size: .74rem; }
+#lineup-slots li[data-lineup-player], #lineup-bench li[data-lineup-player] { cursor: grab; touch-action: none; user-select: none; }
+.dragging-lineup #lineup-slots, .dragging-lineup #lineup-bench { outline: 1px dashed var(--team-light, #ffd381); outline-offset: 2px; }
+@media (min-width: 960px) {
+  #live-lineup-host #lineup-bench { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 @media (max-width: 660px) {
-  .arena-active .table-roster { top: 33%; width: min(47vw, 12rem); }
+  .arena-active .table-roster { width: min(47vw, 12rem); }
   .table-roster ul { max-height: 23svh; }
   .table-roster li { font-size: .66rem; }
+  #room #live-lineup-host .lineup-maker { padding: .4rem; }
+  #live-lineup-host .lineup-columns { gap: .35rem; }
+  #live-lineup-host #lineup-slots li, #live-lineup-host #lineup-bench li { font-size: .64rem; }
+  #live-lineup-host #lineup-bench li { align-items: start; gap: .12rem; }
+  #live-lineup-host #lineup-slots li > div { gap: .1rem; }
 }

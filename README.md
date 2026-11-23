@@ -4,7 +4,7 @@
 
 **Build an IPL squad from the auction table.**
 
-Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. Set your retentions, bid against nine squad-aware AI franchises, and pick your Playing XI after the final hammer. The same player pool powers a reproducible sports ML benchmark for sale probability, price uncertainty, and franchise strategy.
+Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. Set your retentions, bid against nine squad-aware AI franchises, and build your Playing XI as your squad takes shape. The same player pool powers a reproducible sports ML benchmark for sale probability, price uncertainty, and franchise strategy.
 
 [Quick start](#quick-start) · [Inside the game](#inside-the-game) · [Sports ML benchmark](#sports-ml-benchmark) · [Simulator benchmarks](#simulator-versus-the-real-auction) · [Architecture](#architecture)
 
@@ -21,18 +21,18 @@ Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. 
 | Feature | How it plays |
 | --- | --- |
 | **Franchise setup** | Pick a team and choose whom to retain. Retention deductions and the ₹120 Cr salary cap determine your opening purse. |
-| **Live 3D bidding** | Raise your paddle from the arena, switch between the wide camera and **My table** behind your delegation, or use the lighter table view. The **Audio** menu independently controls the built-in auctioneer, wooden paddle and gavel effects, and a looping original instrumental. |
+| **Live 3D bidding** | Raise your paddle from the arena and switch between the wide camera, a seat behind any franchise’s table, and the lighter table view. Each table camera shows its retained and purchased players on a roster stand. The stage board keeps the player’s name centered and adds the leading franchise’s name and logo in the corner. A spotlight in the franchise’s color follows the lead table. The **Audio** menu controls the auctioneer, paddle and gavel effects, and the original instrumental. |
 | **Player and rival scouting** | The live board shows the reserve, last recorded sale and season when available, playing role, and applicable RTM. Open Player Stats for valuation, sale probability, conditional price range, and available form. Open a team-colored side panel for its purse, squad, RTM cards, and projected XI. The auction clock pauses while you inspect a team and resumes when you close the panel. |
 | **Set reveals and shuffled lots** | Watch the pouch open inside the wide-camera arena. The roster card shows the category, order, and reserve prices. Players shuffle within each set while the published opening-set order stays intact. |
 | **Your pace between lots** | **Skip player** resolves the current lot and shows the result. Bidding remains paused until you select **Ready for next player**, including after a refresh. |
 | **Accelerated bidding and final recall** | Submit a searchable, role-filtered sheet of up to ten players. AI franchises submit their own shortlists based on squad fit and affordability. Shared nominations produce a single lot, and both accelerated stages use shorter bidding intervals. |
 | **Right to Match** | An eligible former franchise can request RTM, the winning bidder can make a final offer, and the eligible franchise can match that final price. Eligibility and remaining slots are tracked per franchise. |
 | **Sale ceremony and results** | A full-screen, team-colored SOLD reveal shows the winning franchise, player, and price. Review recent bids and sold or unsold outcomes from the arena. |
-| **Playing XI** | Start from a suggested XI, swap in players from your squad, reorder the batting lineup, and choose a wicketkeeper. The editor enforces the four-overseas limit. |
+| **Playing XI** | Edit and save your franchise’s XI mid-auction. Drag players between the available squad and the batting order, or drag within the XI to reorder it. Rival lineups are AI projections. |
 
 ![Marquee set reveal with the animated pouch, team tables, and the upcoming players and reserve prices](docs/screenshots/set-reveal.jpg)
 
-*The next set appears beside the arena. Select Open bidding when you are ready.*
+*The next set is revealed over the wide-camera arena. Select **Open bidding** when you are ready.*
 
 ### How the auction moves
 
@@ -47,7 +47,9 @@ In both accelerated rounds, the opening window drops from **2.4 s to 1.35 s**, t
 
 ### Build your Playing XI
 
-Start with the suggested XI, swap players in from the available squad, set the batting order, and select a wicketkeeper. The editor shows the overseas count and the number of batting and bowling options. A saved lineup must have eleven distinct players, a wicketkeeper, and at most four overseas players.
+During the auction, open **Franchises**, select your team, and choose **Edit Playing XI**. The auction pauses while the panel is open. Drag a player from **Available squad** into **Batting order** to add them, or drag them back to remove them. Drop a player above or below another batter to change the order. The row buttons also support adding, removing, and moving players. Use **Save XI draft** to keep a work-in-progress lineup as the auction continues.
+
+After the auction, finish your lineup and select a wicketkeeper. The final XI requires eleven distinct players and allows at most four overseas players. The editor shows the overseas count and the squad’s available batting and bowling options.
 
 ![Playing XI maker showing the batting order, available squad, selected wicketkeeper, overseas count, and save button](docs/screenshots/playing-xi.jpg)
 

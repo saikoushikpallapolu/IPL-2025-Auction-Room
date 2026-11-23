@@ -370,26 +370,28 @@ function makeStage(scene) {
     ctx.strokeRect(21, 21, w - 42, h - 42);
     ctx.textAlign = "center";
     if (franchise) {
+      const tagWidth = 515;
+      const tagLeft = w - 37 - tagWidth;
       ctx.fillStyle = "#080f22d9";
-      ctx.fillRect(37, 33, w - 74, 117);
+      ctx.fillRect(tagLeft, 36, tagWidth, 78);
       const logo = franchiseBadges.get(franchise.code);
       ctx.fillStyle = "#f4f7ff";
-      ctx.fillRect(48, 41, 101, 101);
+      ctx.fillRect(tagLeft + 9, 45, 60, 60);
       if (logo?.complete && logo.naturalWidth) {
-        ctx.drawImage(logo, 55, 48, 87, 87);
+        ctx.drawImage(logo, tagLeft + 13, 49, 52, 52);
       } else {
         ctx.fillStyle = "#111b32";
         ctx.font = "bold 23px system-ui";
-        ctx.fillText(franchise.code, 98, 101, 85);
+        ctx.fillText(franchise.code, tagLeft + 39, 82, 51);
       }
       ctx.textAlign = "left";
       ctx.fillStyle = "#e1eaff";
-      ctx.font = "750 21px system-ui";
+      ctx.font = "750 17px system-ui";
       const status = line.startsWith("Sold") ? "SOLD TO" : line === "Highest bidder" ? "IN THE LEAD" : `LEADS · ${line.toUpperCase()}`;
-      ctx.fillText(status, 172, 69, w - 215);
+      ctx.fillText(status, tagLeft + 81, 63, tagWidth - 94);
       ctx.fillStyle = "#ffffff";
-      ctx.font = "850 54px system-ui";
-      ctx.fillText(franchise.name, 172, 125, w - 215);
+      ctx.font = "800 32px system-ui";
+      ctx.fillText(franchise.name, tagLeft + 81, 96, tagWidth - 94);
     } else {
       if (emblem.complete && emblem.naturalWidth) ctx.drawImage(emblem, 40, 39, 64, 64);
       ctx.fillStyle = bright ? "#080d15" : "#ffffff";
@@ -398,10 +400,10 @@ function makeStage(scene) {
     }
     ctx.textAlign = "center";
     ctx.fillStyle = bright ? "#080d15" : "#fff4dc";
-    ctx.font = franchise ? "bold 63px system-ui" : "bold 74px system-ui";
-    ctx.fillText(name, w / 2, franchise ? 207 : 181, w - 110);
+    ctx.font = "bold 83px system-ui";
+    ctx.fillText(name, w / 2, 188, w - 100);
     ctx.font = "600 54px system-ui";
-    ctx.fillText(amount, w / 2, franchise ? 275 : 264);
+    ctx.fillText(amount, w / 2, 264);
     metrics.forEach(([label, value], i) => {
       const cell = (w - 90) / metrics.length;
       const left = 45 + i * cell;
