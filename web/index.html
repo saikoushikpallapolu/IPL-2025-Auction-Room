@@ -179,6 +179,25 @@
         </div>
       </div>
 
+      <aside id="franchise-panel" class="franchise-panel" aria-labelledby="franchise-name" hidden>
+        <header class="franchise-header">
+          <div id="franchise-name"></div>
+          <label class="franchise-picker">Franchise <select id="franchise-select"></select></label>
+          <button id="franchise-close" type="button" class="secondary compact">Close</button>
+        </header>
+        <div id="franchise-metrics" class="franchise-metrics"></div>
+        <p id="franchise-pause-status" class="franchise-pause-status" role="status" hidden>Auction paused while you review squads</p>
+        <div class="franchise-columns">
+          <section aria-labelledby="franchise-squad-title">
+            <h3 id="franchise-squad-title">Squad</h3>
+            <ul id="franchise-squad"></ul>
+          </section>
+          <section aria-labelledby="franchise-xi-title">
+            <h3 id="franchise-xi-title">Projected Playing XI</h3>
+            <ol id="franchise-xi"></ol>
+          </section>
+        </div>
+      </aside>
       <dialog id="stats-dialog" aria-labelledby="stats-title">
         <div class="dialog-heading">
           <h2 id="stats-title"></h2>
@@ -200,10 +219,6 @@
             </dl>
             <p class="muted" id="phase-stats"></p>
             <div id="performance-stats"></div>
-          </section>
-          <section id="stats-teams" hidden>
-            <p class="muted" id="rtm-count"></p>
-            <div id="standings" class="standings"></div>
           </section>
           <section id="stats-set" hidden><ol id="current-set-list" class="set-list"></ol></section>
           <section id="stats-results" hidden><div id="results" class="rows"></div></section>

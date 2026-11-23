@@ -99,6 +99,9 @@ def state(request: Request, after: int | None = None):
 def action(move: Move, request: Request):
     with lock:
         auction = current_auction(request)
+        if move.action in {"pause", "resume"}:
+            auction.act(move.action)
+            return auction.snapshot()
         same_lot = move.lot == auction.index + 1
         current_offer = (
             move.action == "bid" and same_lot and auction.phase == "bidding"

@@ -1,8 +1,9 @@
 from collections import Counter
 from random import Random
 from unittest import TestCase
+from unittest.mock import patch
 
-from src.simulator_engine import Auction, Catalog
+from src.simulator_engine import Auction, Catalog, next_price
 from src.team_strategy import projected_xi, xi_fit
 
 
@@ -30,6 +31,24 @@ class AuctionRulesTests(TestCase):
         known = dict(CSK=5500, DC=7300, GT=6900, KKR=5100, LSG=6900, MI=4500, PBKS=11050, RR=4100, RCB=8300, SRH=4500)
         self.assertEqual(Auction(self.catalog, None, []).purses, known)
 
+    def test_bid_increments_at_purse_brackets(self):
+        self.assertEqual([next_price(price) for price in (30, 95, 100, 190, 200, 480, 500)],
+                         [35, 100, 110, 200, 220, 500, 525])
+
+    def test_retained_spin_and_pant_wicketkeeping_are_available_in_xi(self):
+        chennai = projected_xi(self.catalog.retained["CSK"])
+        self.assertIn(("Ravindra Jadeja", "spin"), {(p["name"], p["skill"]) for p in chennai["players"]})
+        pant = next(p for p in self.catalog.players if p["name"] == "Rishabh Pant")
+        self.assertEqual((pant["role"], pant["skill"], pant["rtm_team"]), ("WK", "keeper", "DC"))
+
+    def test_secondary_role_can_fill_vacancy_without_double_counting_a_player(self):
+        roster = [dict(player(str(i)), skill="top_order", price=100) for i in range(3)]
+        roster.append(dict(player("flex"), skill="top_order", price=100, secondary_skills=("spin",)))
+        lineup = projected_xi(roster)
+        self.assertEqual(len(lineup["players"]), 4)
+        self.assertNotIn("spin", lineup["vacancies"])
+        self.assertEqual(len({p["roster_index"] for p in lineup["players"]}), 4)
+
     def test_user_can_bid_during_opening_and_both_closing_calls(self):
         for call_count, cue in enumerate(("open", "once", "twice")):
             with self.subTest(cue=cue):
@@ -44,6 +63,26 @@ class AuctionRulesTests(TestCase):
                 self.assertTrue(before["can_bid"])
                 auction.act("bid")
                 self.assertEqual((auction.leader, auction.price, auction.cue), ("DC", before["next_price"], "open"))
+
+    def test_squad_pause_freezes_bidding_and_rtm_clocks(self):
+        for phase in ("bidding", "rtm"):
+            with self.subTest(phase=phase):
+                auction = self.make_auction([player("pause", "DC")])
+                auction.ceilings.clear()
+                if phase == "rtm":
+                    auction.bid("MI", 50)
+                    auction.settle()
+                auction.deadline = 104
+                with patch("src.simulator_engine.monotonic", return_value=100):
+                    auction.act("pause")
+                with patch("src.simulator_engine.monotonic", return_value=200):
+                    self.assertEqual(auction.snapshot()["seconds"], 4)
+                    self.assertEqual(auction.phase, phase)
+                    with self.assertRaisesRegex(ValueError, "resume bidding"):
+                        auction.act("skip")
+                    auction.act("resume")
+                    self.assertEqual(auction.deadline, 204)
+                    self.assertFalse(auction.snapshot()["paused"])
 
     def test_leading_team_can_raise_before_user_confirms_rtm(self):
         auction = self.make_auction([player("a", "DC")])
@@ -63,6 +102,34 @@ class AuctionRulesTests(TestCase):
         self.assertEqual(auction.rtm_stage, "final")
         auction.act("raise", amount=500)
         self.assertEqual((auction.results[-1]["team"], auction.results[-1]["price"]), ("DC", 500))
+
+    def test_final_rtm_acceptance_and_decline_only_charge_the_winner(self):
+        for decision, winner in (("match", "DC"), ("pass", "MI")):
+            with self.subTest(decision=decision):
+                auction = self.make_auction([player("final", "DC")])
+                purses = auction.purses.copy()
+                auction.ceilings["MI"] = 1800
+                auction.bid("MI", 1500)
+                auction.settle()
+                self.assertEqual(auction.rtm_stage, "offer")
+                auction.act("match")
+                self.assertEqual((auction.rtm_stage, auction.price), ("match", 1800))
+                auction.act(decision)
+                self.assertEqual(auction.results[-1]["team"], winner)
+                self.assertEqual(auction.results[-1]["via_rtm"], decision == "match")
+                self.assertEqual(auction.rtm_cards("DC")["total"], 5 if decision == "match" else 6)
+                self.assertEqual(auction.purses[winner], purses[winner] - 1800)
+                other = "MI" if winner == "DC" else "DC"
+                self.assertEqual(auction.purses[other], purses[other])
+
+    def test_skip_during_final_offer_keeps_ai_rtm_right(self):
+        auction = self.make_auction([player("skip-rtm", "MI", uncapped=True)])
+        auction.bid("DC", 40)
+        auction.settle()
+        self.assertEqual(auction.rtm_stage, "final")
+        auction.act("skip")
+        result = auction.results[-1]
+        self.assertEqual((result["team"], result["price"], result["via_rtm"]), ("MI", 40, True))
 
     def test_player_without_rtm_entitlement_does_not_trigger_offer(self):
         unlisted = player("a")

@@ -541,6 +541,7 @@ export function createRoom(host, labels, handlers) {
     const overview = wide && !(cut && focus);
     const portraitDistance = overview ? Math.max(0, 1 / camera.aspect - 1) * 8 : 0;
     camera.fov = overview ? Math.max(revealing ? 62 : 51, Math.min(94, 61 / camera.aspect)) : camera.aspect < 1 ? 66 : 53;
+    camera.filmOffset = revealing && camera.aspect > 1.1 ? 6 : 0;
     camera.updateProjectionMatrix();
     if (cut && focus) {
       const point = focus.table.position;

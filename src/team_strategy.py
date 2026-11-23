@@ -10,6 +10,8 @@ def primary_skill(player):
     style = player.get("bowling_style", "").lower()
     if role == "WK":
         return "keeper"
+    if role in {"BOWL", "AR"} and style == "spin":
+        return "spin"
     if role in {"BOWL", "AR"} and form.get("death_bowl_balls", 0) >= 24:
         if form["death_bowl_balls"] >= 0.28 * sum(form.get(f"{p}_bowl_balls", 0) for p in ("powerplay", "middle", "death")):
             return "death"
@@ -20,6 +22,25 @@ def primary_skill(player):
     if role == "AR" or (form.get("death_bat_balls", 0) >= 20 and form.get("death_runs", 0) >= 1.4 * form["death_bat_balls"]):
         return "finisher"
     return "top_order"
+
+
+def secondary_skills(player):
+    form = player.get("form") or {}
+    role = player["role"]
+    style = player.get("bowling_style", "").lower()
+    skills = []
+    if role != "BOWL" and form.get("powerplay_bat_balls", 0) >= 36:
+        skills.append("top_order")
+    if role != "BOWL" and form.get("death_bat_balls", 0) >= 24 and form.get("death_runs", 0) >= 1.4 * form["death_bat_balls"]:
+        skills.append("finisher")
+    if role in {"AR", "BOWL"}:
+        if form.get("middle_bowl_balls", 0) >= 36 and any(word in style for word in ("spin", "break", "orthodox")):
+            skills.append("spin")
+        if form.get("powerplay_bowl_balls", 0) >= 36 and any(word in style for word in ("fast", "medium", "pace")):
+            skills.append("pace")
+        if form.get("death_bowl_balls", 0) >= 36:
+            skills.append("death")
+    return tuple(skill for skill in skills if skill != player["skill"])
 
 
 def playing_quality(player):
@@ -50,12 +71,13 @@ def xi_fit(player, roster, alternatives):
     incumbents = [member for member in roster if member.get("skill") == skill]
     quality = player.get("quality", 1.0)
     values = sorted((member.get("quality", 1.0) for member in incumbents), reverse=True)
-    vacancy = max(0, slots - len(values)) / slots
-    upgrade = 0 if vacancy else max(0, min(1, 2 * (quality / values[slots - 1] - 1)))
+    cover = sum(skill in member.get("secondary_skills", ()) for member in roster)
+    vacancy = max(0, slots - len(values) - .45 * cover) / slots
+    upgrade = 0 if len(values) < slots else max(0, min(1, 2 * (quality / values[slots - 1] - 1)))
     alternatives_in_tier = alternatives[(skill, player["overseas"])]
     scarcity = 1 / (1 + alternatives_in_tier / 8)
     overseas = sum(member["overseas"] for member in roster)
-    congestion = 0.14 * min(2, max(0, overseas - 3)) if player["overseas"] else 0
+    congestion = .14 * min(3, max(0, overseas - 3)) if player["overseas"] else 0
     return max(0.48, 0.70 + 0.44 * vacancy + 0.27 * upgrade + 0.13 * scarcity - congestion)
 
 
@@ -90,4 +112,23 @@ def projected_xi(roster):
             "roster_index": roster_indexes[id(player)],
         })
         remaining[skill] -= 1
+    used = {entry["roster_index"] for entry in starters}
+    overseas = sum(entry["overseas"] for entry in starters)
+    for skill in sorted(remaining, key=lambda key: sum(key in p.get("secondary_skills", ()) for p in roster)):
+        candidates = sorted(
+            (p for p in roster if roster_indexes[id(p)] not in used and skill in p.get("secondary_skills", ())),
+            key=quality, reverse=True,
+        )
+        for player in candidates:
+            if not remaining[skill]:
+                break
+            if player["overseas"] and overseas == 4:
+                continue
+            index = roster_indexes[id(player)]
+            used.add(index)
+            overseas += player["overseas"]
+            starters.append({"name": player["name"], "skill": skill, "overseas": player["overseas"], "roster_index": index})
+            remaining[skill] -= 1
+    order = {skill: i for i, skill in enumerate(XI_TARGETS)}
+    starters.sort(key=lambda entry: order[entry["skill"]])
     return {"players": starters, "vacancies": {skill: count for skill, count in remaining.items() if count}}

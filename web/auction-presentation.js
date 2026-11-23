@@ -164,11 +164,11 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     sync(state, previous, teams) {
       latest = state;
       teamNames = teams;
-      if (previous && (state.lot !== previous.lot || state.phase !== previous.phase)) {
+      if (previous && (state.lot !== previous.lot || state.phase !== previous.phase || state.paused)) {
         audio.stopVoice();
         clearTimeout(impactTimeout);
       }
-      audio.live(state.phase !== "complete");
+      audio.live(state.phase !== "complete" && !state.paused);
       if (!previous || previous.user !== state.user) {
         node("arena-tables").replaceChildren(...Object.entries(teams).map(([code, name]) => {
           const button = document.createElement("button");
@@ -188,7 +188,7 @@ function createAuctionPresentation(colors, formatPrice, actions) {
       node("seat-team").style.setProperty("--seat-color", colors[state.user][0]);
       showView();
       updateScene();
-      if (previous && state.phase === "bidding" &&
+      if (previous && !state.paused && state.phase === "bidding" &&
           (state.lot !== previous.lot || state.cue !== previous.cue)) {
         if (state.cue === "once") audio.call("Going once.");
         if (state.cue === "twice") audio.call("Going twice.");
@@ -196,7 +196,7 @@ function createAuctionPresentation(colors, formatPrice, actions) {
       const bid = state.bid_id && `${state.lot}:${state.bid_id}`;
       if (bid && bid !== lastBid && state.leader) {
         lastBid = bid;
-        if (previous) {
+        if (previous && !state.paused) {
           scene?.raise(state.leader);
           const ownTable = state.leader === state.user;
           const names = Object.keys(teams).filter(team => team !== state.user);

@@ -253,27 +253,31 @@ body:has(.arena-active) #error:not([hidden]) { position: fixed; z-index: 8; top:
 .pouch .game-emblem { position: absolute; width: 3rem; height: 3rem; left: 50%; top: 61%; transform: translate(-50%, -50%); }
 
 body:has(.arena-reveal) { background: #070d20; color: #f3f7ff; }
-body:has(.arena-reveal) > .top { background: #0a152b; border-color: #35547a; }
+body:has(.arena-reveal) > .top {
+  position: absolute; z-index: 6; inset: 0 0 auto;
+  background: #0a152bc4; border-color: #35547a;
+}
 body:has(.arena-reveal) > .top .season { color: #bdd0ed; }
 body:has(.arena-reveal) > main.shell { width: 100%; padding: 0; }
 .arena-reveal .room-heading { display: none; }
 .arena-reveal .set-reveal {
   position: relative; isolation: isolate;
-  min-height: calc(100svh - 69px);
-  grid-template-columns: minmax(0, 1.9fr) minmax(19rem, 1fr);
+  min-height: 100svh;
+  grid-template-columns: minmax(0, 1fr) minmax(19rem, 31%);
+  grid-template-rows: minmax(0, 1fr);
   margin: 0; border: 0; border-radius: 0;
   background: #0a1327;
 }
 #set-venue { display: none; }
 .arena-reveal #set-venue {
-  display: block; position: absolute; inset: 0; grid-area: 1 / 1 / 2 / 2; z-index: 0;
+  display: block; position: absolute; inset: 0; grid-area: 1 / 1 / 2 / 3; z-index: 0;
   background: #090f25 url("/assets/auction-night.webp") right center / cover;
 }
 .arena-reveal .room-viewport { position: absolute; inset: 0; height: auto; border: 0; border-radius: 0; }
 .arena-reveal .seat-marker { display: none; }
 .arena-reveal .pouch-scene {
   grid-area: 1 / 1; z-index: 1; align-self: start;
-  width: 48%;
+  width: 48%; margin-top: 68px;
   min-height: min(36vh, 290px); pointer-events: none;
   background: radial-gradient(ellipse at 50% 55%, #090f2519 24%, transparent 56%);
 }
@@ -292,7 +296,8 @@ body:has(.arena-reveal) > main.shell { width: 100%; padding: 0; }
 .arena-reveal .reveal-content {
   grid-area: 1 / 2; z-index: 2; align-self: center;
   margin: clamp(.85rem, 2vw, 1.75rem);
-  background: linear-gradient(145deg, #192b4d, #0c1529);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--team-ink) 58%, #10203c), #081327f7);
+  backdrop-filter: blur(8px);
   color: #f6f8ff; color-scheme: dark; border: 1px solid #5475a4; border-radius: 1rem;
   box-shadow: 0 18px 60px #01071996;
 }
@@ -306,9 +311,11 @@ body:has(.arena-reveal) > main.shell { width: 100%; padding: 0; }
 .arena-reveal #open-set { background: #ffcf87; color: #14203a; width: 100%; }
 .arena-reveal #open-set:hover { background: #ffe1b4; }
 @media (max-width: 700px) {
-  .arena-reveal .set-reveal { grid-template-columns: 1fr; grid-template-rows: minmax(290px, 47svh) auto; }
-  .arena-reveal .reveal-content { grid-area: 2 / 1; margin: 0 .75rem .75rem; }
-  .arena-reveal .pouch-scene { min-height: 165px; margin-top: 1.3rem; scale: .68; transform-origin: top center; }
+  .arena-reveal .set-reveal { grid-template-columns: 1fr; grid-template-rows: minmax(15rem, 47svh) auto; }
+  .arena-reveal #set-venue { grid-area: 1 / 1 / 3 / 2; }
+  .arena-reveal .reveal-content { grid-area: 2 / 1; align-self: end; margin: 0 .75rem .75rem; }
+  .arena-reveal .reveal-content .set-list { max-height: 26svh; }
+  .arena-reveal .pouch-scene { min-height: 165px; margin-top: 5rem; scale: .68; transform-origin: top center; }
 }
 @media (prefers-reduced-motion: reduce) {
   .arena-reveal .pouch i { animation: none; }
@@ -350,3 +357,80 @@ body:has(.arena-reveal) > main.shell { width: 100%; padding: 0; }
 .view-controls { position: relative; }
 .auction-audio-panel label { display: flex; align-items: center; gap: .45rem; font-size: .83rem; }
 .auction-audio-panel small { color: #c0d1eb; font-size: .7rem; }
+
+.franchise-panel {
+  position: fixed; z-index: 6; top: clamp(9rem, 22vh, 13rem); right: clamp(.5rem, 2vw, 1.5rem);
+  bottom: clamp(13rem, 26vh, 15rem); width: min(42rem, calc(100% - 1rem));
+  display: flex; flex-direction: column; overflow: hidden;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--franchise-ink) 67%, #101a2a),
+    color-mix(in srgb, var(--franchise-ink) 42%, #0b1321));
+  color: #f1f5fb; color-scheme: dark;
+  border: 1px solid #657d9a; border-top: 3px solid var(--franchise-color);
+  border-radius: .8rem; box-shadow: 0 13px 42px #020608a8;
+}
+.franchise-header {
+  display: flex; flex-wrap: wrap; gap: .55rem; align-items: center; padding: .6rem .75rem;
+  background: color-mix(in srgb, var(--franchise-ink) 68%, #09101f);
+}
+#franchise-name { display: flex; align-items: center; gap: .55rem; margin-right: auto; }
+#franchise-name h2 { font-size: clamp(.95rem, 2vw, 1.3rem); }
+.franchise-picker { display: grid; gap: .12rem; font-size: .7rem; }
+.franchise-picker select {
+  max-width: min(12rem, 46vw); border: 1px solid #8a9bb7; border-radius: .35rem; padding: .25rem;
+  background: #111d30; color: inherit; font: inherit;
+}
+.franchise-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid #344c69; }
+.franchise-metrics div { display: grid; gap: .18rem; padding: .45rem .65rem; border-right: 1px solid #ffffff35; background: #080c171f; }
+.franchise-metrics span { color: #b5c7e0; font-size: .7rem; }
+.franchise-metrics small { color: #b5c7e0; font-size: .64rem; }
+.franchise-metrics strong, .franchise-price { color: var(--franchise-color); }
+.franchise-columns { display: grid; flex: 1; min-height: 0; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); }
+.franchise-columns section { overflow-y: auto; min-width: 0; }
+.franchise-columns section + section { border-left: 1px solid #344c69; }
+.franchise-columns h3 {
+  position: sticky; top: 0; margin: 0; padding: .55rem .65rem; font-size: .85rem;
+  background: color-mix(in srgb, var(--franchise-ink) 60%, #15233b); border-bottom: 1px solid #ffffff35;
+}
+.franchise-columns ul, .franchise-columns ol { margin: 0; padding: .25rem .6rem; list-style: none; }
+.franchise-player { display: flex; align-items: center; justify-content: space-between; gap: .35rem; }
+.franchise-player, .franchise-vacancy { padding: .4rem .05rem; border-bottom: 1px solid #29415b; font-size: .78rem; }
+.franchise-player small { display: block; color: #b5c7e0; margin-top: .12rem; }
+.franchise-price { white-space: nowrap; }
+.franchise-vacancy { color: #bacbe1; font-style: italic; }
+@media (max-width: 660px) {
+  .franchise-panel { top: clamp(12rem, 31svh, 16rem); bottom: 15rem; }
+  .franchise-header { gap: .35rem; padding: .4rem; }
+  #franchise-name { flex-basis: 100%; }
+  .franchise-picker { margin-right: auto; }
+  .franchise-metrics div { padding: .3rem; font-size: .78rem; }
+}
+
+.franchise-pause-status {
+  margin: 0; padding: .32rem .72rem; color: var(--franchise-color);
+  background: #070d1a48; font-size: .75rem; font-weight: 650;
+}
+.franchise-player:hover { background: #ffffff13; }
+.franchise-vacancy { border-bottom-style: dashed; }
+#room #stats-dialog, #room .lineup-maker, #room #nominations {
+  --panel-theme: var(--team-ink, #244567);
+  color: #eff5ff; color-scheme: dark;
+  background: linear-gradient(140deg, color-mix(in srgb, var(--panel-theme) 54%, #15223a), #090f1f 92%);
+  border-color: color-mix(in srgb, var(--team-light, #89b6e8) 50%, #354c70);
+}
+#stats-dialog .muted, .lineup-maker .muted, #stats-dialog dt { color: #c5d5ec; }
+#stats-dialog .dialog-heading {
+  background: color-mix(in srgb, var(--panel-theme) 55%, #13233c);
+  border-color: #aec7e345;
+}
+#stats-dialog .detail-stats > div { background: #070d195f; border-color: #a9c4df3f; }
+#stats-dialog h2, #stats-dialog h3, .lineup-maker h2 { color: #f7faff; }
+#room #stats-dialog .activity li, #room #stats-dialog .result-row {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--team-ink, #20344f) 68%, #0e1a2c), #0d182b);
+  color: #f5f8ff; border: 1px solid #aec7e331; border-left: 3px solid var(--team-light, #57718f);
+  border-radius: .45rem; padding: .32rem .5rem; margin-block: .28rem; gap: .55rem;
+}
+.team-event { display: inline-flex; align-items: center; gap: .4rem; min-width: 0; }
+.team-event .team-badge { flex: none; width: 1.55rem; min-height: 1.55rem; }
+.team-event .team-logo { width: 1.3rem; height: 1.3rem; }
+#stats-dialog .activity strong { color: var(--team-light, #eef5ff); white-space: nowrap; }
+#room #lineup-maker .eyebrow, #room #nominations .eyebrow { color: var(--team-light, #ffcf87); }

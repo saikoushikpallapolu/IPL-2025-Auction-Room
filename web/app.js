@@ -36,6 +36,11 @@ function badge(code) {
   return node;
 }
 
+function setTeamColors(node, code) {
+  node.style.setProperty("--team-light", colors[code][0]);
+  node.style.setProperty("--team-ink", colors[code][1]);
+}
+
 function showError(message) {
   $("error").textContent = message || "";
   $("error").hidden = !message;
@@ -97,6 +102,7 @@ function choose(team) {
 
 function showSetup() {
   state = null;
+  $("franchise-panel").hidden = true;
   presentation.reset();
   lastPaddle = null;
   $("setup").hidden = false;
@@ -113,38 +119,83 @@ function showSetup() {
   choose(selection || Object.keys(config.teams)[0]);
 }
 
-function renderStandings() {
-  const opened = new Set([...$("standings").querySelectorAll("details[open]")].map(node => node.dataset.team));
-  const entries = Object.entries(state.teams).sort(([code], [other]) => Number(other === state.user) - Number(code === state.user));
-  $("standings").replaceChildren(...entries.map(([code, team]) => {
-    const details = element("details", null, "standing");
-    details.dataset.team = code;
-    details.open = opened.has(code);
-    const summary = element("summary");
-    const content = element("span", null, "standing-content");
-    const name = element("span", config.teams[code]);
-    const overseas = team.roster.filter(player => player.overseas).length;
-    name.append(element("em", `${team.roster.length}/25 squad · ${overseas}/8 overseas`));
-    content.append(badge(code), name, element("strong", money(team.purse)));
-    summary.append(content);
-    const roster = element("ul", null, "roster");
-    for (const player of team.roster) {
-      roster.append(element("li", `${player.name} · ${money(player.price)}${player.retained ? " · Retained" : ""}`));
+function renderFranchise(code) {
+  const team = state.teams[code];
+  if (!team) return;
+  const panel = $("franchise-panel");
+  panel.style.setProperty("--franchise-color", colors[code][0]);
+  panel.style.setProperty("--franchise-ink", colors[code][1]);
+  $("franchise-name").replaceChildren(badge(code), element("h2", config.teams[code]));
+  const overseas = team.roster.filter(player => player.overseas).length;
+  const cards = team.rtm_cards;
+  const metrics = [
+    ["Purse", money(team.purse)], ["Squad", `${team.roster.length}/25`],
+    ["Overseas", `${overseas}/8`], ["RTM", cards?.total ?? "—"],
+  ];
+  $("franchise-metrics").replaceChildren(...metrics.map(([label, value]) => {
+    const cell = element("div");
+    cell.append(element("span", label), element("strong", value));
+    if (label === "RTM" && cards?.total) {
+      cell.append(element("small", `Up to ${cards.capped} capped / ${cards.uncapped} uncapped`));
     }
-    if (!team.roster.length) roster.append(element("li", "No players yet"));
-    const xi = element("p", `Projected XI · ${team.playing_xi.players.length}/11 roles filled`, "muted");
-    const vacancies = Object.entries(team.playing_xi.vacancies).map(([skill, count]) => `${xiRoles[skill]} ×${count}`);
-    const needs = element("p", vacancies.length ? vacancies.join(" · ") : "All specialist roles covered", "muted");
-    const lineup = element("ul", null, "roster");
-    for (const player of team.playing_xi.players) {
-      lineup.append(element("li", `${player.name} · ${xiRoles[player.skill]}${player.overseas ? " · Overseas" : ""}`));
-    }
-    details.append(summary, xi, needs, lineup, element("p", "Full squad", "muted"), roster);
-    return details;
+    return cell;
   }));
+  const starters = new Set(team.playing_xi.players.map(player => player.roster_index));
+  const rows = team.roster.map((player, index) => {
+    const item = element("li", null, "franchise-player");
+    const details = element("div");
+    const status = [roles[player.role], player.overseas ? "Overseas" : "Domestic", player.retained ? "Retained" : "Auction buy"];
+    if (starters.has(index)) status.push("Projected XI");
+    details.append(element("strong", player.name), element("small", status.join(" · ")));
+    item.append(details, element("strong", money(player.price), "franchise-price"));
+    return item;
+  });
+  $("franchise-squad").replaceChildren(...(rows.length ? rows : [element("li", "No players yet", "franchise-vacancy")]));
+  const lineup = [];
+  for (const [skill, label] of Object.entries(xiRoles)) {
+    for (const player of team.playing_xi.players.filter(player => player.skill === skill)) {
+      const item = element("li", null, "franchise-player");
+      const details = element("div");
+      details.append(element("strong", player.name), element("small", `${label}${player.overseas ? " · Overseas" : ""}`));
+      item.append(details);
+      lineup.push(item);
+    }
+    for (let i = 0; i < (team.playing_xi.vacancies[skill] || 0); i++) {
+      lineup.push(element("li", `Open · ${label}`, "franchise-vacancy"));
+    }
+  }
+  $("franchise-xi").replaceChildren(...lineup);
+}
+
+async function openFranchise(code) {
+  if (busy && !state.paused) return;
+  const select = $("franchise-select");
+  if (!select.options.length) {
+    select.replaceChildren(...Object.entries(config.teams).map(([key, name]) => new Option(name, key)));
+  }
+  if ($("stats-dialog").open) $("stats-dialog").close();
+  select.value = code;
+  $("franchise-panel").hidden = false;
+  renderFranchise(code);
+  if (state.seconds != null && !state.paused) {
+    $("franchise-close").disabled = true;
+    const paused = await move("pause");
+    $("franchise-close").disabled = false;
+    if (!paused) $("franchise-panel").hidden = true;
+  }
+}
+
+async function closeFranchise() {
+  if (busy) return;
+  if (state?.paused && !await move("resume")) return;
+  $("franchise-panel").hidden = true;
 }
 
 function updateClock() {
+  if (state?.paused) {
+    $("phase").textContent = "Auction paused";
+    return;
+  }
   if (state?.phase !== "rtm") return;
   const seconds = Math.max(0, Math.ceil((countdownEnd - performance.now()) / 1000));
   $("phase").textContent = `Match window · ${seconds}s`;
@@ -210,7 +261,7 @@ function buildFloor(user) {
   $(`floor-${user}`).append(bidButton);
 }
 
-const statTitles = { player: "Player stats", teams: "Franchise purses and squads", set: "Current set", results: "Auction results", activity: "Bid history" };
+const statTitles = { player: "Player stats", set: "Current set", results: "Auction results", activity: "Bid history" };
 const performanceGroups = {
   "Batting": [["career_runs", "Career runs"], ["career_strike_rate", "Career strike rate"], ["recent_runs", "Recent runs"], ["recent_strike_rate", "Recent strike rate"], ["peak_season_runs", "Peak season runs"]],
   "Bowling": [["career_wickets", "Career wickets"], ["career_economy", "Career economy"], ["recent_wickets", "Recent wickets"], ["recent_economy", "Recent economy"], ["peak_season_wickets", "Peak season wickets"]],
@@ -219,14 +270,14 @@ const performanceGroups = {
 const statNumber = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 });
 
 function showStats(section, code) {
+  if (section === "teams") {
+    openFranchise(code || state.user);
+    return;
+  }
   for (const key of Object.keys(statTitles)) $("stats-" + key).hidden = key !== section;
   $("stats-title").textContent = section === "player" && state.player ? state.player.name : statTitles[section];
   $("stats-dialog").showModal();
-  if (code) {
-    const franchise = $("standings").querySelector(`[data-team="${code}"]`);
-    franchise.open = true;
-    franchise.scrollIntoView({ block: "nearest" });
-  }
+
 }
 
 function renderPerformance(stats) {
@@ -325,11 +376,16 @@ function render(nextState) {
   const nominate = phase === "nomination";
   $("setup").hidden = true;
   $("room").hidden = false;
+  setTeamColors($("room"), user);
   $("restart").hidden = false;
   $("your-team").replaceChildren(badge(user), element("span", config.teams[user]));
   $("set-reveal").hidden = !reveal;
   $("room-grid").hidden = reveal || nominate;
   $("nominations").hidden = !nominate;
+  $("franchise-pause-status").hidden = !state.paused;
+  $("franchise-close").textContent = state.paused ? "Resume auction" : "Close";
+  if (state.paused && $("franchise-panel").hidden) openFranchise(user);
+  if (nominate || reveal) $("franchise-panel").hidden = true;
   if (nominate) {
     presentation.sync(state, previous, config.teams);
     if ($("stats-dialog").open) $("stats-dialog").close();
@@ -359,7 +415,7 @@ function render(nextState) {
     leader ? `${config.teams[leader]} leads` : "Taking opening bids";
   $("phase").textContent = complete ? "Complete" : bidding ? (state.accelerated_round ? "Accelerated bidding" : "Live bidding") : matching ? "RTM" : leader ? "Sold" : "Unsold";
   if (!complete) {
-    renderFloor(bidding ? call : matching ? (finalBid ? "Make your final offer" : `Right to Match · ${state.rtm_team}`) : leader ? `Sold to ${leader} · ${money(price)}` : "Unsold · no bids");
+    renderFloor(bidding ? call : matching ? (finalBid ? `${config.teams[state.rtm_team]} requested RTM` : `Right to Match · ${state.rtm_team}`) : leader ? `Sold to ${leader} · ${money(price)}${results.at(-1)?.via_rtm ? " · RTM" : ""}` : "Unsold · no bids");
   } else {
     renderFloor("Final standings are available below");
   }
@@ -397,7 +453,7 @@ function render(nextState) {
       complete ? "Start a new auction to try another franchise." : "Ready to continue? Bidding stays paused until you choose.";
   $("bid").textContent = matching ? (finalBid ? "Raise final bid" : state.rtm_stage === "offer" ? "Request RTM" : `Match ${money(price)}`) : leader === user ? "You lead" : `Bid ${money(state.next_price)}`;
   $("bid").hidden = !(bidding || matching);
-  $("bid").disabled = bidding && !state.can_bid;
+  $("bid").disabled = state.paused || (bidding && !state.can_bid);
   $("pass").hidden = !matching;
   $("pass").textContent = finalBid ? "Keep current bid" : "Decline RTM";
   $("final-raise").hidden = !finalBid;
@@ -406,11 +462,12 @@ function render(nextState) {
     $("final-amount").max = state.final_bid_max / 100;
     $("final-amount").value = state.final_bid_min / 100;
   }
-  if (finalBid) $("bid").disabled = state.final_bid_min > state.final_bid_max;
+  if (finalBid) $("bid").disabled = state.paused || state.final_bid_min > state.final_bid_max;
+  $("pass").disabled = state.paused;
+  $("skip").disabled = state.paused;
   $("skip").hidden = !bidding;
   $("next").hidden = phase !== "result";
   $("next").textContent = state.lot === state.total ? "Ready to continue" : "Ready for next player";
-  $("rtm-count").textContent = `${state.rtm} RTM left`;
   $("current-set").hidden = complete;
   $("player-stats-button").hidden = complete;
   $("activity-button").hidden = complete;
@@ -422,14 +479,25 @@ function render(nextState) {
   if (!previous || previous.results.length !== results.length || previous.user !== user || previous.phase === "reveal") {
     $("results").replaceChildren(...(results.length ? [...results].reverse().map(result => {
     const row = element("div", null, "result-row");
-    row.append(element("strong", result.name), element("span", result.team ? `${result.team} · ${money(result.price)}` : "Unsold"));
+    row.append(element("strong", result.name));
+    const resultLabel = element("span", result.team ? `${result.team} · ${money(result.price)}${result.via_rtm ? " · RTM" : ""}` : "Unsold", "team-event");
+    if (result.team) {
+      setTeamColors(row, result.team);
+      resultLabel.prepend(badge(result.team));
+    }
+    row.append(resultLabel);
     return row;
     }) : [element("p", "Results appear after the first lot.", "muted")]));
-    renderStandings();
+    if (!$("franchise-panel").hidden) renderFranchise($("franchise-select").value);
   }
   $("activity").replaceChildren(...[...state.events].reverse().map(event => {
     const row = element("li");
-    row.append(element("span", event.team ? `${event.team} · ${event.message}` : event.message));
+    const eventLabel = element("span", event.team ? `${event.team} · ${event.message}` : event.message, "team-event");
+    if (event.team) {
+      setTeamColors(row, event.team);
+      eventLabel.prepend(badge(event.team));
+    }
+    row.append(eventLabel);
     if (event.price != null) row.append(element("strong", money(event.price)));
     return row;
   }));
@@ -448,8 +516,10 @@ async function move(action, options = {}) {
     if (action === "bid" && (updated.leader !== updated.user || updated.price !== price)) {
       showError(updated.phase === "bidding" ? "The asking price changed. Bid again at the new price." : "The lot closed before your bid arrived.");
     }
+    return true;
   } catch (error) {
     showError(error.message);
+    return false;
   } finally {
     busy = false;
   }
@@ -470,6 +540,13 @@ $("nomination-role").addEventListener("change", updateNominationSheet);
 $("submit-nominations").addEventListener("click", () => {
   const nominations = [...$("nomination-list").querySelectorAll("input:checked")].map(box => box.value);
   move("nominate", { nominations });
+});
+$("franchise-select").addEventListener("change", event => renderFranchise(event.target.value));
+$("franchise-close").addEventListener("click", closeFranchise);
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !$("stats-dialog").open && !$("franchise-panel").hidden) {
+    closeFranchise();
+  }
 });
 for (const button of document.querySelectorAll("[data-stats]")) {
   button.addEventListener("click", () => showStats(button.dataset.stats));

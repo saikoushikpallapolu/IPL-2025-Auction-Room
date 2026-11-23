@@ -22,7 +22,7 @@ Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. 
 | --- | --- |
 | **Franchise setup** | Pick a team and choose whom to retain. Retention deductions and the ₹120 Cr salary cap determine your opening purse. |
 | **Live 3D bidding** | Raise your paddle from the arena, switch between the wide camera and **My table** behind your delegation, or use the lighter table view. The **Audio** menu independently controls the built-in auctioneer, wooden paddle and gavel effects, and a looping original instrumental. |
-| **Player and rival scouting** | The live board shows the reserve, last recorded sale and season when available, playing role, and applicable RTM. Open Player Stats for valuation, sale probability, conditional price range, and available form. Inspect rival purses, squads, and projected XI vacancies in the room. |
+| **Player and rival scouting** | The live board shows the reserve, last recorded sale and season when available, playing role, and applicable RTM. Open Player Stats for valuation, sale probability, conditional price range, and available form. Open a team-colored side panel for its purse, squad, RTM cards, and projected XI. The auction clock pauses while you inspect a team and resumes when you close the panel. |
 | **Set reveals and shuffled lots** | Watch the pouch open inside the wide-camera arena. The roster card shows the category, order, and reserve prices. Players shuffle within each set while the published opening-set order stays intact. |
 | **Your pace between lots** | **Skip player** resolves the current lot and shows the result. Bidding remains paused until you select **Ready for next player**, including after a refresh. |
 | **Accelerated bidding and final recall** | Submit a searchable, role-filtered sheet of up to ten players. AI franchises submit their own shortlists based on squad fit and affordability. Shared nominations produce a single lot, and both accelerated stages use shorter bidding intervals. |
@@ -87,7 +87,7 @@ The P20–P80 interval covered 64.3% of all sold players. The set-held-out resul
 
 ```bash
 python -m src.rebuild_pool --people people.csv --names names.csv ipl_json.zip t20s_male_json.zip bbl_json.zip psl_json.zip cpl_json.zip sma_json.zip sat_json.zip
-python -m src.benchmark_auction --seeds 30 --seed-start 0
+python -m src.benchmark_auction --seeds 30 --seed-start 20
 python -m unittest discover -s tests
 ```
 
@@ -124,22 +124,22 @@ All 46 premium sales in these folds were underpredicted by the current model. Th
 
 | Measure | Simulator, 30 seeded all-AI runs | Actual 2025 auction |
 | --- | ---: | ---: |
-| Signings | 186.40 | 182 |
-| Overseas signings | 67.97 | 62 |
-| Auction spend | ₹631.91 Cr | ₹639.15 Cr |
-| Highest signing | ₹29.16 Cr | ₹27.00 Cr |
-| Marquee spend | ₹213.99 Cr | ₹180.50 Cr |
+| Signings | 183.17 | 182 |
+| Overseas signings | 68.03 | 62 |
+| Auction spend | ₹615.60 Cr | ₹639.15 Cr |
+| Highest signing | ₹24.98 Cr | ₹27.00 Cr |
+| Marquee spend | ₹174.02 Cr | ₹180.50 Cr |
 
 | Additional replay diagnostics | Mean |
 | --- | ---: |
-| Accelerated-round signings | 110.93 |
-| Called players who finished unsigned | 19.43% |
-| Full pool unsigned | 67.69% |
-| Specialist XI roles unfilled per team | 0.47 |
+| Accelerated-round signings | 95.53 |
+| Called players who finished unsigned | 8.10% |
+| Full pool unsigned | 68.26% |
+| Specialist XI roles unfilled per team | 0.28 |
 | Final squad-size MAE per franchise | 2.04 players |
-| Remaining purse MAE per franchise | ₹0.89 Cr |
+| Remaining purse MAE per franchise | ₹2.39 Cr |
 
-These runs use seeds 0–29 with the two-stage nomination engine and fixed 2025 pool. The AI weighs squad needs, alternative players, franchise preferences, and slot-level budgets. Aggregate spend is close to the recorded auction, while the simulator overstates marquee spend and overseas signings. This benchmark measures the simulation's behavior on the replay pool. The separate model tables above measure prediction error. [Official IPL auction results](https://www.iplt20.com/auction/2025/teams) · [Franchise purse and squad totals](https://www.cricbuzz.com/cricket-series/ipl-2025/auction/teams)
+These runs use seeds 20–49 with the two-stage nomination engine and fixed 2025 pool. The AI weighs squad needs, alternative players, franchise preferences, and slot-level budgets. Marquee spend and total signings are closer to the recorded auction. The simulator still underspends overall and signs more overseas players. Several opening sets remain mispriced. This benchmark measures the simulation's behavior on the replay pool. The separate model tables above measure prediction error. [Official IPL auction results](https://www.iplt20.com/auction/2025/teams) · [Franchise purse and squad totals](https://www.cricbuzz.com/cricket-series/ipl-2025/auction/teams)
 
 ## Architecture
 

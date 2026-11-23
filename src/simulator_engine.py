@@ -11,7 +11,7 @@ import xgboost as xgb
 
 from .train_predictor import FEATURE_COLUMNS, FEATURE_PATH, METRICS, MODEL_PATH, ROLE_COLUMNS, ROOT
 from .rebuild_pool import ESTIMATES, RETAINED_FORM, name_key
-from .team_strategy import playing_quality, primary_skill, projected_xi, xi_fit
+from .team_strategy import playing_quality, primary_skill, projected_xi, secondary_skills, xi_fit
 
 
 TEAMS = {
@@ -43,19 +43,23 @@ UNCAPPED_RETAINEES = {
     "Ramandeep Singh", "Mohsin Khan", "Ayush Badoni", "Shashank Singh",
     "Prabhsimran Singh", "Yash Dayal", "Sandeep Sharma",
 }
+RETAINED_SPINNERS = {
+    "Ravindra Jadeja", "Axar Patel", "Rashid Khan", "Kuldeep Yadav",
+    "Ravi Bishnoi", "Varun Chakaravarthy", "Sunil Narine",
+}
 
 
 @dataclass(frozen=True)
 class MarketTuning:
-    marquee: tuple[float, float] = (1.47, 0.92)
-    capped_pace: float = 1.50
-    first_nominations: int = 60
-    second_nominations: int = 30
-    late_interest: float = 0.16
+    marquee: tuple[float, float] = (1.38, 1.01)
+    capped_pace: float = 1.32
+    first_nominations: int = 40
+    second_nominations: int = 18
+    late_interest: float = 0.10
     slot_budget: bool = True
     depth_target: int = 23
     accelerated_purse_share: float = 0.25
-    capped_top_order: float = 0.78
+    capped_top_order: float = 0.62
     late_budget_pressure: float = 0.75
 
 
@@ -72,7 +76,7 @@ def read_rows(filename):
 
 
 def next_price(price):
-    return price + (10 if price < 200 else 20 if price < 500 else 50)
+    return price + (5 if price < 100 else 10 if price < 200 else 20 if price < 500 else 25)
 
 
 def set_category(code):
@@ -101,6 +105,7 @@ class Catalog:
                 "overseas": row["nationality"] == "Overseas",
                 "price": round(float(row["cost"]) * 100), "retained": True,
                 "uncapped": row["player_name"] in UNCAPPED_RETAINEES,
+                "bowling_style": "spin" if row["player_name"] in RETAINED_SPINNERS else "",
             })
 
         pool = read_rows("registered_auction_pool_2025.csv")
@@ -123,7 +128,7 @@ class Catalog:
         players = []
         for row in pool:
             key = name_key(row["player_name"])
-            role = row["role"]
+            role = "WK" if key == "rishabhpant" else row["role"]
             overseas = row["country"] != "India"
             registration_id = row["registration_id"]
             estimate = forecasts.get(registration_id, {})
@@ -151,6 +156,7 @@ class Catalog:
                 "price_range": [round(estimate[f"price_p{i}_cr"] * 100) for i in (20, 50, 80)] if estimate else None,
             }
             player["skill"] = primary_skill(player)
+            player["secondary_skills"] = secondary_skills(player)
             player["quality"] = playing_quality(player)
             player["market_value"] = player["price_range"][1] if estimate else player["reserve"]
             players.append(player)
@@ -186,6 +192,7 @@ class Catalog:
             for player in roster:
                 player["form"] = retained_form.get(name_key(player["name"]), {})
                 player["skill"] = primary_skill(player)
+                player["secondary_skills"] = secondary_skills(player)
                 player["quality"] = playing_quality(player)
                 player["market_value"] = player["price"]
         return cls(players, retained)
@@ -249,6 +256,7 @@ class Auction:
         self.results = []
         self.lineup = None
         self.version = 0
+        self.paused_seconds = None
         self.index = -1
         self.advance()
 
@@ -258,7 +266,12 @@ class Auction:
 
     @property
     def rtm(self):
-        return 6 - self.rtm_slots[self.user].total() if self.user else 0
+        return self.rtm_cards(self.user)["total"] if self.user else 0
+
+    def rtm_cards(self, code):
+        used = self.rtm_slots[code]
+        total = 6 - used.total()
+        return {"total": total, "capped": min(total, 5 - used["capped"]), "uncapped": min(total, 2 - used["uncapped"])}
 
     def eligible(self, code, price):
         roster = self.rosters[code]
@@ -305,8 +318,7 @@ class Auction:
         marquee = player["set_code"] in {"M1", "M2"}
         probability = player["sale_probability"] if player["sale_probability"] is not None else 0.25
         if marquee:
-            # Multiple teams compete for the scarce marquee tier in a mega auction.
-            base = max(estimate[2] if estimate else base, reserve * 1.55) * self.market.marquee[int(player["set_code"][-1]) - 1]
+            base = max(base, reserve * 1.55) * self.market.marquee[int(player["set_code"][-1]) - 1]
         elif not self.recall_round and self.rng.random() > min(0.94, 0.14 + 0.90 * probability):
             # One shared draw captures lots where the entire market passes on reserve.
             self.log("Bidding opened")
@@ -316,8 +328,11 @@ class Auction:
         # Leave room for subsequent sets, especially overseas specialists.
         held_slots = max(0, 4 - int(progress * 5)) if self.recall_round < 2 else 0
         held_overseas = max(0, 2 - int(progress * 3)) if self.recall_round < 2 else 0
-        alternatives = Counter((p["skill"], p["overseas"]) for p in self.players[self.index + 1:])
-        alternatives.update((p["skill"], p["overseas"]) for p in self.recall_pool.values() if p["id"] not in self.offered)
+        available = self.players[self.index + 1:] + [p for p in self.recall_pool.values() if p["id"] not in self.offered]
+        alternatives = Counter(
+            (p["skill"], p["overseas"]) for p in available
+            if p["market_value"] >= .55 * player["market_value"] and p["quality"] >= .85 * player["quality"]
+        )
         remaining_slot_budgets = {
             code: self.purses[code] / max(4, 23 - len(roster)) for code, roster in self.rosters.items()
         } if self.market.slot_budget else {}
@@ -338,7 +353,7 @@ class Auction:
             interest = (0.045 + 0.31 * probability + 0.13 * incumbent + 0.10 * (preference > 1)) * fit
             interest *= min(1.65, base / reserve) * market_interest
             if marquee:
-                interest = max(interest, 0.60)
+                interest = max(interest, .34 + .20 * min(1, fit / 1.15))
             else:
                 # Crowded squads become selective even when they still have legal slots.
                 interest *= min(1.15, 0.55 + 0.06 * (SQUAD_LIMIT - len(roster)))
@@ -360,6 +375,11 @@ class Auction:
             elif not player["uncapped"] and not marquee and player["skill"] == "top_order":
                 ceiling *= self.market.capped_top_order
             ceiling *= preference * (1.16 if incumbent else 1) * self.rng.uniform(0.8, 1.24)
+            if estimate:
+                # Allow a strategic premium while dampening stacked multipliers.
+                upper = estimate[2]
+                if ceiling > upper:
+                    ceiling = upper + (ceiling - upper) * (.55 if fit >= 1 else .32)
             # A team will rarely put its remaining purse into a single signing.
             reserve_for_later = (held_slots + held_overseas) * 30
             future_depth_cost = 30 * max(0, self.market.depth_target - len(roster) - 1)
@@ -418,6 +438,7 @@ class Auction:
             bucket = "uncapped" if self.player["uncapped"] else "capped"
             self.rtm_slots[self.rtm_holder][bucket] += 1
             self.leader = self.rtm_holder
+            self.rtm_stage = "matched"
             self.log("Matched the final bid", self.leader, self.price, kind="bid")
         self.award()
 
@@ -478,6 +499,7 @@ class Auction:
                 "overseas": player["overseas"], "price": self.price, "retained": False,
                 "skill": player["skill"], "market_value": player["market_value"],
                 "quality": player["quality"],
+                "secondary_skills": player.get("secondary_skills", ()),
             })
             self.recall_pool.pop(player["id"], None)
         else:
@@ -485,6 +507,7 @@ class Auction:
         self.results.append({
             "id": player["id"], "name": player["name"], "team": self.leader,
             "price": self.price, "set": player["set_code"], "round": self.recall_round,
+            "via_rtm": self.rtm_stage == "matched",
         })
         self.phase = "result"
         self.log("Sold" if self.leader else "Unsold", self.leader, self.price)
@@ -536,6 +559,19 @@ class Auction:
         return self.recall_pool
 
     def act(self, action, *, amount=None, nominations=()):
+        if action == "pause":
+            if self.phase in {"bidding", "rtm"} and self.paused_seconds is None:
+                self.paused_seconds = max(.25, self.deadline - monotonic())
+                self.version += 1
+            return
+        if action == "resume":
+            if self.paused_seconds is not None:
+                self.deadline = monotonic() + self.paused_seconds
+                self.paused_seconds = None
+                self.version += 1
+            return
+        if self.paused_seconds is not None:
+            raise ValueError("Close the squad panel to resume bidding.")
         if self.phase == "nomination" and action == "nominate":
             self.nominate(nominations)
             return
@@ -553,7 +589,10 @@ class Auction:
                 while self.ai_bid():
                     pass
             if self.phase == "rtm":
-                self.award()
+                if self.rtm_stage == "final":
+                    self.final_bid(self.price)
+                else:
+                    self.finish_rtm(False)
             elif self.phase == "bidding":
                 self.settle(interactive=False)
             self.version += 1
@@ -578,7 +617,7 @@ class Auction:
         self.version += 1
 
     def tick(self):
-        if self.phase not in {"bidding", "rtm"} or monotonic() < self.deadline:
+        if self.paused_seconds is not None or self.phase not in {"bidding", "rtm"} or monotonic() < self.deadline:
             return
         if self.phase == "rtm":
             self.act("pass")
@@ -618,7 +657,8 @@ class Auction:
             "bid_id": len(self.events) if self.events and self.events[-1]["kind"] == "bid" else None,
             "next_price": self.ask_price() if self.phase == "bidding" else None,
             "can_bid": self.phase == "bidding" and self.leader != self.user and self.eligible(self.user, self.ask_price()),
-            "seconds": max(0, self.deadline - monotonic()) if timed else None,
+            "paused": self.paused_seconds is not None,
+            "seconds": self.paused_seconds if self.paused_seconds is not None else max(0, self.deadline - monotonic()) if timed else None,
             "rtm": self.rtm, "rtm_stage": self.rtm_stage if self.phase == "rtm" else None,
             "rtm_team": self.rtm_holder if self.phase == "rtm" else None,
             "rtm_eligible_team": (
@@ -639,6 +679,7 @@ class Auction:
             "teams": {
                 code: {
                     "purse": self.purses[code], "retention_deduction": self.deductions[code],
+                    "rtm_cards": self.rtm_cards(code),
                     "roster": roster.copy(), "playing_xi": projected_xi(roster),
                 }
                 for code, roster in self.rosters.items()
