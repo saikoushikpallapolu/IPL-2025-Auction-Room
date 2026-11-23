@@ -26,8 +26,9 @@ class Move(BaseModel):
 
 
 class Lineup(BaseModel):
-    order: list[StrictInt] = Field(min_length=11, max_length=11)
-    keeper: StrictInt
+    order: list[StrictInt] = Field(max_length=11)
+    keeper: StrictInt | None = None
+    draft: bool = False
 
 
 @asynccontextmanager
@@ -123,7 +124,7 @@ def save_lineup(lineup: Lineup, request: Request):
     with lock:
         auction = current_auction(request)
         try:
-            auction.save_lineup(lineup.order, lineup.keeper)
+            auction.save_lineup(lineup.order, lineup.keeper, draft=lineup.draft)
         except ValueError as error:
             raise HTTPException(400, str(error)) from error
         return auction.snapshot()

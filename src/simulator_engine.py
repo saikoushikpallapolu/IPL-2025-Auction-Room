@@ -631,17 +631,21 @@ class Auction:
                 self.deadline = monotonic() + (ACCELERATED_CALL_PAUSE if self.recall_round else CALL_PAUSE)
         self.version += 1
 
-    def save_lineup(self, order, keeper):
-        if self.phase != "complete" or self.user not in self.rosters:
+    def save_lineup(self, order, keeper, *, draft=False):
+        if self.user not in self.rosters or (not draft and self.phase != "complete"):
             raise ValueError("Complete the auction before saving your Playing XI.")
+        if draft and self.phase == "complete":
+            raise ValueError("Save your final Playing XI after the auction.")
         roster = self.rosters[self.user]
-        if len(order) != 11 or len(set(order)) != 11 or any(index < 0 or index >= len(roster) for index in order):
+        if len(order) > 11 or (not draft and len(order) != 11) or len(set(order)) != len(order) or any(index < 0 or index >= len(roster) for index in order):
             raise ValueError("Select eleven different players from your squad.")
         if sum(roster[index]["overseas"] for index in order) > 4:
             raise ValueError("Choose at most four overseas players.")
-        if keeper not in order or roster[keeper]["role"] != "WK":
+        if (not draft or keeper is not None) and (keeper not in order or roster[keeper]["role"] != "WK"):
             raise ValueError("Select a wicketkeeper from your Playing XI.")
         self.lineup = {"order": list(order), "keeper": keeper}
+        if draft:
+            self.lineup["draft"] = True
         self.version += 1
 
     def snapshot(self):

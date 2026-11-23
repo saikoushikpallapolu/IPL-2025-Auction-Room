@@ -101,6 +101,7 @@ function choose(team) {
 }
 
 function showSetup() {
+  lineupMaker.closeDraft();
   state = null;
   $("franchise-panel").hidden = true;
   presentation.reset();
@@ -123,6 +124,10 @@ function renderFranchise(code) {
   const team = state.teams[code];
   if (!team) return;
   const panel = $("franchise-panel");
+  const personalDraft = code === state.user && state.lineup?.draft ? state.lineup : null;
+  const canEdit = code === state.user && state.phase !== "complete";
+  $("edit-live-xi").hidden = !canEdit;
+  $("franchise-xi-title").textContent = personalDraft ? "Your Playing XI draft" : "Projected Playing XI";
   panel.style.setProperty("--franchise-color", colors[code][0]);
   panel.style.setProperty("--franchise-ink", colors[code][1]);
   $("franchise-name").replaceChildren(badge(code), element("h2", config.teams[code]));
@@ -140,18 +145,29 @@ function renderFranchise(code) {
     }
     return cell;
   }));
-  const starters = new Set(team.playing_xi.players.map(player => player.roster_index));
+  const starters = new Set(personalDraft?.order || team.playing_xi.players.map(player => player.roster_index));
   const rows = team.roster.map((player, index) => {
     const item = element("li", null, "franchise-player");
     const details = element("div");
     const status = [roles[player.role], player.overseas ? "Overseas" : "Domestic", player.retained ? "Retained" : "Auction buy"];
-    if (starters.has(index)) status.push("Projected XI");
+    if (starters.has(index)) status.push(personalDraft ? "Your XI" : "Projected XI");
     details.append(element("strong", player.name), element("small", status.join(" · ")));
     item.append(details, element("strong", money(player.price), "franchise-price"));
     return item;
   });
   $("franchise-squad").replaceChildren(...(rows.length ? rows : [element("li", "No players yet", "franchise-vacancy")]));
   const lineup = [];
+  if (personalDraft) {
+    for (const index of personalDraft.order) {
+      const player = team.roster[index];
+      lineup.push(element("li", `${player.name}${index === personalDraft.keeper ? " · Wicketkeeper" : ""}`, "franchise-player"));
+    }
+    for (let i = lineup.length; i < 11; i++) {
+      lineup.push(element("li", "Open XI spot", "franchise-vacancy"));
+    }
+    $("franchise-xi").replaceChildren(...lineup);
+    return;
+  }
   for (const [skill, label] of Object.entries(xiRoles)) {
     for (const player of team.playing_xi.players.filter(player => player.skill === skill)) {
       const item = element("li", null, "franchise-player");
@@ -174,6 +190,7 @@ async function openFranchise(code) {
     select.replaceChildren(...Object.entries(config.teams).map(([key, name]) => new Option(name, key)));
   }
   if ($("stats-dialog").open) $("stats-dialog").close();
+  closeLiveLineup();
   select.value = code;
   $("franchise-panel").hidden = false;
   renderFranchise(code);
@@ -188,7 +205,14 @@ async function openFranchise(code) {
 async function closeFranchise() {
   if (busy) return;
   if (state?.paused && !await move("resume")) return;
+  closeLiveLineup();
   $("franchise-panel").hidden = true;
+}
+
+function closeLiveLineup() {
+  lineupMaker.closeDraft();
+  $("franchise-panel").classList.remove("editing-xi");
+  $("edit-live-xi").textContent = "Edit Playing XI";
 }
 
 function updateClock() {
@@ -211,9 +235,13 @@ function renderSet(group) {
   for (const id of ["set-list", "current-set-list"]) {
     const list = $(id);
     list.replaceChildren(...players.map((player, index) => {
-      const row = element("li", player.name);
-      row.append(element("span", roles[player.role]));
-      if (Number.isFinite(player.reserve)) row.append(element("strong", money(player.reserve), "set-reserve"));
+      const row = element("li");
+      const entry = element("div", null, "set-entry");
+      const name = element("div", null, "set-player");
+      name.append(element("strong", player.name), element("span", roles[player.role], "set-role"));
+      entry.append(name);
+      if (Number.isFinite(player.reserve)) entry.append(element("strong", money(player.reserve), "set-reserve"));
+      row.append(entry);
       row.style.setProperty("--order", index);
       return row;
     }));
@@ -413,9 +441,16 @@ function render(nextState) {
   $("progress").textContent = complete ? `${state.total} lots processed` : `Lot ${state.lot} · ${state.total} queued${setProgress}`;
   const call = state.cue === "once" ? "Going once…" : state.cue === "twice" ? "Going twice…" :
     leader ? `${config.teams[leader]} leads` : "Taking opening bids";
+  const winner = phase === "result" ? leader : null;
+  $("lot-card").classList.toggle("sold-to-team", Boolean(winner));
+  $("lot-winner-badge").hidden = !winner;
+  if (winner) {
+    setTeamColors($("lot-card"), winner);
+    $("lot-winner-badge").replaceChildren(badge(winner));
+  }
   $("phase").textContent = complete ? "Complete" : bidding ? (state.accelerated_round ? "Accelerated bidding" : "Live bidding") : matching ? "RTM" : leader ? "Sold" : "Unsold";
   if (!complete) {
-    renderFloor(bidding ? call : matching ? (finalBid ? `${config.teams[state.rtm_team]} requested RTM` : `Right to Match · ${state.rtm_team}`) : leader ? `Sold to ${leader} · ${money(price)}${results.at(-1)?.via_rtm ? " · RTM" : ""}` : "Unsold · no bids");
+    renderFloor(bidding ? call : matching ? (finalBid ? `${config.teams[state.rtm_team]} requested RTM` : `Right to Match · ${state.rtm_team}`) : winner ? `Sold to ${config.teams[winner]}${results.at(-1)?.via_rtm ? " via RTM" : ""}` : "Unsold · no bids");
   } else {
     renderFloor("Final standings are available below");
   }
@@ -541,7 +576,21 @@ $("submit-nominations").addEventListener("click", () => {
   const nominations = [...$("nomination-list").querySelectorAll("input:checked")].map(box => box.value);
   move("nominate", { nominations });
 });
-$("franchise-select").addEventListener("change", event => renderFranchise(event.target.value));
+$("franchise-select").addEventListener("change", event => {
+  closeLiveLineup();
+  renderFranchise(event.target.value);
+});
+$("edit-live-xi").addEventListener("click", () => {
+  if (busy || $("franchise-select").value !== state.user) return;
+  if (!$("live-lineup-host").hidden) {
+    closeLiveLineup();
+    renderFranchise(state.user);
+  } else {
+    lineupMaker.showDraft(state);
+    $("franchise-panel").classList.add("editing-xi");
+    $("edit-live-xi").textContent = "Back to squad";
+  }
+});
 $("franchise-close").addEventListener("click", closeFranchise);
 document.addEventListener("keydown", event => {
   if (event.key === "Escape" && !$("stats-dialog").open && !$("franchise-panel").hidden) {

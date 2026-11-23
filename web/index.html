@@ -97,7 +97,7 @@
       </section>
       <div id="room-grid" hidden>
         <section id="auction-floor" class="auction-floor" aria-labelledby="player-name">
-          <header class="stage-scoreboard">
+          <header id="lot-card" class="stage-scoreboard">
             <div>
               <p class="stage-progress"><span id="progress"></span> <span id="phase"></span></p>
               <h2 id="player-name"></h2>
@@ -105,6 +105,7 @@
               <ul id="arena-metrics" aria-label="Player metrics"></ul>
             </div>
             <div class="stage-call">
+              <span id="lot-winner-badge" hidden></span>
               <p id="floor-call" role="status" aria-live="polite"></p>
               <strong id="stage-price"></strong>
             </div>
@@ -114,6 +115,7 @@
             <button id="view-3d" type="button" aria-pressed="true">3D room</button>
             <button id="view-floor" type="button" aria-pressed="false">Table view</button>
             <button id="view-wide" type="button" aria-pressed="false">Wide camera</button>
+            <label id="camera-team-control" hidden>Team table <select id="camera-team"></select></label>
             <button id="auction-audio" type="button" aria-expanded="false" aria-controls="auction-audio-panel">Audio</button>
             <div id="auction-audio-panel" class="auction-audio-panel" hidden>
               <label><input id="auction-voice" type="checkbox"> Auctioneer voice</label>
@@ -129,6 +131,10 @@
             <div class="seat-marker"><span id="seat-team"></span><span>Your table</span></div>
           </div>
           <div id="floor-tables" class="floor-tables"></div>
+          <aside id="table-roster" class="table-roster" hidden aria-labelledby="table-roster-title">
+            <h3 id="table-roster-title"></h3>
+            <ul id="table-roster-players"></ul>
+          </aside>
           <button id="bid" class="team-desk bid-at-table" type="button" hidden></button>
           <footer class="stage-controls">
             <p id="action-note"></p>
@@ -183,6 +189,7 @@
         <header class="franchise-header">
           <div id="franchise-name"></div>
           <label class="franchise-picker">Franchise <select id="franchise-select"></select></label>
+          <button id="edit-live-xi" type="button" class="secondary compact" hidden>Edit Playing XI</button>
           <button id="franchise-close" type="button" class="secondary compact">Close</button>
         </header>
         <div id="franchise-metrics" class="franchise-metrics"></div>
@@ -197,6 +204,7 @@
             <ol id="franchise-xi"></ol>
           </section>
         </div>
+        <div id="live-lineup-host" hidden></div>
       </aside>
       <dialog id="stats-dialog" aria-labelledby="stats-title">
         <div class="dialog-heading">

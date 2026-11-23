@@ -244,12 +244,39 @@ function makeTable(scene, code, color, x, z, angle, index, isUser) {
     makeDelegate(table, offset, 0, -.77, index * 3 + seat, color, false, seat === 1));
   const rowSign = box(table, sign, 0, .73, -1.58, .83, .25, .02);
   rowSign.rotation.y = Math.PI;
+  const rosterStand = group(table, 1.27, .10, -1.26);
+  rosterStand.rotation.y = Math.PI;
+  box(rosterStand, dark, 0, .39, -.025, .045, .78, .08);
+  box(rosterStand, dark, 0, .035, 0, .69, .05, .31);
+  const rosterCard = canvasTexture(512, 384, (ctx, w, h, players) => {
+    ctx.fillStyle = "#0b1628";
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, w, 8);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 26px system-ui";
+    ctx.fillText(`${code} SQUAD`, 16, 42);
+    ctx.font = "16px system-ui";
+    ctx.fillText("R · Retained     A · Auction buy", 16, 67);
+    players.forEach((player, index) => {
+      const x = 16 + (index >= 13 ? 246 : 0);
+      const y = 93 + (index % 13) * 21;
+      ctx.fillStyle = player.retained ? "#b9d9ff" : "#ffd892";
+      ctx.fillText(player.retained ? "R" : "A", x, y);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText(player.name, x + 22, y, 210);
+    });
+  });
+  rosterCard.draw([]);
+  const rosterScreen = new T.Mesh(new T.PlaneGeometry(.78, .59), new T.MeshBasicMaterial({ map: rosterCard.texture, toneMapped: false }));
+  rosterScreen.position.set(0, .76, .045);
+  rosterStand.add(rosterScreen);
   const bidder = people[1];
   if (isUser) {
     bidder.actor.position.x = -.16;
     people[0].actor.position.x = -.99;
   }
-  return { table, lamp, people, bidder, raisedAt: -Infinity };
+  return { table, lamp, people, bidder, rosterCard, rosterCount: -1, raisedAt: -Infinity };
 }
 
 function makeHall(scene) {
@@ -323,12 +350,13 @@ function makeStage(scene) {
   box(scene, dark, 0, .14, STAGE_Z + 1.93, 5, .22, .56);
   box(scene, gold, 0, .49, STAGE_Z + 1.91, 13.5, .025, .023);
   const emblem = new Image();
+  const franchiseBadges = new Map();
   let boardData = ["Auction Room", "", "2025 Mega Auction"];
   const scoreboard = canvasTexture(2048, 840, (ctx, width, height, data) => {
     const w = width / 2;
     const h = height / 2;
     ctx.setTransform(2, 0, 0, 2, 0, 0);
-    const [name, amount, line, color, metrics = []] = data;
+    const [name, amount, line, color, metrics = [], franchise] = data;
     const gradient = ctx.createLinearGradient(0, 0, w, h);
     const theme = new T.Color(color || "#3970cf");
     const bright = .2126 * theme.r + .7152 * theme.g + .0722 * theme.b > .48;
@@ -340,16 +368,40 @@ function makeStage(scene) {
     ctx.strokeStyle = `#${theme.clone().lerp(new T.Color(0xffffff), .48).getHexString()}`;
     ctx.lineWidth = 3;
     ctx.strokeRect(21, 21, w - 42, h - 42);
-    if (emblem.complete && emblem.naturalWidth) ctx.drawImage(emblem, 40, 39, 64, 64);
-    ctx.fillStyle = bright ? "#080d15" : "#ffffff";
     ctx.textAlign = "center";
-    ctx.font = "600 27px system-ui";
-    ctx.fillText(line.toUpperCase(), w / 2, 79, w - 235);
+    if (franchise) {
+      ctx.fillStyle = "#080f22d9";
+      ctx.fillRect(37, 33, w - 74, 117);
+      const logo = franchiseBadges.get(franchise.code);
+      ctx.fillStyle = "#f4f7ff";
+      ctx.fillRect(48, 41, 101, 101);
+      if (logo?.complete && logo.naturalWidth) {
+        ctx.drawImage(logo, 55, 48, 87, 87);
+      } else {
+        ctx.fillStyle = "#111b32";
+        ctx.font = "bold 23px system-ui";
+        ctx.fillText(franchise.code, 98, 101, 85);
+      }
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#e1eaff";
+      ctx.font = "750 21px system-ui";
+      const status = line.startsWith("Sold") ? "SOLD TO" : line === "Highest bidder" ? "IN THE LEAD" : `LEADS · ${line.toUpperCase()}`;
+      ctx.fillText(status, 172, 69, w - 215);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "850 54px system-ui";
+      ctx.fillText(franchise.name, 172, 125, w - 215);
+    } else {
+      if (emblem.complete && emblem.naturalWidth) ctx.drawImage(emblem, 40, 39, 64, 64);
+      ctx.fillStyle = bright ? "#080d15" : "#ffffff";
+      ctx.font = "600 27px system-ui";
+      ctx.fillText(line.toUpperCase(), w / 2, 79, w - 235);
+    }
+    ctx.textAlign = "center";
     ctx.fillStyle = bright ? "#080d15" : "#fff4dc";
-    ctx.font = "bold 74px system-ui";
-    ctx.fillText(name, w / 2, 181, w - 110);
+    ctx.font = franchise ? "bold 63px system-ui" : "bold 74px system-ui";
+    ctx.fillText(name, w / 2, franchise ? 207 : 181, w - 110);
     ctx.font = "600 54px system-ui";
-    ctx.fillText(amount, w / 2, 264);
+    ctx.fillText(amount, w / 2, franchise ? 275 : 264);
     metrics.forEach(([label, value], i) => {
       const cell = (w - 90) / metrics.length;
       const left = 45 + i * cell;
@@ -365,6 +417,15 @@ function makeStage(scene) {
   });
   function drawBoard(data) {
     boardData = data;
+    const franchise = data[5];
+    if (franchise && !franchiseBadges.has(franchise.code)) {
+      const logo = new Image();
+      franchiseBadges.set(franchise.code, logo);
+      logo.onload = () => {
+        if (boardData[5]?.code === franchise.code) scoreboard.draw(boardData);
+      };
+      logo.src = `/assets/team-badges/${franchise.code.toLowerCase()}.webp`;
+    }
     scoreboard.draw(data);
   }
   emblem.onload = () => drawBoard(boardData);
@@ -455,6 +516,7 @@ export function createRoom(host, labels, handlers) {
   scene.add(spotlightRing);
   const labelPoint = new T.Vector3();
   let leader;
+  let cameraTeam;
   const aim = new T.Vector3();
   const cameraPos = new T.Vector3();
   const cameraAim = new T.Vector3();
@@ -551,7 +613,7 @@ export function createRoom(host, labels, handlers) {
       cameraPos.set(0, 13.4 + portraitDistance * .34, 22.6 + portraitDistance);
       cameraAim.set(0, -.65, -1.6);
     } else {
-      const desk = floorTables.get(user)?.table;
+      const desk = floorTables.get(cameraTeam || user)?.table;
       cameraPos.set(.22, 3.25, -5.65);
       if (desk) desk.localToWorld(cameraPos);
       else cameraPos.z = 12.11;
@@ -604,6 +666,15 @@ export function createRoom(host, labels, handlers) {
       }
     },
     wide(value, reveal = false) { wide = value; revealing = reveal; },
+    viewTable(code) { cameraTeam = code; },
+    rosters(teams) {
+      for (const [code, desk] of floorTables) {
+        const players = teams[code].roster;
+        if (players.length === desk.rosterCount) continue;
+        desk.rosterCount = players.length;
+        desk.rosterCard.draw(players);
+      }
+    },
     scoreboard(data) { stage.drawBoard(data); },
     lead(code) {
       if (code === leader) return;

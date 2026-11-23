@@ -17,6 +17,8 @@ function createAuctionPresentation(colors, formatPrice, actions) {
   let saleTimeout;
   let impactTimeout;
   let wide = true;
+  let cameraTeam;
+  let displayedRoster;
   let lastBid;
   const audio = createAuctionAudio(node);
 
@@ -28,6 +30,28 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     const bid = node("bid");
     const destination = selected === "3d" ? node("room-bid") : node(`floor-${latest?.user}`);
     if (destination && bid.parentElement !== destination) destination.append(bid);
+  }
+
+  function showTableRoster() {
+    const roster = latest?.teams[cameraTeam]?.roster;
+    const visible = isLive() && roster && (selected !== "3d" || !wide);
+    const stand = node("table-roster");
+    stand.hidden = !visible;
+    if (!visible) return;
+    if (displayedRoster?.team === cameraTeam && displayedRoster.count === roster.length) return;
+    displayedRoster = { team: cameraTeam, count: roster.length };
+    stand.style.setProperty("--roster-ink", colors[cameraTeam][1]);
+    stand.style.setProperty("--roster-light", colors[cameraTeam][0]);
+    node("table-roster-title").replaceChildren(actions.badge(cameraTeam), document.createTextNode(teamNames[cameraTeam]));
+    node("table-roster-players").replaceChildren(...roster.map(player => {
+      const row = document.createElement("li");
+      const label = document.createElement("strong");
+      label.textContent = player.name;
+      const kind = document.createElement("span");
+      kind.textContent = player.retained ? "Retained" : "Bought";
+      row.append(label, kind);
+      return row;
+    }));
   }
 
   function showView() {
@@ -50,6 +74,8 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     node("view-wide").hidden = !show3d;
     node("view-wide").setAttribute("aria-pressed", String(wide));
     node("view-wide").textContent = wide ? "My table" : "Wide camera";
+    node("camera-team-control").hidden = !isLive();
+    showTableRoster();
     node("arena-tables").hidden = !show3d;
     node("view-3d").disabled = Boolean(failed);
     node("view-3d").title = failed ? "3D is unavailable on this device. The table view is ready." : "";
@@ -90,6 +116,7 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     if (latest.phase === "reveal") {
       if (!scene) return;
       scene.configure(latest.user, tones, teamNames);
+      scene.rosters(latest.teams);
       scene.wide(true, true);
       scene.call(null);
       scene.lead(null);
@@ -120,15 +147,18 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     if (!scene) return;
     scene.configure(latest.user, tones, teamNames);
     scene.wide(wide);
+    scene.viewTable(cameraTeam);
+    scene.rosters(latest.teams);
     scene.scoreboard([
       latest.player.name,
       formatPrice(latest.price ?? latest.player.reserve),
       latest.phase === "result" ? (latest.leader ? `Sold to ${latest.leader}` : "Unsold") :
         latest.phase === "rtm" ? "Right to Match" :
           latest.cue === "once" ? "Going once" : latest.cue === "twice" ? "Going twice" :
-            latest.leader ? `${latest.leader} leads` : "Opening bid",
+            latest.leader ? "Highest bidder" : "Opening bid",
       latest.leader ? tones[latest.leader] : null,
       metrics,
+      latest.leader ? { code: latest.leader, name: teamNames[latest.leader] } : null,
     ]);
     scene.call(latest.phase === "bidding" ? latest.cue : null);
     scene.lead(["bidding", "rtm"].includes(latest.phase) ? latest.leader : null);
@@ -155,7 +185,23 @@ function createAuctionPresentation(colors, formatPrice, actions) {
 
   node("view-3d").addEventListener("click", () => { if (!failed) { selected = "3d"; showView(); } });
   node("view-floor").addEventListener("click", () => { selected = "table"; showView(); });
-  node("view-wide").addEventListener("click", () => { wide = !wide; scene?.wide(wide); showView(); });
+  node("view-wide").addEventListener("click", () => {
+    wide = !wide;
+    if (!wide) {
+      cameraTeam = latest.user;
+      node("camera-team").value = cameraTeam;
+    }
+    scene?.wide(wide);
+    scene?.viewTable(cameraTeam);
+    showView();
+  });
+  node("camera-team").addEventListener("change", event => {
+    cameraTeam = event.target.value;
+    wide = false;
+    scene?.wide(false);
+    scene?.viewTable(cameraTeam);
+    showView();
+  });
   motion.addEventListener("change", () => scene?.reduced(motion.matches));
   window.addEventListener("pagehide", () => clearTimeout(impactTimeout));
   return {
@@ -170,6 +216,9 @@ function createAuctionPresentation(colors, formatPrice, actions) {
       }
       audio.live(state.phase !== "complete" && !state.paused);
       if (!previous || previous.user !== state.user) {
+        cameraTeam = state.user;
+        node("camera-team").replaceChildren(...Object.entries(teams).map(([code, name]) => new Option(name, code)));
+        node("camera-team").value = cameraTeam;
         node("arena-tables").replaceChildren(...Object.entries(teams).map(([code, name]) => {
           const button = document.createElement("button");
           button.type = "button";
@@ -216,6 +265,7 @@ function createAuctionPresentation(colors, formatPrice, actions) {
     },
     reset() {
       latest = null;
+      displayedRoster = null;
       lastBid = null;
       clearTimeout(saleTimeout);
       clearTimeout(impactTimeout);
@@ -233,12 +283,15 @@ function createAuctionPresentation(colors, formatPrice, actions) {
 
 function createLineupMaker(save) {
   const node = id => document.getElementById(id);
+  const editor = node("lineup-maker");
+  const home = editor.parentElement;
   let roster = [];
   let order = [];
   let suggested = [];
   let keeper;
   let confirmState;
   let dragSlot;
+  let editingDraft = false;
   const roles = { BAT: "Batter", BOWL: "Bowler", AR: "All-rounder", WK: "Wicketkeeper" };
 
   function button(text, handler, label = text) {
@@ -278,8 +331,9 @@ function createLineupMaker(save) {
     const valid = players.length === 11 && overseas <= 4 && keeper != null;
     node("lineup-summary").textContent = `${players.length}/11 selected · ${overseas}/4 overseas · ${keeper == null ? "Wicketkeeper needed" : `Keeper: ${roster[keeper].name}`}`;
     node("lineup-balance").textContent = `${batters} batting options · ${bowlers} bowling options${bowlers < 5 ? " · Add bowling cover" : ""}`;
-    node("save-lineup").disabled = !valid || Boolean(confirmState);
-    node("lineup-feedback").textContent = confirmState ? "Playing XI saved for this auction." :
+    node("save-lineup").textContent = editingDraft ? "Save XI draft" : "Save Playing XI";
+    node("save-lineup").disabled = (!editingDraft && !valid) || Boolean(confirmState);
+    node("lineup-feedback").textContent = confirmState ? (editingDraft ? "Draft saved for this auction." : "Playing XI saved for this auction.") :
       overseas > 4 ? "Remove an overseas player to save." : "";
     node("lineup-slots").replaceChildren(...order.map((index, position) => {
       const player = roster[index];
@@ -329,7 +383,7 @@ function createLineupMaker(save) {
     const saveButton = node("save-lineup");
     saveButton.disabled = true;
     try {
-      await save({ order, keeper });
+      await save({ order, keeper, draft: editingDraft });
       confirmState = true;
       draw();
     } catch (error) {
@@ -345,11 +399,7 @@ function createLineupMaker(save) {
     changed();
   });
 
-  return {
-    sync(state, previous) {
-      const enabled = state.phase === "complete";
-      node("lineup-maker").hidden = !enabled;
-      if (!enabled || (previous?.phase === "complete" && previous.user === state.user)) return;
+  function loadLineup(state) {
       const team = state.teams[state.user];
       roster = team.roster;
       suggested = team.playing_xi.players.map(player => player.roster_index);
@@ -377,9 +427,31 @@ function createLineupMaker(save) {
       suggested.sort((a, b) => (ranks[roster[a].skill] ?? 6) - (ranks[roster[b].skill] ?? 6));
       order = [...(state.lineup?.order || suggested)];
       keeper = state.lineup?.keeper;
-      confirmState = Boolean(state.lineup);
+      confirmState = Boolean(state.lineup && editingDraft === Boolean(state.lineup.draft));
       sensibleKeeper();
       draw();
+  }
+
+  return {
+    showDraft(state) {
+      editingDraft = true;
+      node("live-lineup-host").append(editor);
+      node("live-lineup-host").hidden = false;
+      editor.hidden = false;
+      loadLineup(state);
+    },
+    closeDraft() {
+      if (!editingDraft) return;
+      editingDraft = false;
+      node("live-lineup-host").hidden = true;
+      editor.hidden = true;
+      home.append(editor);
+    },
+    sync(state, previous) {
+      if (editingDraft) return;
+      const enabled = state.phase === "complete";
+      editor.hidden = !enabled;
+      if (enabled && (previous?.phase !== "complete" || previous.user !== state.user)) loadLineup(state);
     },
   };
 }

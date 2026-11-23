@@ -35,6 +35,21 @@ class AuctionRulesTests(TestCase):
         self.assertEqual([next_price(price) for price in (30, 95, 100, 190, 200, 480, 500)],
                          [35, 100, 110, 200, 220, 500, 525])
 
+    def test_mid_auction_lineup_draft_allows_empty_spots_and_carries_to_final(self):
+        auction = Auction(self.catalog, "CSK", [p["name"] for p in self.catalog.retained["CSK"]])
+        keeper = next(i for i, p in enumerate(auction.rosters["CSK"]) if p["role"] == "WK")
+        auction.act("open")
+        auction.act("pause")
+        auction.save_lineup([1, keeper], keeper, draft=True)
+        self.assertEqual(auction.snapshot()["lineup"], {"order": [1, keeper], "keeper": keeper, "draft": True})
+        self.assertTrue(auction.snapshot()["paused"])
+        with self.assertRaises(ValueError):
+            auction.save_lineup([1, 1], None, draft=True)
+        auction.phase = "complete"
+        with self.assertRaises(ValueError):
+            auction.save_lineup([1, keeper], keeper)
+        self.assertTrue(auction.snapshot()["lineup"]["draft"])
+
     def test_retained_spin_and_pant_wicketkeeping_are_available_in_xi(self):
         chennai = projected_xi(self.catalog.retained["CSK"])
         self.assertIn(("Ravindra Jadeja", "spin"), {(p["name"], p["skill"]) for p in chennai["players"]})
