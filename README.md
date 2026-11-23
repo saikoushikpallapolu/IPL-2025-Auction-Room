@@ -12,9 +12,9 @@ Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. 
 | :---: | :---: | :---: | :---: | :---: |
 | **10** | **577** | **79** | **929** | **₹1.86 Cr** |
 
-![Wide 3D auction room showing all ten team tables, the leading franchise spotlight, live bid controls, and the current player card](docs/screenshots/auction-room.jpg)
+![Wide 3D auction room with ten franchise tables, Kagiso Rabada centered on the stage board, and a pink spotlight on Rajasthan Royals](docs/screenshots/auction-room.jpg)
 
-*The wide camera during a live lot. The overhead spotlight follows the highest bidder.*
+*Live bidding from the wide camera. The stage board shows the leading franchise’s name and logo, and the overhead spotlight matches its colors.*
 
 ## Inside the game
 
@@ -34,6 +34,10 @@ Run one of ten franchises in a browser replay of the **2025 IPL mega auction**. 
 
 *The next set is revealed over the wide-camera arena. Select **Open bidding** when you are ready.*
 
+![View from behind the Chennai Super Kings table showing the roster stand with retained and purchased players](docs/screenshots/table-camera.jpg)
+
+*The camera behind Chennai’s table. The roster stand shows who was retained and who was bought.*
+
 ### How the auction moves
 
 1. **Opening sets.** Players are offered in shuffled order within each set. Teams can pass even when they have room and money.
@@ -51,9 +55,9 @@ During the auction, open **Franchises**, select your team, and choose **Edit Pla
 
 After the auction, finish your lineup and select a wicketkeeper. The final XI requires eleven distinct players and allows at most four overseas players. The editor shows the overseas count and the squad’s available batting and bowling options.
 
-![Playing XI maker showing the batting order, available squad, selected wicketkeeper, overseas count, and save button](docs/screenshots/playing-xi.jpg)
+![Mid-auction Playing XI editor with available squad on the left, batting order on the right, and a Save XI draft button](docs/screenshots/playing-xi.jpg)
 
-*Playing XI editor after a sample Chennai Super Kings auction.*
+*Chennai’s mid-auction draft. Move players between the squad and the batting order, then save the draft before returning to bidding.*
 
 ## Quick start
 
